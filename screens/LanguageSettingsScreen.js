@@ -1,9 +1,10 @@
 import React from 'react'
+import { View, Text } from 'react-native'
 
 export default LanguageSettingsScreen = () => {
   return (
     <View>
-      Ich bin der LanguageSettingsScreen.
+      <Text>Ich bin der LanguageSettingsScreen.</Text>
     </View>
   )
 }

@@ -1,8 +1,10 @@
 import React from 'react'
+import RandomScreen from '../screens/RandomScreen';
+import MovieDetailsScreen from '../screens/MovieDetailsScreen';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function RandomStackNavigator() {
     return (
@@ -20,10 +22,10 @@ export default function RandomStackNavigator() {
           }}
         />
         <Stack.Screen 
-          name="MovieDetails" 
-          component={MovieDetails} 
+          name="MovieDetailsScreen" 
+          component={MovieDetailsScreen} 
           options={{
-            title: "MovieDetails",
+            title: "MovieDetailsScreen",
           }}
         />
   

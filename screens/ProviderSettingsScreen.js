@@ -1,9 +1,10 @@
 import React from 'react'
+import { View, Text } from 'react-native'
 
 export default ProviderSettingsScreen = () => {
   return (
     <View>
-      Ich bin der ProviderSettingsScreen.
+      <Text>Ich bin der ProviderSettingsScreen.</Text>
     </View>
   )
 }

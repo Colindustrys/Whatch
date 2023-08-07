@@ -1,8 +1,10 @@
 import React from 'react'
+import BrowseScreen from '../screens/BrowseScreen';
+import MovieDetailsScreen from '../screens/MovieDetailsScreen';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function BrowseStackNavigator() {
     return (
@@ -20,10 +22,10 @@ export default function BrowseStackNavigator() {
           }}
         />
         <Stack.Screen 
-          name="MovieDetails" 
-          component={MovieDetails} 
+          name="MovieDetailsScreen" 
+          component={MovieDetailsScreen} 
           options={{
-            title: "MovieDetails",
+            title: "MovieDetailsScreen",
           }}
         />
   

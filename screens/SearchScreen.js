@@ -1,9 +1,15 @@
 import React from 'react'
+import { View, Text, Button } from 'react-native'
 
-export default SearchScreen = () => {
+export default SearchScreen = ({ navigation }) => {
   return (
     <View>
-      Ich bin der SearchScreen.
+      <Text>Ich bin der SearchScreen.</Text>
+      <Button
+        onPress={() => navigation.navigate("MovieDetailsScreen")}
+        title="To Details"
+        color="#841584"
+      />
     </View>
   )
 }

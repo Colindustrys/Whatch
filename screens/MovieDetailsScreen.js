@@ -1,9 +1,10 @@
 import React from 'react'
+import { View, Text } from 'react-native'
 
 export default MovieDetailsScreen = () => {
   return (
     <View>
-      Ich bin der MovieDetailsScreen.
+      <Text>Ich bin der MovieDetailsScreen.</Text>
     </View>
   )
 }
