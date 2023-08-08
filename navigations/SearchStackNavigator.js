@@ -12,6 +12,8 @@ export default function SearchStackNavigator() {
         screenOptions={{
           //hide the very thin line under the header 
           headerShadowVisible: false,
+          headerShown: false,          
+
         }}
       >
         <Stack.Screen 

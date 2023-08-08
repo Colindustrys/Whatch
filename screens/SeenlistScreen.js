@@ -1,10 +1,18 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-export default SeenlistScreen = () => {
+import { useSelector} from 'react-redux'; 
+
+import Typography from '../constants/Typography.js';
+import Theme from '../constants/Theme'
+
+export default SeenlistScreen = ({ navigation }) => {
+
+  const theme = useSelector(state => state.theme);
+
   return (
-    <View>
-      <Text>Ich bin der SeenlistScreen.</Text>
+    <View style={theme.mode == 'light' ? Theme.container_light : Theme.container_dark}>
+      <Text style={theme.mode == 'light' ? Typography.headline_small_light : Typography.headline_small_dark}>Deine Seenlist</Text>
     </View>
   )
 }

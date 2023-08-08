@@ -18,18 +18,69 @@ export default function MainStackNavigator() {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
-          headerTintColor: 'white',
-          headerStyle: { backgroundColor: 'tomato' },
+          headerShadowVisible: false,
         }}
       >
-        <Stack.Screen name="HomeBottomTabNavigator" component={HomeBottomTabNavigator} />
-        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
-        <Stack.Screen name="WatchlistScreen" component={WatchlistScreen} />
-        <Stack.Screen name="ProviderSettingsScreen" component={ProviderSettingsScreen} />
-        <Stack.Screen name="LanguageSettingsScreen" component={LanguageSettingsScreen} />
-        <Stack.Screen name="ThemeSettingsScreen" component={ThemeSettingsScreen} />
-        <Stack.Screen name="SeenlistScreen" component={SeenlistScreen} />
-        <Stack.Screen name="MovieDetailsScreen" component={MovieDetailsScreen} />
+        <Stack.Screen 
+          name="HomeBottomTabNavigator" 
+          component={HomeBottomTabNavigator}
+          options={{
+            title: "Home",
+          }} 
+        />
+        <Stack.Screen 
+          name="SettingsScreen" 
+          component={SettingsScreen}
+          options={{
+            title: "Settings",
+          }} 
+        />
+        <Stack.Screen 
+          name="WatchlistScreen" 
+          component={WatchlistScreen}
+          options={{
+            title: "Watchlist",
+          }} 
+        />
+        <Stack.Screen 
+          name="ProviderSettingsScreen" 
+          component={ProviderSettingsScreen}
+          options={{
+            title: "Settings",
+          }} 
+          screenOptions={{
+            //hide the very thin line under the header 
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen 
+          name="LanguageSettingsScreen" 
+          component={LanguageSettingsScreen}
+          options={{
+            title: "Settings",
+          }} 
+        />
+        <Stack.Screen 
+          name="ThemeSettingsScreen" 
+          component={ThemeSettingsScreen}
+          options={{
+            title: "Settings",
+          }} 
+        />
+        <Stack.Screen 
+          name="SeenlistScreen" 
+          component={SeenlistScreen}
+          options={{
+            title: "Settings",
+          }} 
+        />
+        <Stack.Screen 
+          name="MovieDetailsScreen" 
+          component={MovieDetailsScreen}
+          options={{
+            title: "Details",
+          }}
+         />
       </Stack.Navigator>
     </NavigationContainer>
   )
