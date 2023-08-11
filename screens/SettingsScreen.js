@@ -1,38 +1,69 @@
-import React from 'react'
-import { View, Text, Button } from 'react-native'
+import React from "react";
+import { View, Text, Button } from "react-native";
 
-import { useSelector} from 'react-redux'; 
+import { useSelector } from "react-redux";
 
-import Typography from '../constants/Typography.js';
-import Theme from '../constants/Theme'
+import Typography from "../constants/Typography.js";
+import Theme from "../constants/Theme";
 
 export default SettingsScreen = ({ navigation }) => {
-
-  const theme = useSelector(state => state.theme);
+  const theme = useSelector((state) => state.theme);
 
   return (
-    <View style={theme.mode == 'light' ? Theme.container_light : Theme.container_dark}>
-      <Text style={theme.mode == 'light' ? Typography.headline_small_light : Typography.headline_small_dark}>Deine Settings</Text>
-      <Button
+    <View
+      style={
+        theme.mode == "light" ? Theme.container_light : Theme.container_dark
+      }
+    >
+      <Text
+        style={
+          theme.mode == "light"
+            ? Typography.headline_small_light
+            : Typography.headline_small_dark
+        }
+      >
+        Deine Settings
+      </Text>
+      <Text
         onPress={() => navigation.navigate("ProviderSettingsScreen")}
-        title="To Provider"
-        color="#841584"
-      />
-      <Button
+        style={
+          theme.mode == "light"
+            ? Typography.paragraph_light
+            : Typography.paragraph_dark
+        }
+      >
+        Deine Streamingdienste
+      </Text>
+      <Text
         onPress={() => navigation.navigate("SeenlistScreen")}
-        title="To SeenList"
-        color="#841584"
-      />
-      <Button
+        style={
+          theme.mode == "light"
+            ? Typography.paragraph_light
+            : Typography.paragraph_dark
+        }
+      >
+        Schon gesehen-Liste
+      </Text>
+      <Text
         onPress={() => navigation.navigate("LanguageSettingsScreen")}
-        title="To Language"
-        color="#841584"
-      />
-      <Button
+        style={
+          theme.mode == "light"
+            ? Typography.paragraph_light
+            : Typography.paragraph_dark
+        }
+      >
+        Spracheinstellungen
+      </Text>
+      <Text
         onPress={() => navigation.navigate("ThemeSettingsScreen")}
-        title="To Theme"
-        color="#841584"
-      />
+        style={
+          theme.mode == "light"
+            ? Typography.paragraph_light
+            : Typography.paragraph_dark
+        }
+      >
+        Theme
+      </Text>
     </View>
-  )
-}
+  );
+};
