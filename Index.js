@@ -38,6 +38,7 @@ export default function Index() {
     >
       <StatusBar
         backgroundColor={theme.mode == "light" ? Colors.white : Colors.black}
+        barStyle={theme.mode == "light" ? "dark-content" : "light-content"}
       />
       <MainStackNavigator />
     </SafeAreaView>

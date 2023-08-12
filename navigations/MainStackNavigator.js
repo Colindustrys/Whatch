@@ -24,6 +24,8 @@ export default function MainStackNavigator() {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
+          navigationBarColor:
+            theme.mode == "light" ? Colors.white : Colors.black,
           headerShadowVisible: false,
           headerTintColor: theme.mode == "light" ? Colors.black : Colors.white,
           headerStyle: {

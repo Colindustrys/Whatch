@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { View, Pressable, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -11,14 +12,12 @@ export default ({ clickHandler, icon }) => {
   const theme = useSelector((state) => state.theme);
 
   return (
-    <View>
-      <Pressable onPress={clickHandler} style={Theme.topNavigationButton}>
-        <Ionicons
-          name={icon}
-          size={24}
-          color={theme.mode == "light" ? Colors.black : Colors.white}
-        />
-      </Pressable>
-    </View>
+    <Pressable onPress={clickHandler} style={Theme.topNavigationButton}>
+      <Ionicons
+        name={icon}
+        size={24}
+        color={theme.mode == "light" ? Colors.black : Colors.white}
+      />
+    </Pressable>
   );
 };

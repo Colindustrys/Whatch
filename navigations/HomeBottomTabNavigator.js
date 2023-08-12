@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RandomStackNavigator from "./RandomStackNavigator";
 import BrowseStackNavigator from "./BrowseStackNavigator";
@@ -6,6 +7,7 @@ import { View, Button, StyleSheet } from "react-native";
 import { Fragment } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import NavigationButtonComponent from "../components/NavigationButtonComponent";
+import NavigationSwitchComponent from "../components/NavigationSwitchComponent";
 
 import { useSelector } from "react-redux";
 
@@ -16,11 +18,8 @@ const Tab = createBottomTabNavigator();
 
 export default HomeBottomTabNavigator = ({ navigation }) => {
   const theme = useSelector((state) => state.theme);
-
-  const clickHandler = (Screen) => {
-    navigation.navigate(Screen);
-    //navigation.navigate("LineDetails", { stationObject: stationObject });
-  };
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   return (
     <Fragment>
@@ -31,9 +30,9 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
             : Theme.topNavigationContainer_dark
         }
       >
-        <NavigationButtonComponent
-          clickHandler={() => navigation.navigate("SettingsScreen")}
-          icon={"heart"}
+        <NavigationSwitchComponent
+          toggleSwitch={toggleSwitch}
+          isEnabled={isEnabled}
         />
         <View style={Theme.innerNavigationTopContainer}>
           <NavigationButtonComponent
