@@ -15,6 +15,7 @@ module.exports = StyleSheet.create({
     textAlign: "center",
     textTransform: "uppercase",
     color: Colors.black,
+    fontFamily: "Comfortaa_700Bold",
   },
   headline_small_light: {
     fontSize: 24,
@@ -35,6 +36,7 @@ module.exports = StyleSheet.create({
     textAlign: "center",
     textTransform: "uppercase",
     color: Colors.white,
+    fontFamily: "Comfortaa_700Bold",
   },
   headline_small_dark: {
     fontSize: 24,
