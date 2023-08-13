@@ -38,6 +38,7 @@ export default function MainStackNavigator() {
           },
 
           //headerTransparent: true,
+          headerShown: false,
         }}
       >
         <Stack.Screen

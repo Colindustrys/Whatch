@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
 import Colors from "./Colors.js";
+import { StyleSheet, Platform, StatusBar } from "react-native";
 
 module.exports = StyleSheet.create({
   container_light: {
@@ -19,20 +19,24 @@ module.exports = StyleSheet.create({
   AndroidSafeArea_light: {
     flex: 1,
     backgroundColor: Colors.white,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   AndroidSafeArea_dark: {
     flex: 1,
     backgroundColor: Colors.black,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   topNavigationContainer_dark: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     padding: 16,
     backgroundColor: Colors.black,
   },
   topNavigationContainer_light: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     padding: 16,
     backgroundColor: Colors.white,
   },
