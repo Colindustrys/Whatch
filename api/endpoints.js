@@ -1,4 +1,5 @@
 import { parseMovie } from './parser'
+import { getMovieDetailsJsonFromApi } from './movieDetailsRequest'
 const { MovieDb } = require('moviedb-promise')
 const moviedb = new MovieDb('f862a1abef6de0d1ca20c51abb9f51ab')
 
@@ -22,9 +23,4 @@ export const getMovieDetails = async (id) => {
         throw e;
     }
 
-}
-
-const getMovieDetailsJsonFromApi = async (id) => {
-    const res = await moviedb.movieInfo(id)
-    return res;
 }

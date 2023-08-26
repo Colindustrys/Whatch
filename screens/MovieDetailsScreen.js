@@ -7,31 +7,36 @@ import Typography from "../constants/Typography.js";
 import Theme from "../constants/Theme";
 
 import { getMovieDetails } from "../api/endpoints.js";
+import Movie from "../models/Movie.js";
 
 
 
 export default MovieDetailsScreen = ({ navigation }) => {
   const theme = useSelector((state) => state.theme);
 
-  const [movieTitle, setMovieTitle] = useState('Movie Title');
+  //useState für titel
+  tempMovie = new Movie
+  tempMovie.title = "Movie Titel"
+  const [movie, setMovie] = useState(tempMovie);
 
-
-  const _getMovieDetails = async (id) => {
+  //holt film daten und zeigt sie an
+  const setMovieDetails = async (id) => {
     
     try {
         myMovie = await getMovieDetails(id)
-        setMovieTitle(myMovie.title)
+        setMovie(myMovie)
+        //setMovieTitle(movieTitle.title = myMovie.title)
     } catch (e) {
-        console.log(e);
-        setMovieTitle("uh oh seems like a error occured")
+      //was soll bei error passieren
+      console.log(e);
+      // tempMovie2 = new Movie;
+      // tempMovie2.title = "uh oh seems like a error occured"
+      // setMovie(tempMovie2)
     }
 
   }
+  setMovieDetails(238)
 
-  _getMovieDetails(238)
-
-
-  
 
   return (
     <View
@@ -46,7 +51,7 @@ export default MovieDetailsScreen = ({ navigation }) => {
             : Typography.headline_big_dark
         }
       >
-        {movieTitle}
+        {movie.title}
       </Text>
     </View>
   );
