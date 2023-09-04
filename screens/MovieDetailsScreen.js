@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { View, Text } from "react-native";
 
 import { useSelector } from "react-redux";
@@ -21,7 +21,7 @@ export default MovieDetailsScreen = ({ navigation }) => {
 
   //holt film daten und zeigt sie an
   const setMovieDetails = async (id) => {
-    
+
     try {
         myMovie = await getMovieDetails(id)
         setMovie(myMovie)
@@ -35,7 +35,11 @@ export default MovieDetailsScreen = ({ navigation }) => {
     }
 
   }
-  setMovieDetails(238)
+
+  //get movie details once on startup
+  useEffect(() => {
+    setMovieDetails(238);
+  }, []);
 
 
   return (
