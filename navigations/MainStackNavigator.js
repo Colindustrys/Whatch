@@ -31,23 +31,26 @@ export default function MainStackNavigator() {
           headerStyle: {
             backgroundColor:
               theme.mode == "light" ? Colors.white : Colors.black,
-            text: "red",
           },
           headerTitleStyle: {
             color: theme.mode == "light" ? Colors.black : Colors.white,
+            fontSize: 24,
+            fontFamily: "Comfortaa_700Bold",
           },
-
-          //headerTransparent: true,
-          headerShown: false,
+          headerTitleAlign: "center",
+          headerShown: true,
         }}
       >
-        <Stack.Screen
-          name="HomeBottomTabNavigator"
-          component={HomeBottomTabNavigator}
-          options={{
-            title: "Home",
-          }}
-        />
+        <Stack.Group screenOptions={{ headerShown: false }}>
+          <Stack.Screen
+            name="HomeBottomTabNavigator"
+            component={HomeBottomTabNavigator}
+            options={{
+              title: "Home",
+            }}
+          />
+        </Stack.Group>
+
         <Stack.Screen
           name="SettingsScreen"
           component={SettingsScreen}
@@ -66,7 +69,7 @@ export default function MainStackNavigator() {
           name="ProviderSettingsScreen"
           component={ProviderSettingsScreen}
           options={{
-            title: "Settings",
+            title: "Provider Settings",
           }}
           screenOptions={{
             //hide the very thin line under the header
@@ -77,21 +80,21 @@ export default function MainStackNavigator() {
           name="LanguageSettingsScreen"
           component={LanguageSettingsScreen}
           options={{
-            title: "Settings",
+            title: "Language Settings",
           }}
         />
         <Stack.Screen
           name="ThemeSettingsScreen"
           component={ThemeSettingsScreen}
           options={{
-            title: "Settings",
+            title: "Theme Settings",
           }}
         />
         <Stack.Screen
           name="SeenlistScreen"
           component={SeenlistScreen}
           options={{
-            title: "Settings",
+            title: "Seenlist",
           }}
         />
         <Stack.Screen

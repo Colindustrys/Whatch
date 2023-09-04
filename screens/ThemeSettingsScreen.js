@@ -31,15 +31,6 @@ export default ThemeSettingsScreen = () => {
     <View
       style={mode == "light" ? Theme.container_light : Theme.container_dark}
     >
-      <Text
-        style={
-          mode == "light"
-            ? Typography.headline_small_light
-            : Typography.headline_small_dark
-        }
-      >
-        Theme
-      </Text>
       <Button
         title="Switch Mode"
         onPress={handleThemeChange}
