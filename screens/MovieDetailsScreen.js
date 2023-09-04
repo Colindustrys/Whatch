@@ -6,7 +6,6 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  Dimensions,
 } from "react-native";
 
 import { useSelector } from "react-redux";
@@ -14,8 +13,8 @@ import { useSelector } from "react-redux";
 import Typography from "../constants/Typography.js";
 import Theme from "../constants/Theme";
 
-//import { getMovieDetails } from "../api/endpoints.js";
-import { getMovieDetails } from "../api/endpointsForTesting.js";
+import { getMovieDetails } from "../api/endpoints.js";
+//import { getMovieDetails } from "../api/endpointsForTesting.js";
 
 export default MovieDetailsScreen = ({ navigation }) => {
   const theme = useSelector((state) => state.theme);
