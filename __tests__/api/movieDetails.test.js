@@ -6,6 +6,7 @@ jest.mock("../../api/movieDbInstance");
 
 describe("getMovieDetailsObject", () => {
   it("fetches and processes movie details", async () => {
+    moviedb.movieInfo.mockClear();
     //response that the mocked moviedb movieInfo function returns
     const mockResponse = {
       adult: false,
@@ -60,7 +61,7 @@ describe("getMovieDetailsObject", () => {
       title: "The Godfather",
       video: false,
       vote_average: 8.707,
-      vote_count: 18541,
+      vote_count: 18556,
     };
     //define the response of the mocken moviedb.movieInfo to resolve with the mockResponse
     moviedb.movieInfo.mockResolvedValue(mockResponse);
@@ -74,10 +75,23 @@ describe("getMovieDetailsObject", () => {
 
     //assert if the retured movieObject is equal to what is expected
     expect(receivedMovieObject).toEqual({
+      _backdrop_path: "/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
       _description:
         "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
+      _genres: ["Drama", "Crime"],
       _id: 238,
+      _imdb_id: "tt0068646",
+      _original_language: "en",
+      _poster_path: "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+      _release_date: new Date(
+        1972, // Year
+        2, // Month
+        14 // Day
+      ),
+      _runtime: 175,
       _title: "The Godfather",
+      _vote_average: 8.707,
+      _vote_count: 18556,
     });
     //assert the function is called correctly
     expect(moviedb.movieInfo).toHaveBeenCalledWith(id);
@@ -88,6 +102,7 @@ describe("getMovieDetailsObject", () => {
   });
 
   it("handles errors gracefully", async () => {
+    moviedb.movieInfo.mockClear();
     //error response that the mocked movieInfo throws
     const mockError = new Error("API Error");
     //define the response of the mocken moviedb.movieInfo to reject with the mockError
@@ -112,7 +127,6 @@ describe("getMovieDetailsObject", () => {
     //assert the function is called correctly
     expect(moviedb.movieInfo).toHaveBeenCalledWith(id);
     expect(moviedb.movieInfo).toHaveBeenCalledTimes(1);
-    moviedb.movieInfo.mockClear();
 
     jest.restoreAllMocks();
   });
