@@ -16,15 +16,6 @@ export default SettingsScreen = ({ navigation }) => {
       }
     >
       <Text
-        style={
-          theme.mode == "light"
-            ? Typography.headline_small_light
-            : Typography.headline_small_dark
-        }
-      >
-        Deine Settings
-      </Text>
-      <Text
         onPress={() => navigation.navigate("ProviderSettingsScreen")}
         style={
           theme.mode == "light"

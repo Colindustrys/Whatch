@@ -16,15 +16,6 @@ export default SeenlistScreen = ({ navigation }) => {
         theme.mode == "light" ? Theme.container_light : Theme.container_dark
       }
     >
-      <Text
-        style={
-          theme.mode == "light"
-            ? Typography.headline_small_light
-            : Typography.headline_small_dark
-        }
-      >
-        Deine Seenlist
-      </Text>
       <Button
         onPress={() => navigation.navigate("MovieDetailsScreen")}
         title="To Details"
