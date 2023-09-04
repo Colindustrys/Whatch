@@ -1,15 +1,16 @@
-import { createStore, combineReducers } from 'redux';
-import themeReducer from './reducer';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { persistStore, persistReducer } from "redux-persist";
 
-// Set up a general reducer.
-const rootReducer = combineReducers({
-    theme: themeReducer
-});
+import { legacy_createStore as createStore } from "redux";
 
-// Create a store with the reducer.
-const configureStore = () => {
-    return createStore(rootReducer);
-}
+import rootReducer from "./rootReducer";
 
-// Export the configured store
-export default configureStore;
+const persistConfig = {
+  key: "root",
+  storage: AsyncStorage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = createStore(persistedReducer);
+export const persistor = persistStore(store);

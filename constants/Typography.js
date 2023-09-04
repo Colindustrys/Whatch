@@ -31,6 +31,13 @@ module.exports = StyleSheet.create({
     paddingBottom: 16,
     fontFamily: "Comfortaa_300Light",
   },
+  paragraph_small_light: {
+    fontSize: 16,
+    textAlign: "left",
+    color: Colors.black,
+    paddingBottom: 16,
+    fontFamily: "Comfortaa_300Light",
+  },
   headline_big_dark: {
     fontSize: 32,
     textAlign: "center",
@@ -47,6 +54,13 @@ module.exports = StyleSheet.create({
   },
   paragraph_dark: {
     fontSize: 20,
+    textAlign: "left",
+    color: Colors.white,
+    paddingBottom: 16,
+    fontFamily: "Comfortaa_300Light",
+  },
+  paragraph_small_dark: {
+    fontSize: 16,
     textAlign: "left",
     color: Colors.white,
     paddingBottom: 16,
