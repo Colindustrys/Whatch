@@ -8,8 +8,8 @@ import Colors from "../constants/Colors";
 import Theme from "../constants/Theme";
 
 export default ProviderSettingsScreen = ({ navigation }) => {
-  //Get States from Async Storage
   //TODO: Rename this in every Component! theme --> storedTheme
+  //Get States from Async Storage
   const storedTheme = useSelector((state) => state.theme);
   const storedProvider = useSelector((state) => state.provider);
   const dispatch = useDispatch();

@@ -14,30 +14,37 @@ import RadioForm, {
 } from "react-native-simple-radio-button";
 
 export default ThemeSettingsScreen = () => {
-  // get the current theme
-  const theme = useSelector((state) => state.theme);
-  // initialize action dispatcher
+  //Get States from Async Storage
+  const storedTheme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
-  //TODO: auslagern
-  var radio_props = [
+  //TODO: make own dataClass?!
+  var themeOptions = [
     //TODO: get systemstandard
-    { label: "Systemstandard", value: 0, index: 0 },
-    { label: "Hell", value: "light", index: 1 },
-    { label: "Dunkel", value: "dark", index: 2 },
+    { label: "Systemstandard", value: "system", id: 0 },
+    { label: "Hell", value: "light", id: 1 },
+    { label: "Dunkel", value: "dark", id: 2 },
   ];
 
-  const [isSelected, setSelected] = useState(theme.index);
+  const onPressHandler = (value, optionId) => {
+    dispatch({
+      type: "CHANGE_THEME",
+      mode: value,
+      id: optionId,
+    });
+  };
 
   return (
     <View
       style={
-        theme.mode == "light" ? Theme.container_light : Theme.container_dark
+        storedTheme.mode == "light"
+          ? Theme.container_light
+          : Theme.container_dark
       }
     >
       <Text
         style={
-          theme.mode == "light"
+          storedTheme.mode == "light"
             ? Typography.paragraph_light
             : Typography.paragraph_dark
         }
@@ -46,7 +53,7 @@ export default ThemeSettingsScreen = () => {
       </Text>
       <Text
         style={
-          theme.mode == "light"
+          storedTheme.mode == "light"
             ? Typography.paragraph_small_light
             : Typography.paragraph_small_dark
         }
@@ -56,23 +63,14 @@ export default ThemeSettingsScreen = () => {
       </Text>
 
       <RadioForm>
-        {radio_props.map((obj, i) => (
-          <RadioButton labelHorizontal={true} key={i}>
+        {themeOptions.map((option, optionId) => (
+          <RadioButton labelHorizontal={true} key={optionId}>
             <RadioButtonInput
-              obj={obj}
-              index={i}
-              isSelected={isSelected === i}
-              onPress={(value, index) => {
-                [
-                  dispatch(
-                    {
-                      type: "CHANGE_THEME",
-                      theme: value,
-                      index: index,
-                    },
-                    setSelected(i)
-                  ),
-                ];
+              obj={option}
+              id={optionId}
+              isSelected={storedTheme.id === optionId}
+              onPress={(value) => {
+                onPressHandler(value, optionId);
               }}
               borderWidth={2}
               buttonInnerColor={Colors.accent}
@@ -81,23 +79,14 @@ export default ThemeSettingsScreen = () => {
               buttonOuterSize={20}
             />
             <RadioButtonLabel
-              obj={obj}
-              index={i}
+              obj={option}
+              id={optionId}
               labelHorizontal={true}
-              onPress={(value, index) => {
-                [
-                  dispatch(
-                    {
-                      type: "CHANGE_THEME",
-                      theme: value,
-                      index: index,
-                    },
-                    setSelected(i)
-                  ),
-                ];
+              onPress={(value) => {
+                onPressHandler(value, optionId);
               }}
               labelStyle={
-                theme.mode == "light"
+                storedTheme.mode == "light"
                   ? Typography.paragraph_small_light
                   : Typography.paragraph_small_dark
               }
