@@ -1,6 +1,7 @@
 // Initially we will have a dark mode
 const initialState = {
   mode: "dark",
+  index: 1,
 };
 
 // Handle our action of changing the theme
