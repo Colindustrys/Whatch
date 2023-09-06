@@ -38,12 +38,18 @@ export default ProviderSettingsScreen = ({ navigation }) => {
     { label: "Netflix", id: 6, value: false },
     { label: "Amazon Prime", id: 7, value: false },
     { label: "Disney Plus", id: 8, value: false },
+    { label: "Amazon Prime", id: 9, value: false },
+    { label: "Disney Plus", id: 10, value: false },
+    { label: "Netflix", id: 11, value: false },
+    { label: "Amazon Prime", id: 12, value: false },
+    { label: "Disney Pllllus", id: 13, value: false },
   ]);
 
   //OnPageLoad --> Set Providerlist with Async State if its not empty
   useEffect(() => {
     if (storedProvider.provider.length > 0) {
       setProviderList(storedProvider.provider);
+      console.log(providerList);
     }
   }, []);
 
@@ -89,7 +95,28 @@ export default ProviderSettingsScreen = ({ navigation }) => {
           : Theme.container_dark
       }
     >
+      <Text
+        style={
+          storedTheme.mode == "light"
+            ? Typography.paragraph_light
+            : Typography.paragraph_dark
+        }
+      >
+        Wähle deine abonnierten Streamingdienste
+      </Text>
+      <Text
+        style={
+          storedTheme.mode == "light"
+            ? Typography.paragraph_small_light
+            : Typography.paragraph_small_dark
+        }
+      >
+        Deine persönlichen Streamingdienste benötigen wir, um dir die perfekten
+        Ergebnisse liefern zu können.
+      </Text>
+
       <FlatList
+        /* TODO: FlatList not rendering all the items?! */
         data={providerList}
         renderItem={({ item }) => (
           <ProviderItem

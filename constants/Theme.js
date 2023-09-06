@@ -6,14 +6,12 @@ module.exports = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     padding: 24,
-    paddingTop: 40,
     backgroundColor: Colors.white,
   },
   container_dark: {
     flex: 1,
     justifyContent: "flex-start",
     padding: 24,
-    paddingTop: 40,
     backgroundColor: Colors.black,
   },
   AndroidSafeArea_light: {
