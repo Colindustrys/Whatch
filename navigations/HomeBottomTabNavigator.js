@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RandomStackNavigator from "./RandomStackNavigator";
 import BrowseStackNavigator from "./BrowseStackNavigator";
@@ -9,7 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 import NavigationButtonComponent from "../components/NavigationButtonComponent";
 import NavigationSwitchComponent from "../components/NavigationSwitchComponent";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Colors from "../constants/Colors";
 import Theme from "../constants/Theme";
@@ -17,9 +17,17 @@ import Theme from "../constants/Theme";
 const Tab = createBottomTabNavigator();
 
 export default HomeBottomTabNavigator = ({ navigation }) => {
+  //Get States from Async Storage
   const theme = useSelector((state) => state.theme);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const storedFreeOfCharge = useSelector((state) => state.freeOfCharge);
+
+  const dispatch = useDispatch();
+
+  const toggleSwitch = () => {
+    dispatch({
+      type: "TOGGLE_FREE",
+    });
+  };
 
   return (
     <Fragment>
@@ -32,7 +40,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
       >
         <NavigationSwitchComponent
           toggleSwitch={toggleSwitch}
-          isEnabled={isEnabled}
+          isEnabled={storedFreeOfCharge.free}
         />
         <View style={Theme.innerNavigationTopContainer}>
           <NavigationButtonComponent
