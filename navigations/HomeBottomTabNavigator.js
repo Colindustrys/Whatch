@@ -19,13 +19,14 @@ const Tab = createBottomTabNavigator();
 export default HomeBottomTabNavigator = ({ navigation }) => {
   //Get States from Async Storage
   const theme = useSelector((state) => state.theme);
-  const storedFreeOfCharge = useSelector((state) => state.freeOfCharge);
+  const storedFilterMethod = useSelector((state) => state.filterMethod);
 
   const dispatch = useDispatch();
 
   const toggleSwitch = () => {
+    console.log(storedFilterMethod.freeToCharge);
     dispatch({
-      type: "TOGGLE_FREE",
+      type: "TOGGLE_FREE_TO_CHARGE",
     });
   };
 
@@ -40,7 +41,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
       >
         <NavigationSwitchComponent
           toggleSwitch={toggleSwitch}
-          isEnabled={storedFreeOfCharge.free}
+          isEnabled={storedFilterMethod.freeToCharge}
         />
         <View style={Theme.innerNavigationTopContainer}>
           <NavigationButtonComponent
