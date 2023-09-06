@@ -42,6 +42,10 @@ export default ThemeSettingsScreen = () => {
           : Theme.container_dark
       }
     >
+      {/** TODO:  Light / Dark Theme Decision in Stylesheet*/}
+
+      {/** TODO: make own Component for paragraph */}
+
       <Text
         style={
           storedTheme.mode == "light"
@@ -51,6 +55,8 @@ export default ThemeSettingsScreen = () => {
       >
         Wähle ein App-Farbschema
       </Text>
+      {/** TODO: make own Component for small paragraph */}
+
       <Text
         style={
           storedTheme.mode == "light"
@@ -62,6 +68,7 @@ export default ThemeSettingsScreen = () => {
         Energie verbraucht.
       </Text>
 
+      {/** TODO: make own Component for RadioForm */}
       <RadioForm>
         {themeOptions.map((option, optionId) => (
           <RadioButton labelHorizontal={true} key={optionId}>
