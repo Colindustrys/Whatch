@@ -14,8 +14,12 @@ import { useSelector } from "react-redux";
 import Colors from "./constants/Colors";
 import Theme from "./constants/Theme";
 
+import styled, { ThemeProvider } from "styled-components";
+
 export default function Index() {
   const theme = useSelector((state) => state.theme);
+  const storedTheme = useSelector((state) => state.appearance);
+
   //load font
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -28,19 +32,22 @@ export default function Index() {
   if (!fontsLoaded) {
     return null;
   }
+
   return (
-    <SafeAreaView
-      style={
-        theme.mode == "light"
-          ? Theme.AndroidSafeArea_light
-          : Theme.AndroidSafeArea_dark
-      }
-    >
-      <StatusBar
-        backgroundColor={theme.mode == "light" ? Colors.white : Colors.black}
-        barStyle={theme.mode == "light" ? "dark-content" : "light-content"}
-      />
-      <MainStackNavigator />
-    </SafeAreaView>
+    <ThemeProvider theme={storedTheme.theme}>
+      <SafeAreaView
+        style={
+          theme.mode == "light"
+            ? Theme.AndroidSafeArea_light
+            : Theme.AndroidSafeArea_dark
+        }
+      >
+        <StatusBar
+          backgroundColor={theme.mode == "light" ? Colors.white : Colors.black}
+          barStyle={theme.mode == "light" ? "dark-content" : "light-content"}
+        />
+        <MainStackNavigator />
+      </SafeAreaView>
+    </ThemeProvider>
   );
 }

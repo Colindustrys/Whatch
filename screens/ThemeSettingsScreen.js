@@ -7,75 +7,69 @@ import Colors from "../constants/Colors";
 import Typography from "../constants/Typography.js";
 import Theme from "../constants/Theme";
 
+import {
+  Container,
+  HeaderText,
+  Paragraph,
+  ParagraphSmall,
+} from "../redux-store/StyledComponents.js";
+
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel,
 } from "react-native-simple-radio-button";
+import { darkTheme, lightTheme } from "../redux-store/Theme";
 
 export default ThemeSettingsScreen = () => {
-  //Get States from Async Storage
-  const storedTheme = useSelector((state) => state.theme);
+  //dont need this anmyore
+  const storedTheme = useSelector((state) => state.appearance);
+
+  //get selected radioField
+  const storedthemeSettingSelect = useSelector(
+    (state) => state.themeSettingSelect
+  );
+
   const dispatch = useDispatch();
 
   //TODO: make own dataClass?!
   var themeOptions = [
     //TODO: get systemstandard
-    { label: "Systemstandard", value: "system", id: 0 },
-    { label: "Hell", value: "light", id: 1 },
-    { label: "Dunkel", value: "dark", id: 2 },
+    { label: "Systemstandard", value: "lightTheme", id: 0 },
+    { label: "Hell", value: lightTheme, id: 1 },
+    { label: "Dunkel", value: darkTheme, id: 2 },
   ];
 
   const onPressHandler = (value, optionId) => {
+    console.log(storedTheme);
     dispatch({
-      type: "CHANGE_THEME",
-      mode: value,
+      type: "SELECT_ID",
       id: optionId,
+    });
+
+    dispatch({
+      type: "SWITCH_THEME",
+      baseTheme: value,
     });
   };
 
   return (
-    <View
-      style={
-        storedTheme.mode == "light"
-          ? Theme.container_light
-          : Theme.container_dark
-      }
-    >
-      {/** TODO:  Light / Dark Theme Decision in Stylesheet*/}
-
-      {/** TODO: make own Component for paragraph */}
-
-      <Text
-        style={
-          storedTheme.mode == "light"
-            ? Typography.paragraph_light
-            : Typography.paragraph_dark
-        }
-      >
-        Wähle ein App-Farbschema
-      </Text>
-      {/** TODO: make own Component for small paragraph */}
-
-      <Text
-        style={
-          storedTheme.mode == "light"
-            ? Typography.paragraph_small_light
-            : Typography.paragraph_small_dark
-        }
-      >
+    <Container>
+      <Paragraph>Wähle ein App-Farbschema</Paragraph>
+      <ParagraphSmall>
         Tipp: Der Darktheme ist richtig gut für die Umwelt, da dieser weniger
         Energie verbraucht.
-      </Text>
+      </ParagraphSmall>
 
-      {/** TODO: make own Component for RadioForm */}
+      {/** TODO: make own Component for RadioForm --> how to style this in styledComps */}
+
       <RadioForm>
-        {themeOptions.map((option, optionId) => (
+        {themeOptions.map((option, optionId, value) => (
           <RadioButton labelHorizontal={true} key={optionId}>
             <RadioButtonInput
               obj={option}
               id={optionId}
-              isSelected={storedTheme.id === optionId}
+              isSelected={optionId === storedthemeSettingSelect.id}
               onPress={(value) => {
                 onPressHandler(value, optionId);
               }}
@@ -101,6 +95,6 @@ export default ThemeSettingsScreen = () => {
           </RadioButton>
         ))}
       </RadioForm>
-    </View>
+    </Container>
   );
 };
