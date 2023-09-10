@@ -1,5 +1,15 @@
-import { SafeAreaView, StatusBar } from "react-native";
-import MainStackNavigator from "./navigations/MainStackNavigator";
+//React
+import { StatusBar, Platform } from "react-native";
+import { useSelector } from "react-redux";
+
+//Styled Components
+import { ThemeProvider } from "styled-components";
+import {
+  StyledSafeAreaView,
+  StyledStatusBar,
+} from "../Whatch/redux-store/StyledComponents.js";
+
+//Fonts
 import {
   useFonts,
   Comfortaa_300Light,
@@ -9,16 +19,14 @@ import {
   Comfortaa_700Bold,
 } from "@expo-google-fonts/comfortaa";
 
-import { useSelector } from "react-redux";
+//Redux
+import { lightTheme } from "../Whatch/redux-store/Theme";
 
-import Colors from "./constants/Colors";
-import Theme from "./constants/Theme";
-
-import styled, { ThemeProvider } from "styled-components";
+//Navigator
+import MainStackNavigator from "./navigations/MainStackNavigator";
 
 export default function Index() {
-  const theme = useSelector((state) => state.theme);
-  const storedTheme = useSelector((state) => state.appearance);
+  const storedAppearance = useSelector((state) => state.appearance);
 
   //load font
   let [fontsLoaded] = useFonts({
@@ -34,20 +42,19 @@ export default function Index() {
   }
 
   return (
-    <ThemeProvider theme={storedTheme.theme}>
-      <SafeAreaView
-        style={
-          theme.mode == "light"
-            ? Theme.AndroidSafeArea_light
-            : Theme.AndroidSafeArea_dark
-        }
+    <ThemeProvider theme={storedAppearance.theme}>
+      <StyledSafeAreaView
+        platformIsAndroid={Platform.OS === "android"}
+        StatusBar={StatusBar}
       >
-        <StatusBar
-          backgroundColor={theme.mode == "light" ? Colors.white : Colors.black}
-          barStyle={theme.mode == "light" ? "dark-content" : "light-content"}
+        <StyledStatusBar
+          barStyleIsDarkContent={
+            storedAppearance.theme.BACKGROUND_COLOR ==
+            lightTheme.BACKGROUND_COLOR
+          }
         />
         <MainStackNavigator />
-      </SafeAreaView>
+      </StyledSafeAreaView>
     </ThemeProvider>
   );
 }

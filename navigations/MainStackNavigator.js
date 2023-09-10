@@ -1,6 +1,12 @@
+//React
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+//Navigation
 import HomeBottomTabNavigator from "./HomeBottomTabNavigator";
+
+//Screens
 import SettingsScreen from "../screens/SettingsScreen";
 import WatchlistScreen from "../screens/WatchlistScreen";
 import ProviderSettingsScreen from "../screens/ProviderSettingsScreen";
@@ -8,39 +14,16 @@ import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
 import ThemeSettingsScreen from "../screens/ThemeSettingsScreen";
 import SeenlistScreen from "../screens/SeenlistScreen";
 import MovieDetailsScreen from "../screens/MovieDetailsScreen";
-import { NavigationContainer } from "@react-navigation/native";
 
-const Stack = createNativeStackNavigator();
-
-import { useSelector } from "react-redux";
-
-import Colors from "../constants/Colors";
+//Components
+import { StyledStackNavigator } from "../redux-store/StyledComponents.js";
 
 export default function MainStackNavigator() {
-  const theme = useSelector((state) => state.theme);
+  const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          navigationBarColor:
-            theme.mode == "light" ? Colors.white : Colors.black,
-          headerShadowVisible: false,
-          headerTintColor: theme.mode == "light" ? Colors.black : Colors.white,
-          headerStyle: {
-            backgroundColor:
-              theme.mode == "light" ? Colors.white : Colors.black,
-          },
-          headerTitleStyle: {
-            color: theme.mode == "light" ? Colors.black : Colors.white,
-            fontSize: 24,
-            fontFamily: "Comfortaa_700Bold",
-          },
-          headerTitleAlign: "center",
-          headerShown: true,
-        }}
-      >
+      <StyledStackNavigator initialRouteName="Home">
         <Stack.Group screenOptions={{ headerShown: false }}>
           <Stack.Screen
             name="HomeBottomTabNavigator"
@@ -104,7 +87,7 @@ export default function MainStackNavigator() {
             title: "Details",
           }}
         />
-      </Stack.Navigator>
+      </StyledStackNavigator>
     </NavigationContainer>
   );
 }

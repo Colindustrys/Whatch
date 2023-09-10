@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, FlatList } from "react-native";
-
+//React
+import React from "react";
+import { FlatList } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
-import Typography from "../constants/Typography.js";
-import Colors from "../constants/Colors";
-import Theme from "../constants/Theme";
-
+//Components
 import ProviderItem from "../components/ProviderItem.js";
+
+//Styled Components
+import {
+  Container,
+  Paragraph,
+  ParagraphSmall,
+} from "../redux-store/StyledComponents.js";
 
 /* @ Alex: Was brauchst du zum filtern? Nur die aktiven Provider oder kannst du mit der ganzen Liste arbeiten? */
 export default ProviderSettingsScreen = ({ navigation }) => {
-  //TODO: Rename this in every Component! theme --> storedTheme
   //Get States from Async Storage
-  const storedTheme = useSelector((state) => state.theme);
   const storedProvider = useSelector((state) => state.provider);
   const dispatch = useDispatch();
 
@@ -29,32 +31,12 @@ export default ProviderSettingsScreen = ({ navigation }) => {
   };
 
   return (
-    <View
-      style={
-        storedTheme.mode == "light"
-          ? Theme.container_light
-          : Theme.container_dark
-      }
-    >
-      <Text
-        style={
-          storedTheme.mode == "light"
-            ? Typography.paragraph_light
-            : Typography.paragraph_dark
-        }
-      >
-        Wähle deine abonnierten Streamingdienste
-      </Text>
-      <Text
-        style={
-          storedTheme.mode == "light"
-            ? Typography.paragraph_small_light
-            : Typography.paragraph_small_dark
-        }
-      >
+    <Container>
+      <Paragraph>Wähle deine abonnierten Streamingdienste</Paragraph>
+      <ParagraphSmall>
         Deine persönlichen Streamingdienste benötigen wir, um dir die perfekten
         Ergebnisse liefern zu können.
-      </Text>
+      </ParagraphSmall>
 
       <FlatList
         data={storedProvider.provider}
@@ -68,6 +50,6 @@ export default ProviderSettingsScreen = ({ navigation }) => {
         )}
         keyExtractor={(item) => item.id}
       />
-    </View>
+    </Container>
   );
 };

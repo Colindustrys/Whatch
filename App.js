@@ -1,10 +1,14 @@
+//React
 import * as React from "react";
 import { Provider } from "react-redux";
+import { Text } from "react-native";
+import { PersistGate } from "redux-persist/integration/react";
+
+//Index
 import Index from "./Index";
 
-import { PersistGate } from "redux-persist/integration/react";
+//Redux
 import { store, persistor } from "./redux-store/store";
-import { Text } from "react-native";
 
 function App() {
   return (

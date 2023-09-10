@@ -1,60 +1,24 @@
+//React
 import React from "react";
-import { View, Text, Button } from "react-native";
 
-import { useSelector } from "react-redux";
-
-import Typography from "../constants/Typography.js";
-import Theme from "../constants/Theme";
+//Styled Components
+import { Container, Paragraph } from "../redux-store/StyledComponents.js";
 
 export default SettingsScreen = ({ navigation }) => {
-  const theme = useSelector((state) => state.theme);
-
   return (
-    <View
-      style={
-        theme.mode == "light" ? Theme.container_light : Theme.container_dark
-      }
-    >
-      <Text
-        onPress={() => navigation.navigate("ProviderSettingsScreen")}
-        style={
-          theme.mode == "light"
-            ? Typography.paragraph_light
-            : Typography.paragraph_dark
-        }
-      >
+    <Container>
+      <Paragraph onPress={() => navigation.navigate("ProviderSettingsScreen")}>
         Deine Streamingdienste
-      </Text>
-      <Text
-        onPress={() => navigation.navigate("SeenlistScreen")}
-        style={
-          theme.mode == "light"
-            ? Typography.paragraph_light
-            : Typography.paragraph_dark
-        }
-      >
+      </Paragraph>
+      <Paragraph onPress={() => navigation.navigate("SeenlistScreen")}>
         Schon gesehen-Liste
-      </Text>
-      <Text
-        onPress={() => navigation.navigate("LanguageSettingsScreen")}
-        style={
-          theme.mode == "light"
-            ? Typography.paragraph_light
-            : Typography.paragraph_dark
-        }
-      >
+      </Paragraph>
+      <Paragraph onPress={() => navigation.navigate("LanguageSettingsScreen")}>
         Spracheinstellungen
-      </Text>
-      <Text
-        onPress={() => navigation.navigate("ThemeSettingsScreen")}
-        style={
-          theme.mode == "light"
-            ? Typography.paragraph_light
-            : Typography.paragraph_dark
-        }
-      >
+      </Paragraph>
+      <Paragraph onPress={() => navigation.navigate("ThemeSettingsScreen")}>
         Theme
-      </Text>
-    </View>
+      </Paragraph>
+    </Container>
   );
 };

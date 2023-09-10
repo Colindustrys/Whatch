@@ -1,23 +1,16 @@
+//React
 import * as React from "react";
 
-import { View, Pressable, Text, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-
-import { useSelector } from "react-redux";
-
-import Colors from "../constants/Colors";
-import Theme from "../constants/Theme";
+//Styled Components
+import {
+  TopNavigationButton,
+  TopNavigationIcon,
+} from "../redux-store/StyledComponents.js";
 
 export default ({ clickHandler, icon }) => {
-  const theme = useSelector((state) => state.theme);
-
   return (
-    <Pressable onPress={clickHandler} style={Theme.topNavigationButton}>
-      <Ionicons
-        name={icon}
-        size={24}
-        color={theme.mode == "light" ? Colors.black : Colors.white}
-      />
-    </Pressable>
+    <TopNavigationButton onPress={clickHandler}>
+      <TopNavigationIcon name={icon} size={24} />
+    </TopNavigationButton>
   );
 };

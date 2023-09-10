@@ -1,30 +1,33 @@
-import React, { useState, useEffect } from "react";
+//React
+import React, { Fragment } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
+
+//Navigator
 import RandomStackNavigator from "./RandomStackNavigator";
 import BrowseStackNavigator from "./BrowseStackNavigator";
 import SearchStackNavigator from "./SearchStackNavigator";
-import { View, Button, StyleSheet } from "react-native";
-import { Fragment } from "react";
-import { Ionicons } from "@expo/vector-icons";
+
+//Components
 import NavigationButtonComponent from "../components/NavigationButtonComponent";
 import NavigationSwitchComponent from "../components/NavigationSwitchComponent";
 
-import { useSelector, useDispatch } from "react-redux";
-
-import Colors from "../constants/Colors";
-import Theme from "../constants/Theme";
-
-const Tab = createBottomTabNavigator();
+import {
+  TopNavigationContainer,
+  InnerNavigationTopContainer,
+  StyledTabNavigator,
+} from "../redux-store/StyledComponents.js";
 
 export default HomeBottomTabNavigator = ({ navigation }) => {
+  const Tab = createBottomTabNavigator();
+
   //Get States from Async Storage
-  const theme = useSelector((state) => state.theme);
   const storedFilterMethod = useSelector((state) => state.filterMethod);
 
   const dispatch = useDispatch();
 
   const toggleSwitch = () => {
-    console.log(storedFilterMethod.freeToCharge);
     dispatch({
       type: "TOGGLE_FREE_TO_CHARGE",
     });
@@ -32,18 +35,12 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
 
   return (
     <Fragment>
-      <View
-        style={
-          theme.mode == "light"
-            ? Theme.topNavigationContainer_light
-            : Theme.topNavigationContainer_dark
-        }
-      >
+      <TopNavigationContainer>
         <NavigationSwitchComponent
           toggleSwitch={toggleSwitch}
           isEnabled={storedFilterMethod.freeToCharge}
         />
-        <View style={Theme.innerNavigationTopContainer}>
+        <InnerNavigationTopContainer>
           <NavigationButtonComponent
             clickHandler={() => navigation.navigate("WatchlistScreen")}
             icon={"heart"}
@@ -52,26 +49,14 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
             clickHandler={() => navigation.navigate("SettingsScreen")}
             icon={"settings"}
           />
-        </View>
-      </View>
+        </InnerNavigationTopContainer>
+      </TopNavigationContainer>
 
-      <Tab.Navigator
-        activeColor={Colors.accent}
-        inactiveColor={theme.mode == "light" ? Colors.black : Colors.white}
-        screenOptions={{
-          //tabBarLabelStyle: { fontSize: 12 },
-          //tabBarItemStyle: { width: 100 },
-          tabBarActiveTintColor: Colors.accent,
-          tabBarInactiveTintColor:
-            theme.mode == "light" ? Colors.black : Colors.white,
-          tabBarStyle: {
-            backgroundColor:
-              theme.mode == "light" ? Colors.white : Colors.black,
-            borderTopWidth: 0,
-            elevation: 0,
-          },
-          headerShown: false,
-        }}
+      <StyledTabNavigator
+      //screenOptions={{
+      //tabBarLabelStyle: { fontSize: 12 },
+      //tabBarItemStyle: { width: 100 },
+      //}}
       >
         <Tab.Screen
           name="random"
@@ -103,7 +88,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
             ),
           }}
         />
-      </Tab.Navigator>
+      </StyledTabNavigator>
     </Fragment>
   );
 };

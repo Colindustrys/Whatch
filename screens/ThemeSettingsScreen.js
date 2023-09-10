@@ -1,30 +1,23 @@
-import { Text, View } from "react-native";
-
+//React
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState } from "react";
+import React from "react";
 
-import Colors from "../constants/Colors";
-import Typography from "../constants/Typography.js";
-import Theme from "../constants/Theme";
-
+//Styled Components
 import {
   Container,
-  HeaderText,
   Paragraph,
   ParagraphSmall,
+  StyledRadioButtonInput,
+  StyledRadioButtonLabel,
 } from "../redux-store/StyledComponents.js";
 
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from "react-native-simple-radio-button";
+//Others
+import RadioForm, { RadioButton } from "react-native-simple-radio-button";
+
+//Theme
 import { darkTheme, lightTheme } from "../redux-store/Theme";
 
 export default ThemeSettingsScreen = () => {
-  //dont need this anmyore
-  const storedTheme = useSelector((state) => state.appearance);
-
   //get selected radioField
   const storedthemeSettingSelect = useSelector(
     (state) => state.themeSettingSelect
@@ -41,7 +34,6 @@ export default ThemeSettingsScreen = () => {
   ];
 
   const onPressHandler = (value, optionId) => {
-    console.log(storedTheme);
     dispatch({
       type: "SELECT_ID",
       id: optionId,
@@ -60,37 +52,24 @@ export default ThemeSettingsScreen = () => {
         Tipp: Der Darktheme ist richtig gut für die Umwelt, da dieser weniger
         Energie verbraucht.
       </ParagraphSmall>
-
-      {/** TODO: make own Component for RadioForm --> how to style this in styledComps */}
-
       <RadioForm>
         {themeOptions.map((option, optionId, value) => (
           <RadioButton labelHorizontal={true} key={optionId}>
-            <RadioButtonInput
+            <StyledRadioButtonInput
               obj={option}
               id={optionId}
               isSelected={optionId === storedthemeSettingSelect.id}
               onPress={(value) => {
                 onPressHandler(value, optionId);
               }}
-              borderWidth={2}
-              buttonInnerColor={Colors.accent}
-              buttonOuterColor={Colors.accent}
-              buttonSize={10}
-              buttonOuterSize={20}
             />
-            <RadioButtonLabel
+            <StyledRadioButtonLabel
               obj={option}
               id={optionId}
               labelHorizontal={true}
               onPress={(value) => {
                 onPressHandler(value, optionId);
               }}
-              labelStyle={
-                storedTheme.mode == "light"
-                  ? Typography.paragraph_small_light
-                  : Typography.paragraph_small_dark
-              }
             />
           </RadioButton>
         ))}

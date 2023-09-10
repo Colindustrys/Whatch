@@ -20,7 +20,7 @@ const initialState = {
 };
 
 // Handle action
-const providerReducer = (state = initialState, action) => {
+const ProviderReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_PROVIDER":
       return {
@@ -32,4 +32,4 @@ const providerReducer = (state = initialState, action) => {
   }
 };
 
-export default providerReducer;
+export default ProviderReducer;

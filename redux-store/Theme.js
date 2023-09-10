@@ -14,7 +14,6 @@ export const base = {
   FONT_SIZE_LARGE: "18px",
   FONT_SIZE_EXTRA_LARGE: "24px",
   FONT_SIZE_MASSIVE: "34px",
-
   FONT_WEIGHT_LIGHT: "200",
   FONT_WEIGHT_MEDIUM: "500",
   FONT_WEIGHT_BOLD: "700",
@@ -23,7 +22,6 @@ export const base = {
   FONT_FAMILY_BOLD: "Comfortaa_700Bold",
 };
 
-//TODO: base mit aufnehmen!
 export const darkTheme = {
   BACKGROUND_COLOR: colorOptions.BLACK,
   TEXT_COLOR: colorOptions.WHITE,
