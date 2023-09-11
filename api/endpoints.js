@@ -6,7 +6,7 @@ export const getMovieDetails = async (id) => {
     movieObject = await getMovieDetailsObject(id);
     //return movie object
     return movieObject;
-  } catch (e) {
-    throw e;
+  } catch (error) {
+    throw error;
   }
 };
