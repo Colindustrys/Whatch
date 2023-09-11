@@ -67,6 +67,17 @@ export const StyledStatusBar = styled(StatusBar).attrs((props) => ({
 }))``;
 
 // Text
+
+export const HeadlineMovie = styled.Text`
+  text-align: center;
+  padding-bottom: 16px;
+  color: ${(props) => props.theme.TEXT_COLOR};
+  font-size: ${(props) => props.theme.FONT_SIZE_MASSIVE};
+  font-family: ${(props) => props.theme.FONT_FAMILY_BOLD};
+  margin-bottom: 32px;
+  text-transform: uppercase;
+`;
+
 export const HeadlineSmall = styled.Text`
   text-align: center;
   padding-bottom: 16px;
@@ -88,8 +99,9 @@ export const ParagraphSmall = styled.Text`
   text-align: left;
   padding-bottom: 16px;
   color: ${(props) => props.theme.TEXT_COLOR};
-  font-size: ${(props) => props.theme.FONT_SIZE_MEDIUM};
+  font-size: ${(props) => props.theme.FONT_SIZE_SMALL};
   font-family: ${(props) => props.theme.FONT_FAMILY};
+  line-height: 18px;
 `;
 
 //React Components

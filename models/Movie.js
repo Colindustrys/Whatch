@@ -48,7 +48,7 @@ export default class Movie {
   }
   _genres;
   get genres() {
-    return this._genres.join("\n");
+    return this._genres.join(", ");
   }
   set genres(value) {
     this._genres = value;
@@ -68,8 +68,10 @@ export default class Movie {
   }
   get release_date_string() {
     //return date as string in format 14.03.1972
-    const day = this._release_date.getDate().toString().padStart(2, "0"); 
-    const month = (this._release_date.getMonth() + 1).toString().padStart(2, "0");
+    const day = this._release_date.getDate().toString().padStart(2, "0");
+    const month = (this._release_date.getMonth() + 1)
+      .toString()
+      .padStart(2, "0");
     const year = this._release_date.getFullYear();
 
     const formattedDate = `${day}.${month}.${year}`;
@@ -91,7 +93,7 @@ export default class Movie {
   _vote_average;
   get vote_average() {
     //return vote as percent string
-    return votePercent = Math.round(this._vote_average * 10).toString() + "%"
+    return (votePercent = Math.round(this._vote_average * 10).toString() + "%");
   }
   set vote_average(value) {
     this._vote_average = value;
