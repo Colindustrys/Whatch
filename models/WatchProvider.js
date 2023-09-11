@@ -1,10 +1,10 @@
 export default class WatchProvider {
-  _name
-  get name() {
-    return this._name
+  _label
+  get label() {
+    return this._label
   }
-  set name(value) {
-    this._name = value
+  set label(value) {
+    this._label = value
   }
 
   _id
@@ -29,5 +29,13 @@ export default class WatchProvider {
   }
   set displayPriority(value) {
     this._displayPriority = value
+  }
+
+  _value = false
+  get value() {
+    return this._value
+  }
+  set value(value) {
+    this._value = value
   }
 }

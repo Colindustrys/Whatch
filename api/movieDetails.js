@@ -14,6 +14,8 @@ export const getMovieDetailsObject = async (id) => {
     //set flatrate provider for the movie, if there are none the list is empty
     movieObject.watchprovider = await getMovieWatchProvider(id);
 
+    //console.log(movieObject);
+
     return movieObject;
   } catch (error) {
     throw error;

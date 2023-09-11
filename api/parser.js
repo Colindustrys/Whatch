@@ -45,7 +45,7 @@ export const parseMovieProviders = (json) => {
         let newProvider = new WatchProvider();
 
         newProvider.id = flatrateItem.provider_id;
-        newProvider.name = flatrateItem.provider_name;
+        newProvider.label = flatrateItem.provider_name;
         newProvider.logoPath = flatrateItem.logo_path;
         newProvider.displayPriority = flatrateItem.display_priority;
 
