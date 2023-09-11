@@ -16,13 +16,13 @@ export default ProviderItem = ({
 }) => {
   return (
     <ProviderItemContainer>
+      <ParagraphSmall>{providerLabel}</ParagraphSmall>
+
       <StyledSwitch
         passValue={providerValue}
         onValueChange={() => toggleSwitch(providerId)}
         value={providerValue}
       />
-
-      <ParagraphSmall>{providerLabel}</ParagraphSmall>
     </ProviderItemContainer>
   );
 };

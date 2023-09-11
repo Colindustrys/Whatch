@@ -51,6 +51,8 @@ export const InnerNavigationTopContainer = styled.View`
 export const ProviderItemContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 8px;
 `;
 
 export const StyledSafeAreaView = styled(SafeAreaView).attrs((props) => ({
