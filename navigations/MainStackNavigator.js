@@ -2,6 +2,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { DarkTheme, LightTheme } from "@react-navigation/native";
 
 //Navigation
 import HomeBottomTabNavigator from "./HomeBottomTabNavigator";
@@ -18,11 +19,10 @@ import MovieDetailsScreen from "../screens/MovieDetailsScreen";
 //Components
 import { StyledStackNavigator } from "../redux-store/StyledComponents.js";
 
-export default function MainStackNavigator() {
+export default MainStackNavigator = ({ isLightMode }) => {
   const Stack = createNativeStackNavigator();
-
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={isLightMode ? LightTheme : DarkTheme}>
       <StyledStackNavigator initialRouteName="Home">
         <Stack.Group screenOptions={{ headerShown: false }}>
           <Stack.Screen
@@ -90,4 +90,4 @@ export default function MainStackNavigator() {
       </StyledStackNavigator>
     </NavigationContainer>
   );
-}
+};

@@ -27,6 +27,9 @@ import MainStackNavigator from "./navigations/MainStackNavigator";
 
 export default function Index() {
   const storedAppearance = useSelector((state) => state.appearance);
+  const isLightMode =
+    storedAppearance.theme.BACKGROUND_COLOR == lightTheme.BACKGROUND_COLOR;
+  const PlatformIsAndroid = Platform.OS === "android";
 
   //load font
   let [fontsLoaded] = useFonts({
@@ -44,16 +47,11 @@ export default function Index() {
   return (
     <ThemeProvider theme={storedAppearance.theme}>
       <StyledSafeAreaView
-        platformIsAndroid={Platform.OS === "android"}
+        platformIsAndroid={PlatformIsAndroid}
         StatusBar={StatusBar}
       >
-        <StyledStatusBar
-          barStyleIsDarkContent={
-            storedAppearance.theme.BACKGROUND_COLOR ==
-            lightTheme.BACKGROUND_COLOR
-          }
-        />
-        <MainStackNavigator />
+        <StyledStatusBar barStyleIsDarkContent={isLightMode} />
+        <MainStackNavigator isLightMode={isLightMode} />
       </StyledSafeAreaView>
     </ThemeProvider>
   );
