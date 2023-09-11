@@ -74,7 +74,7 @@ export default class Movie {
       .padStart(2, "0");
     const year = this._release_date.getFullYear();
 
-    const formattedDate = `${day}.${month}.${year}`;
+    const formattedDate = `${year}`;
     return formattedDate;
   }
   set release_date(value) {
@@ -115,5 +115,4 @@ export default class Movie {
   set watchprovider(value) {
     this._watchprovider = value;
   }
-  
 }

@@ -74,7 +74,6 @@ export const HeadlineMovie = styled.Text`
   color: ${(props) => props.theme.TEXT_COLOR};
   font-size: ${(props) => props.theme.FONT_SIZE_MASSIVE};
   font-family: ${(props) => props.theme.FONT_FAMILY_BOLD};
-  margin-bottom: 32px;
   text-transform: uppercase;
 `;
 

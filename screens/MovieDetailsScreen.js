@@ -1,6 +1,12 @@
 //React
 import { React, useState, useEffect } from "react";
-import { ActivityIndicator, Image, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import { useSelector } from "react-redux";
 
 //API
@@ -49,7 +55,7 @@ export default MovieDetailsScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <Container>
+    <View>
       {loading ? (
         // Display a loading indicator while fetching data
         // color is white right now so its not visible in light mode
@@ -66,15 +72,25 @@ export default MovieDetailsScreen = ({ navigation }) => {
               uri: "https://image.tmdb.org/t/p/w1280" + movie.backdrop_path,
             }}
           />
-          <HeadlineMovie>{movie.title}</HeadlineMovie>
-          <ParagraphSmall>{movie.description}</ParagraphSmall>
-          <ParagraphSmall>{movie.genres}</ParagraphSmall>
-          <ParagraphSmall>Release: {movie.release_date_string}</ParagraphSmall>
-          <ParagraphSmall>Userbewertung: {movie.vote_average}</ParagraphSmall>
-          <ParagraphSmall>Laufzeit: {movie.runtime} min </ParagraphSmall>
+          <Container>
+            <HeadlineMovie>{movie.title}</HeadlineMovie>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-around" }}
+            >
+              <ParagraphSmall>{movie.release_date_string}</ParagraphSmall>
+              <ParagraphSmall>{movie.runtime} Min</ParagraphSmall>
+              <ParagraphSmall>{movie.vote_average}</ParagraphSmall>
+            </View>
+            <ParagraphSmall>{movie.description}</ParagraphSmall>
+            <ParagraphSmall>{movie.genres}</ParagraphSmall>
+            <ParagraphSmall>
+              Als Stream verfügbar auf
+              {movie.watchprovider.map((provider) => " " + provider.name)}
+            </ParagraphSmall>
+          </Container>
         </ScrollView>
       )}
-    </Container>
+    </View>
   );
 };
 
