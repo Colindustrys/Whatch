@@ -1,6 +1,8 @@
 //React
+import { useEffect } from "react";
 import { StatusBar, Platform } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllWatchProvider } from "./api/endpoints.js";
 
 //Styled Components
 import { ThemeProvider } from "styled-components";
@@ -26,6 +28,25 @@ import { lightTheme } from "../Whatch/redux-store/Theme";
 import MainStackNavigator from "./navigations/MainStackNavigator";
 
 export default function Index() {
+  const dispatch = useDispatch();
+  const storedProvider = useSelector((state) => state.provider);
+
+  const dispatchProvider = async () => {
+    console.log(storedProvider.provider);
+    storedProvider.provider.length == 0
+    if (true) {
+      console.log("dispatchProvider");
+      dispatch({
+        type: "SET_PROVIDER",
+        payload: await getAllWatchProvider(),
+      });
+    }
+  };
+
+  useEffect(() => {
+    dispatchProvider();
+  }, []);
+
   const storedAppearance = useSelector((state) => state.appearance);
   const isLightMode =
     storedAppearance.theme.BACKGROUND_COLOR == lightTheme.BACKGROUND_COLOR;
