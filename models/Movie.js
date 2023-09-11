@@ -104,4 +104,14 @@ export default class Movie {
   set vote_count(value) {
     this._vote_count = value;
   }
+
+  //ist ein array mit watch provider objekten, wenn keine existieren ist die liste leer
+  _watchprovider;
+  get watchprovider() {
+    return this._watchprovider;
+  }
+  set watchprovider(value) {
+    this._watchprovider = value;
+  }
+  
 }

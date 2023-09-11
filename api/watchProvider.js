@@ -1,21 +1,15 @@
 import moviedb from "./movieDbInstance";
-import { parseMovie } from "./parser";
+import { parseMovieProviders } from "./parser";
 
-// gets the movie info from tmdb and converts it to a movie object then returns that
-export const getMovieDetailsObject = async (id) => {
+// gets the watchprovider for a movie from tmdb and converts it to a list of watch provider objects
+export const getMovieWatchProvider = async (id) => {
   try {
     //get json from tmdb
-    const res = await moviedb.movieInfo(id);
-    // console.log("res in movieDateils.js: " + res);
-    //parse json to movie object
-    movieObject = parseMovie(res);
-    // console.log("movieObj in movieDateils.js: ");
-    // console.log(movieObject);
-    // console.log("nooooooooo errrorooororo");
-    return movieObject;
+    const res = await moviedb.movieWatchProviders(id);
+    //parse list with watchProvider objects
+    const providerarray = parseMovieProviders(res);
+    return providerarray;
   } catch (error) {
-    // console.log("annnnnnnnnnn errrorooororo");
-    //console.log("Error in movieDetails.js: " + error);
     throw error;
   }
 };

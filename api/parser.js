@@ -1,4 +1,5 @@
 import Movie from "../models/Movie";
+import WatchProvider from "../models/WatchProvider";
 
 export const parseMovie = (json) => {
   newMovie = new Movie();
@@ -29,4 +30,29 @@ export const parseMovie = (json) => {
   newMovie.vote_count = json.vote_count;
 
   return newMovie;
+};
+
+export const parseMovieProviders = (json) => {
+  let providerList = [];
+
+  //check if there is results
+  if (json.results.DE) {
+    //check if there is any flatrate
+    if (json.results.DE.flatrate) {
+      const flatrateArray = json.results.DE.flatrate;
+
+      for (const flatrateItem of flatrateArray) {
+        let newProvider = new WatchProvider();
+
+        newProvider.id = flatrateItem.provider_id;
+        newProvider.name = flatrateItem.provider_name;
+        newProvider.logoPath = flatrateItem.logo_path;
+        newProvider.displayPriority = flatrateItem.display_priority;
+
+        providerList.push(newProvider);
+      }
+    }
+  }
+
+  return providerList
 };
