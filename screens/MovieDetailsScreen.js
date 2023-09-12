@@ -6,6 +6,7 @@ import {
   Image,
   StyleSheet,
   ScrollView,
+  Pressable,
 } from "react-native";
 import { useSelector } from "react-redux";
 
@@ -20,9 +21,27 @@ import {
   Paragraph,
   ParagraphSmall,
   HeadlineMovie,
+  TopNavigationIcon,
 } from "../redux-store/StyledComponents.js";
 
 export default MovieDetailsScreen = ({ navigation }) => {
+  const onShareClick = () => {
+    console.log("CLICK!!");
+    //TODO: Share
+  };
+
+  const onAddToWatchlist = () => {
+    console.log("CLICK!!");
+
+    //TODO: AddToWatchList --> Reducer
+  };
+
+  const onAddToSeenlist = () => {
+    console.log("CLICK!!");
+
+    //TODO: AddToSeenList --> Reducer
+  };
+
   const theme = useSelector((state) => state.theme);
 
   //usestate to know if the data is still being loaded from the api
@@ -74,6 +93,7 @@ export default MovieDetailsScreen = ({ navigation }) => {
           />
           <Container>
             <HeadlineMovie>{movie.title}</HeadlineMovie>
+
             <View
               style={{ flexDirection: "row", justifyContent: "space-around" }}
             >
@@ -81,11 +101,33 @@ export default MovieDetailsScreen = ({ navigation }) => {
               <ParagraphSmall>{movie.runtime} Min</ParagraphSmall>
               <ParagraphSmall>{movie.vote_average}</ParagraphSmall>
             </View>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-around" }}
+            >
+              <Pressable onPress={onShareClick}>
+                <TopNavigationIcon name={"share-social-outline"} size={48} />
+                <ParagraphSmall style={{ textAlign: "center" }}>
+                  Teilen
+                </ParagraphSmall>
+              </Pressable>
+              <Pressable onPress={onAddToWatchlist}>
+                <TopNavigationIcon name={"add-outline"} size={48} />
+                <ParagraphSmall style={{ textAlign: "center" }}>
+                  Watchlist
+                </ParagraphSmall>
+              </Pressable>
+              <Pressable onPress={onAddToSeenlist}>
+                <TopNavigationIcon name={"checkmark-outline"} size={48} />
+                <ParagraphSmall style={{ textAlign: "center" }}>
+                  Gesehen
+                </ParagraphSmall>
+              </Pressable>
+            </View>
             <ParagraphSmall>{movie.description}</ParagraphSmall>
             <ParagraphSmall>{movie.genres}</ParagraphSmall>
             <ParagraphSmall>
               Als Stream verfügbar auf
-              {movie.watchprovider.map((provider) => " " + provider.name)}
+              {movie.watchprovider.map((provider) => " " + provider.label)}
             </ParagraphSmall>
           </Container>
         </ScrollView>
