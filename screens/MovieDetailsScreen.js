@@ -1,5 +1,5 @@
 //React
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   ActivityIndicator,
@@ -8,7 +8,7 @@ import {
   ScrollView,
   Pressable,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 //API
 import { getMovieDetails } from "../api/endpoints.js";
@@ -25,24 +25,10 @@ import {
 } from "../redux-store/StyledComponents.js";
 
 export default MovieDetailsScreen = ({ navigation }) => {
-  const onShareClick = () => {
-    console.log("CLICK!!");
-    //TODO: Share
-  };
-
-  const onAddToWatchlist = () => {
-    console.log("CLICK!!");
-
-    //TODO: AddToWatchList --> Reducer
-  };
-
-  const onAddToSeenlist = () => {
-    console.log("CLICK!!");
-
-    //TODO: AddToSeenList --> Reducer
-  };
-
-  const theme = useSelector((state) => state.theme);
+  //Get States from Async Storage
+  const storedWatchList = useSelector((state) => state.watchListReducer);
+  const storedSeenList = useSelector((state) => state.seenListReducer);
+  const dispatch = useDispatch();
 
   //usestate to know if the data is still being loaded from the api
   const [loading, setLoading] = useState(true);
@@ -50,6 +36,40 @@ export default MovieDetailsScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   //usestate for the movieObject with the movie data
   const [movie, setMovie] = useState(null);
+  //useStates for element existing in List
+  const [elementExistInWatchList, setElementExistInWatchList] = useState(false);
+  const [elementExistInSeenList, setElementExistInSeenList] = useState(false);
+
+  const onShareClick = () => {
+    //TODO: Share
+  };
+
+  const onAddToWatchlist = () => {
+    let type;
+    if (elementExistInWatchList) {
+      type = "DELETE_MOVIE_FROM_WATCHLIST";
+    } else {
+      type = "ADD_MOVIE_TO_WATCHLIST";
+    }
+    dispatchHandler(type);
+  };
+
+  const onAddToSeenlist = () => {
+    let type;
+    if (elementExistInSeenList) {
+      type = "DELETE_MOVIE_FROM_SEENLIST";
+    } else {
+      type = "ADD_MOVIE_TO_SEENLIST";
+    }
+    dispatchHandler(type);
+  };
+
+  const dispatchHandler = (type) => {
+    dispatch({
+      type: type,
+      payload: movie.id,
+    });
+  };
 
   const fetchMovieDetails = async (id) => {
     try {
@@ -72,6 +92,22 @@ export default MovieDetailsScreen = ({ navigation }) => {
   useEffect(() => {
     fetchMovieDetails(11);
   }, []);
+
+  //check if element exists in Watchlist and update useState
+  useEffect(() => {
+    setElementExistInWatchList(storedWatchList.movies.includes(movie?.id));
+  }, [storedWatchList]);
+
+  //check if element exists in Seenlist and update useState
+  useEffect(() => {
+    setElementExistInSeenList(storedSeenList.movies.includes(movie?.id));
+  }, [storedSeenList]);
+
+  //set States after movies are loaded
+  useEffect(() => {
+    setElementExistInWatchList(storedWatchList.movies.includes(movie?.id));
+    setElementExistInSeenList(storedSeenList.movies.includes(movie?.id));
+  }, [loading]);
 
   return (
     <View>
@@ -104,20 +140,32 @@ export default MovieDetailsScreen = ({ navigation }) => {
             <View
               style={{ flexDirection: "row", justifyContent: "space-around" }}
             >
-              <Pressable onPress={onShareClick}>
+              <Pressable onPress={() => onShareClick()}>
                 <TopNavigationIcon name={"share-social-outline"} size={48} />
                 <ParagraphSmall style={{ textAlign: "center" }}>
                   Teilen
                 </ParagraphSmall>
               </Pressable>
-              <Pressable onPress={onAddToWatchlist}>
-                <TopNavigationIcon name={"add-outline"} size={48} />
+              <Pressable onPress={() => onAddToWatchlist()}>
+                <TopNavigationIcon
+                  name={
+                    elementExistInWatchList ? "remove-outline" : "add-outline"
+                  }
+                  size={48}
+                />
                 <ParagraphSmall style={{ textAlign: "center" }}>
                   Watchlist
                 </ParagraphSmall>
               </Pressable>
-              <Pressable onPress={onAddToSeenlist}>
-                <TopNavigationIcon name={"checkmark-outline"} size={48} />
+              <Pressable onPress={() => onAddToSeenlist()}>
+                <TopNavigationIcon
+                  name={
+                    elementExistInSeenList
+                      ? "close-outline"
+                      : "checkmark-outline"
+                  }
+                  size={48}
+                />
                 <ParagraphSmall style={{ textAlign: "center" }}>
                   Gesehen
                 </ParagraphSmall>
