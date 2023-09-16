@@ -1,13 +1,6 @@
 //React
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  ActivityIndicator,
-  Image,
-  StyleSheet,
-  ScrollView,
-  Pressable,
-} from "react-native";
+import { View, ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 //API
@@ -21,8 +14,13 @@ import {
   Paragraph,
   ParagraphSmall,
   HeadlineMovie,
-  TopNavigationIcon,
+  StyledRowContainer,
+  StyledActivityIndicator,
+  StyledImage,
 } from "../redux-store/StyledComponents.js";
+
+//Components
+import MovieDetailsButtonComponent from "../components/MovieDetailsButtonComponent.js";
 
 export default MovieDetailsScreen = ({ navigation }) => {
   //Get States from Async Storage
@@ -113,64 +111,49 @@ export default MovieDetailsScreen = ({ navigation }) => {
     <View>
       {loading ? (
         // Display a loading indicator while fetching data
-        // color is white right now so its not visible in light mode
-        <ActivityIndicator size="large" color="white" />
+        <StyledActivityIndicator />
       ) : error ? (
         // Display an error message if an error occurred
         <HeadlineMovie>{error}</HeadlineMovie>
       ) : (
         //display the movie data when it is loaded
         <ScrollView>
-          <Image
-            style={styles.image}
+          <StyledImage
             source={{
               uri: "https://image.tmdb.org/t/p/w1280" + movie.backdrop_path,
             }}
           />
           <Container>
             <HeadlineMovie>{movie.title}</HeadlineMovie>
-
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-around" }}
-            >
+            <StyledRowContainer>
               <ParagraphSmall>{movie.release_date_string}</ParagraphSmall>
               <ParagraphSmall>{movie.runtime} Min</ParagraphSmall>
               <ParagraphSmall>{movie.vote_average}</ParagraphSmall>
-            </View>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-around" }}
-            >
-              <Pressable onPress={() => onShareClick()}>
-                <TopNavigationIcon name={"share-social-outline"} size={48} />
-                <ParagraphSmall style={{ textAlign: "center" }}>
-                  Teilen
-                </ParagraphSmall>
-              </Pressable>
-              <Pressable onPress={() => onAddToWatchlist()}>
-                <TopNavigationIcon
-                  name={
-                    elementExistInWatchList ? "remove-outline" : "add-outline"
-                  }
-                  size={48}
-                />
-                <ParagraphSmall style={{ textAlign: "center" }}>
-                  Watchlist
-                </ParagraphSmall>
-              </Pressable>
-              <Pressable onPress={() => onAddToSeenlist()}>
-                <TopNavigationIcon
-                  name={
-                    elementExistInSeenList
-                      ? "close-outline"
-                      : "checkmark-outline"
-                  }
-                  size={48}
-                />
-                <ParagraphSmall style={{ textAlign: "center" }}>
-                  Gesehen
-                </ParagraphSmall>
-              </Pressable>
-            </View>
+            </StyledRowContainer>
+            <StyledRowContainer>
+              <MovieDetailsButtonComponent
+                iconName={"share-social-outline"}
+                clickHandler={() => onShareClick()}
+              >
+                Teilen
+              </MovieDetailsButtonComponent>
+              <MovieDetailsButtonComponent
+                iconName={
+                  elementExistInWatchList ? "remove-outline" : "add-outline"
+                }
+                clickHandler={() => onAddToWatchlist()}
+              >
+                Teilen
+              </MovieDetailsButtonComponent>
+              <MovieDetailsButtonComponent
+                iconName={
+                  elementExistInSeenList ? "close-outline" : "checkmark-outline"
+                }
+                clickHandler={() => onAddToSeenlist()}
+              >
+                Teilen
+              </MovieDetailsButtonComponent>
+            </StyledRowContainer>
             <ParagraphSmall>{movie.description}</ParagraphSmall>
             <ParagraphSmall>{movie.genres}</ParagraphSmall>
             <ParagraphSmall>
@@ -183,11 +166,3 @@ export default MovieDetailsScreen = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    width: "100%",
-    height: 230,
-    alignSelf: "center",
-  },
-});

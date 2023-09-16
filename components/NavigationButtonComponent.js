@@ -4,13 +4,13 @@ import * as React from "react";
 //Styled Components
 import {
   TopNavigationButton,
-  TopNavigationIcon,
+  StyledIonicon,
 } from "../redux-store/StyledComponents.js";
 
-export default ({ clickHandler, icon }) => {
+export default ({ clickHandler, iconName }) => {
   return (
     <TopNavigationButton onPress={clickHandler}>
-      <TopNavigationIcon name={icon} size={24} />
+      <StyledIonicon name={iconName} size={24} />
     </TopNavigationButton>
   );
 };

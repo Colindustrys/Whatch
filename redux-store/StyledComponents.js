@@ -13,6 +13,8 @@ import {
   Pressable,
   StatusBar,
   SafeAreaView,
+  ActivityIndicator,
+  Image,
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -66,6 +68,11 @@ export const StyledStatusBar = styled(StatusBar).attrs((props) => ({
   barStyle: props.barStyleIsDarkContent ? "dark-content" : "light-content",
 }))``;
 
+export const StyledRowContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
 // Text
 
 export const HeadlineMovie = styled.Text`
@@ -114,7 +121,18 @@ export const TopNavigationButton = styled.Pressable`
   align-items: center;
 `;
 
-export const TopNavigationIcon = styled(Ionicons).attrs((props) => ({
+export const StyledActivityIndicator = styled.ActivityIndicator`
+  size: large;
+  color: props.theme.TEXT_COLOR;
+`;
+
+export const StyledImage = styled.Image`
+  width: 100%;
+  height: 230px;
+  align-self: center;
+`;
+
+export const StyledIonicon = styled(Ionicons).attrs((props) => ({
   color: props.theme.TEXT_COLOR,
 }))``;
 
