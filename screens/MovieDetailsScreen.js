@@ -16,13 +16,13 @@ import {
   HeadlineMovie,
   StyledRowContainer,
   StyledActivityIndicator,
-  StyledImage,
+  StyledBackdrop,
 } from "../redux-store/StyledComponents.js";
 
 //Components
 import MovieDetailsButtonComponent from "../components/MovieDetailsButtonComponent.js";
 
-export default MovieDetailsScreen = ({ navigation }) => {
+export default MovieDetailsScreen = ({ route, navigation }) => {
   //Get States from Async Storage
   const storedWatchList = useSelector((state) => state.watchListReducer);
   const storedSeenList = useSelector((state) => state.seenListReducer);
@@ -88,7 +88,8 @@ export default MovieDetailsScreen = ({ navigation }) => {
 
   //fetch movie details once on startup
   useEffect(() => {
-    fetchMovieDetails(11);
+    //TODO: How to pass movieID to MovieDetailsScreen? --> optional chaining for now because home screens dont pass arguments
+    fetchMovieDetails(route?.params?.movieID ? route.params.movieID : 11);
   }, []);
 
   //check if element exists in Watchlist and update useState
@@ -118,7 +119,7 @@ export default MovieDetailsScreen = ({ navigation }) => {
       ) : (
         //display the movie data when it is loaded
         <ScrollView>
-          <StyledImage
+          <StyledBackdrop
             source={{
               uri: "https://image.tmdb.org/t/p/w1280" + movie.backdrop_path,
             }}

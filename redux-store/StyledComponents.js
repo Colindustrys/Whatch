@@ -73,6 +73,12 @@ export const StyledRowContainer = styled.View`
   justify-content: space-around;
 `;
 
+export const StyledPosterContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+`;
+
 // Text
 
 export const HeadlineMovie = styled.Text`
@@ -126,11 +132,24 @@ export const StyledActivityIndicator = styled.ActivityIndicator`
   color: props.theme.TEXT_COLOR;
 `;
 
-export const StyledImage = styled.Image`
+export const StyledBackdrop = styled.Image`
   width: 100%;
   height: 230px;
   align-self: center;
 `;
+
+export const StyledPoster = styled.Image`
+  width: 200px;
+  aspect-ratio: 3 / 2;
+  resize-mode: contain;
+`;
+/*
+export const StyledPoster = styled(Image).attrs((props) => ({
+  width: 200,
+  height: 200,
+  resizeMode: "contain",
+}))``;
+*/
 
 export const StyledIonicon = styled(Ionicons).attrs((props) => ({
   color: props.theme.TEXT_COLOR,

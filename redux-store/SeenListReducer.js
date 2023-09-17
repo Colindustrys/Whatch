@@ -1,5 +1,5 @@
 const initialState = {
-  movies: [0, 1, 2, 3],
+  movies: [346698, 872585, 298618, 667538],
 };
 
 // Handle action
