@@ -1,6 +1,6 @@
 //React
-import React from "react";
-import { FlatList } from "react-native";
+import React, { useEffect } from "react";
+import { FlatList, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 //Components
@@ -13,39 +13,50 @@ import {
   ParagraphSmall,
 } from "../redux-store/StyledComponents.js";
 
-/* @ Alex: Was brauchst du zum filtern? Nur die aktiven Provider oder kannst du mit der ganzen Liste arbeiten? */
 export default ProviderSettingsScreen = ({ navigation }) => {
   //Get States from Async Storage
-  const storedProvider = useSelector((state) => state.provider);
+  const storedProvider = useSelector((state) => state.providerList);
+  const storedPersonalProvider = useSelector(
+    (state) => state.personalProviderList
+  );
   const dispatch = useDispatch();
 
-  const toggleSwitch = (index) => {
-    //toggle value of selected provider
-    const tempProviderList = [...storedProvider.provider];
-    tempProviderList[index].value = !tempProviderList[index].value;
+  const toggleSwitch = (providerID, providerValue) => {
+    let type;
+    if (!providerValue) {
+      type = "ADD_PROVIDER_TO_PROVIDERLIST";
+    } else {
+      type = "DELETE_PROVIDER_FROM_PROVIDERLIST";
+    }
+    dispatchHandler(type, providerID);
+  };
 
+  const dispatchHandler = (type, providerID) => {
     dispatch({
-      type: "SET_PROVIDER",
-      payload: tempProviderList,
+      type: type,
+      payload: providerID,
     });
   };
 
   return (
     <Container>
-      <Paragraph>Wähle deine abonnierten Streamingdienste</Paragraph>
-      <ParagraphSmall>
-        Deine persönlichen Streamingdienste benötigen wir, um dir die perfekten
-        Ergebnisse liefern zu können.
-      </ParagraphSmall>
-
       <FlatList
+        ListHeaderComponent={
+          <View>
+            <Paragraph>Wähle deine abonnierten Streamingdienste</Paragraph>
+            <ParagraphSmall>
+              Deine persönlichen Streamingdienste benötigen wir, um dir die
+              perfekten Ergebnisse liefern zu können.
+            </ParagraphSmall>
+          </View>
+        }
         data={storedProvider.provider}
         renderItem={({ item }) => (
           <ProviderItem
             providerLabel={item.label}
-            providerValue={item.value}
-            providerId={item.id}
+            providerValue={storedPersonalProvider?.provider?.includes(item.id)}
             toggleSwitch={toggleSwitch}
+            providerID={item.id}
           />
         )}
         keyExtractor={(item) => item.id}

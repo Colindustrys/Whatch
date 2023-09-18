@@ -36,6 +36,7 @@ export const parseMovie = (json) => {
 };
 
 export const parseMovieProviders = (json) => {
+  //new list of watchprovider objects
   let providerList = [];
 
   //check if there is results
@@ -47,11 +48,12 @@ export const parseMovieProviders = (json) => {
       for (const flatrateItem of flatrateArray) {
         let newProvider = new WatchProvider();
 
+        //add details to provider obejcts
         newProvider.id = flatrateItem.provider_id;
         newProvider.label = flatrateItem.provider_name;
         newProvider.logoPath = flatrateItem.logo_path;
         newProvider.displayPriority = flatrateItem.display_priority;
-
+        //add to list
         providerList.push(newProvider);
       }
     }
@@ -74,4 +76,23 @@ export const parseDiscoverList = (json) => {
   }
 
   return movieList;
+};
+
+export const parseAllProviders = (json) => {
+  let providerList = [];
+
+  const results = json.results;
+
+  for (const providerItem of results) {
+    let newProvider = new WatchProvider();
+
+    newProvider.id = providerItem.provider_id;
+    newProvider.displayPriority = providerItem.display_priorities.DE;
+    newProvider.label = providerItem.provider_name;
+    newProvider.logoPath = providerItem.logo_path;
+
+    providerList.push(newProvider);
+  }
+
+  return providerList;
 };

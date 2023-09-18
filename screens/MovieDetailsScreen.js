@@ -24,8 +24,8 @@ import MovieDetailsButtonComponent from "../components/MovieDetailsButtonCompone
 
 export default MovieDetailsScreen = ({ route, navigation }) => {
   //Get States from Async Storage
-  const storedWatchList = useSelector((state) => state.watchListReducer);
-  const storedSeenList = useSelector((state) => state.seenListReducer);
+  const storedWatchList = useSelector((state) => state.watchList);
+  const storedSeenList = useSelector((state) => state.seenList);
   const dispatch = useDispatch();
 
   //usestate to know if the data is still being loaded from the api
