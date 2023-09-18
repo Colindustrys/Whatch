@@ -13,6 +13,9 @@ export const parseMovie = (json) => {
   //make genres array
   newMovie.genres = json.genres.map((genre) => genre.name);
 
+  //make genreIDs array
+  newMovie.genreIDs = json.genres.map((genre) => genre.id);
+
   newMovie.original_language = json.original_language;
 
   //convert json date string to javascript date
@@ -54,5 +57,21 @@ export const parseMovieProviders = (json) => {
     }
   }
 
-  return providerList
+  return providerList;
+};
+
+export const parseDiscoverList = (json) => {
+  let movieList = [];
+
+  if (json.results) {
+    if (json.results.length > 0) {
+      const moviesJsonArray = json.results;
+      for (const movieJSON of moviesJsonArray) {
+        movieList.push(movieJSON.id);
+        console.log(movieJSON.title);
+      }
+    }
+  }
+
+  return movieList;
 };

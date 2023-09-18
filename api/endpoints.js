@@ -1,11 +1,23 @@
 import { getMovieDetailsObject } from "./movieDetails";
+import { getMovieDiscoverList } from "./movieDiscover";
 
 export const getMovieDetails = async (id) => {
   try {
-    //get movieobject
     movieObject = await getMovieDetailsObject(id);
-    //return movie object
     return movieObject;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getMovieDiscover = async (requestParams) => {
+  if (!requestParams) {
+    requestParams = { page: 1 };
+  }
+
+  try {
+    movieIdList = await getMovieDiscoverList(requestParams);
+    return movieIdList;
   } catch (error) {
     throw error;
   }
