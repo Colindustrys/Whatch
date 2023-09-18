@@ -1,25 +1,32 @@
 //React
-import { React, useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  Image,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
-import { useSelector } from "react-redux";
-
-//Theme
-import Typography from "../constants/Typography.js";
-import Theme from "../constants/Theme";
+import React, { useState, useEffect } from "react";
+import { View, ScrollView } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 
 //API
 import { getMovieDetails } from "../api/endpoints.js";
 //import { getMovieDetails } from "../api/endpointsForTesting.js";
 
-export default MovieDetailsScreen = ({ navigation }) => {
-  const theme = useSelector((state) => state.theme);
+//Styled Components
+import {
+  HeadlineSmall,
+  Container,
+  Paragraph,
+  ParagraphSmall,
+  HeadlineMovie,
+  StyledRowContainer,
+  StyledActivityIndicator,
+  StyledBackdrop,
+} from "../redux-store/StyledComponents.js";
+
+//Components
+import MovieDetailsButtonComponent from "../components/MovieDetailsButtonComponent.js";
+
+export default MovieDetailsScreen = ({ route, navigation }) => {
+  //Get States from Async Storage
+  const storedWatchList = useSelector((state) => state.watchListReducer);
+  const storedSeenList = useSelector((state) => state.seenListReducer);
+  const dispatch = useDispatch();
 
   //usestate to know if the data is still being loaded from the api
   const [loading, setLoading] = useState(true);
@@ -27,6 +34,40 @@ export default MovieDetailsScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   //usestate for the movieObject with the movie data
   const [movie, setMovie] = useState(null);
+  //useStates for element existing in List
+  const [elementExistInWatchList, setElementExistInWatchList] = useState(false);
+  const [elementExistInSeenList, setElementExistInSeenList] = useState(false);
+
+  const onShareClick = () => {
+    //TODO: Share
+  };
+
+  const onAddToWatchlist = () => {
+    let type;
+    if (elementExistInWatchList) {
+      type = "DELETE_MOVIE_FROM_WATCHLIST";
+    } else {
+      type = "ADD_MOVIE_TO_WATCHLIST";
+    }
+    dispatchHandler(type);
+  };
+
+  const onAddToSeenlist = () => {
+    let type;
+    if (elementExistInSeenList) {
+      type = "DELETE_MOVIE_FROM_SEENLIST";
+    } else {
+      type = "ADD_MOVIE_TO_SEENLIST";
+    }
+    dispatchHandler(type);
+  };
+
+  const dispatchHandler = (type) => {
+    dispatch({
+      type: type,
+      payload: movie.id,
+    });
+  };
 
   const fetchMovieDetails = async (id) => {
     try {
@@ -47,104 +88,82 @@ export default MovieDetailsScreen = ({ navigation }) => {
 
   //fetch movie details once on startup
   useEffect(() => {
-    fetchMovieDetails(11);
+    //TODO: How to pass movieID to MovieDetailsScreen? --> optional chaining for now because home screens dont pass arguments
+    fetchMovieDetails(route?.params?.movieID ? route.params.movieID : 11);
   }, []);
 
+  //check if element exists in Watchlist and update useState
+  useEffect(() => {
+    setElementExistInWatchList(storedWatchList.movies.includes(movie?.id));
+  }, [storedWatchList]);
+
+  //check if element exists in Seenlist and update useState
+  useEffect(() => {
+    setElementExistInSeenList(storedSeenList.movies.includes(movie?.id));
+  }, [storedSeenList]);
+
+  //set States after movies are loaded
+  useEffect(() => {
+    setElementExistInWatchList(storedWatchList.movies.includes(movie?.id));
+    setElementExistInSeenList(storedSeenList.movies.includes(movie?.id));
+  }, [loading]);
+
   return (
-    <View
-      style={
-        theme.mode == "light" ? Theme.container_light : Theme.container_dark
-      }
-    >
-      <View>
-        {loading ? (
-          // Display a loading indicator while fetching data
-          // color is white right now so its not visible in light mode
-          <ActivityIndicator size="large" color="white" />
-        ) : error ? (
-          // Display an error message if an error occurred
-          <Text
-            style={
-              theme.mode == "light"
-                ? Typography.headline_big_light
-                : Typography.headline_big_dark
-            }
-          >
-            {error}
-          </Text>
-        ) : (
-          //display the movie data when it is loaded
-          <View>
-            <ScrollView>
-              <Image
-                style={styles.image}
-                source={{
-                  uri: "https://image.tmdb.org/t/p/w1280" + movie.backdrop_path,
-                }}
-              />
-
-              <Text
-                style={
-                  theme.mode == "light"
-                    ? Typography.headline_big_light
-                    : Typography.headline_big_dark
-                }
+    <View>
+      {loading ? (
+        // Display a loading indicator while fetching data
+        <StyledActivityIndicator />
+      ) : error ? (
+        // Display an error message if an error occurred
+        <HeadlineMovie>{error}</HeadlineMovie>
+      ) : (
+        //display the movie data when it is loaded
+        <ScrollView>
+          <StyledBackdrop
+            source={{
+              uri: "https://image.tmdb.org/t/p/w1280" + movie.backdrop_path,
+            }}
+          />
+          <Container>
+            <HeadlineMovie>{movie.title}</HeadlineMovie>
+            <StyledRowContainer>
+              <ParagraphSmall>{movie.release_date_string}</ParagraphSmall>
+              <ParagraphSmall>{movie.runtime} Min</ParagraphSmall>
+              <ParagraphSmall>{movie.vote_average}</ParagraphSmall>
+            </StyledRowContainer>
+            <StyledRowContainer>
+              <MovieDetailsButtonComponent
+                iconName={"share-social-outline"}
+                clickHandler={() => onShareClick()}
               >
-                {movie.title}
-              </Text>
-
-              <Text
-                style={
-                  theme.mode == "light"
-                    ? Typography.paragraph_light
-                    : Typography.paragraph_dark
+                Teilen
+              </MovieDetailsButtonComponent>
+              <MovieDetailsButtonComponent
+                iconName={
+                  elementExistInWatchList ? "remove-outline" : "add-outline"
                 }
+                clickHandler={() => onAddToWatchlist()}
               >
-                Release: {movie.release_date_string}
-              </Text>
-
-              <Text
-                style={
-                  theme.mode == "light"
-                    ? Typography.paragraph_light
-                    : Typography.paragraph_dark
+                Teilen
+              </MovieDetailsButtonComponent>
+              <MovieDetailsButtonComponent
+                iconName={
+                  elementExistInSeenList ? "close-outline" : "checkmark-outline"
                 }
+                clickHandler={() => onAddToSeenlist()}
               >
-                Userbewertung: {movie.vote_average}
-              </Text>
-
-              <Text
-                style={
-                  theme.mode == "light"
-                    ? Typography.paragraph_light
-                    : Typography.paragraph_dark
-                }
-              >
-                Genres:{"\n"}
-                {movie.genres}
-              </Text>
-
-              <Text
-                style={
-                  theme.mode == "light"
-                    ? Typography.paragraph_light
-                    : Typography.paragraph_dark
-                }
-              >
-                Beschreibung: {movie.description}
-              </Text>
-            </ScrollView>
-          </View>
-        )}
-      </View>
+                Teilen
+              </MovieDetailsButtonComponent>
+            </StyledRowContainer>
+            <ParagraphSmall>{movie.description}</ParagraphSmall>
+            <ParagraphSmall>{movie.genres}</ParagraphSmall>
+            <ParagraphSmall>
+              Als Stream verfügbar auf
+              {movie.watchprovider.map((provider) => " " + provider.label)}
+            </ParagraphSmall>
+          </Container>
+        </ScrollView>
+      )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    width: "100%",
-    height: 230,
-    alignSelf: "center",
-  },
-});

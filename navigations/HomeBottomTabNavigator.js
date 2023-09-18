@@ -43,11 +43,11 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
         <InnerNavigationTopContainer>
           <NavigationButtonComponent
             clickHandler={() => navigation.navigate("WatchlistScreen")}
-            icon={"heart"}
+            iconName={"heart"}
           />
           <NavigationButtonComponent
             clickHandler={() => navigation.navigate("SettingsScreen")}
-            icon={"settings"}
+            iconName={"settings"}
           />
         </InnerNavigationTopContainer>
       </TopNavigationContainer>

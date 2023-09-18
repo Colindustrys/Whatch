@@ -13,6 +13,8 @@ import {
   Pressable,
   StatusBar,
   SafeAreaView,
+  ActivityIndicator,
+  Image,
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -66,7 +68,28 @@ export const StyledStatusBar = styled(StatusBar).attrs((props) => ({
   barStyle: props.barStyleIsDarkContent ? "dark-content" : "light-content",
 }))``;
 
+export const StyledRowContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
+export const StyledPosterContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+`;
+
 // Text
+
+export const HeadlineMovie = styled.Text`
+  text-align: center;
+  padding-bottom: 16px;
+  color: ${(props) => props.theme.TEXT_COLOR};
+  font-size: ${(props) => props.theme.FONT_SIZE_MASSIVE};
+  font-family: ${(props) => props.theme.FONT_FAMILY_BOLD};
+  text-transform: uppercase;
+`;
+
 export const HeadlineSmall = styled.Text`
   text-align: center;
   padding-bottom: 16px;
@@ -88,8 +111,9 @@ export const ParagraphSmall = styled.Text`
   text-align: left;
   padding-bottom: 16px;
   color: ${(props) => props.theme.TEXT_COLOR};
-  font-size: ${(props) => props.theme.FONT_SIZE_MEDIUM};
+  font-size: ${(props) => props.theme.FONT_SIZE_SMALL};
   font-family: ${(props) => props.theme.FONT_FAMILY};
+  line-height: 18px;
 `;
 
 //React Components
@@ -103,7 +127,31 @@ export const TopNavigationButton = styled.Pressable`
   align-items: center;
 `;
 
-export const TopNavigationIcon = styled(Ionicons).attrs((props) => ({
+export const StyledActivityIndicator = styled.ActivityIndicator`
+  size: large;
+  color: props.theme.TEXT_COLOR;
+`;
+
+export const StyledBackdrop = styled.Image`
+  width: 100%;
+  height: 230px;
+  align-self: center;
+`;
+
+export const StyledPoster = styled.Image`
+  width: 200px;
+  aspect-ratio: 3 / 2;
+  resize-mode: contain;
+`;
+/*
+export const StyledPoster = styled(Image).attrs((props) => ({
+  width: 200,
+  height: 200,
+  resizeMode: "contain",
+}))``;
+*/
+
+export const StyledIonicon = styled(Ionicons).attrs((props) => ({
   color: props.theme.TEXT_COLOR,
 }))``;
 
