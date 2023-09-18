@@ -11,7 +11,7 @@ import {
 export default ({ clickHandler, iconName, children }) => {
   return (
     <Pressable onPress={clickHandler}>
-      <StyledIonicon name={iconName} size={48} />
+      <StyledIonicon name={iconName} size={48} colorIsTextColor={true} />
       <ParagraphSmall>{children}</ParagraphSmall>
     </Pressable>
   );
