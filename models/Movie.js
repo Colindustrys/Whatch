@@ -46,12 +46,21 @@ export default class Movie {
   set poster_path(value) {
     this._poster_path = value;
   }
+
   _genres;
   get genres() {
     return this._genres.join(", ");
   }
   set genres(value) {
     this._genres = value;
+  }
+
+  _genreIDs;
+  get genreIDs() {
+    return this._genreIDs;
+  }
+  set genreIDs(value) {
+    this._genreIDs = value;
   }
 
   _original_language;
@@ -66,8 +75,8 @@ export default class Movie {
   get release_date() {
     return this._release_date;
   }
+  //get date as string in format 14.03.1972
   get release_date_string() {
-    //return date as string in format 14.03.1972
     const day = this._release_date.getDate().toString().padStart(2, "0");
     const month = (this._release_date.getMonth() + 1)
       .toString()
@@ -77,8 +86,8 @@ export default class Movie {
     const formattedDate = `${year}`;
     return formattedDate;
   }
+  //put in a js date object
   set release_date(value) {
-    //put in a js date object
     this._release_date = value;
   }
 

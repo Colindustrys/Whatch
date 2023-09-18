@@ -1,24 +1,34 @@
 import { getMovieDetailsObject } from "./movieDetails";
+import { getMovieDiscoverList } from "./movieDiscover";
 import { getAllWatchProviderObjects } from "./allWatchProvider";
 import moviedb from "./movieDbInstance";
 
 export const getMovieDetails = async (id) => {
   try {
-    //get movieobject
     const movieObject = await getMovieDetailsObject(id);
-    getAllWatchProvider();
-    //return movie object
     return movieObject;
   } catch (error) {
     throw error;
   }
 };
 
+export const getMovieDiscover = async (requestParams) => {
+  if (!requestParams) {
+    requestParams = { page: 1 };
+  }
+
+  try {
+    movieIdList = await getMovieDiscoverList(requestParams);
+    return movieIdList;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getAllWatchProvider = async () => {
-  let allWatchProviders
+  let allWatchProviders;
   try {
     allWatchProviders = await getAllWatchProviderObjects();
-    //console.log(allWatchProviders);
   } catch (error) {
     console.log(error);
   }

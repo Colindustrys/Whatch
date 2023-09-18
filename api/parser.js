@@ -13,6 +13,9 @@ export const parseMovie = (json) => {
   //make genres array
   newMovie.genres = json.genres.map((genre) => genre.name);
 
+  //make genreIDs array
+  newMovie.genreIDs = json.genres.map((genre) => genre.id);
+
   newMovie.original_language = json.original_language;
 
   //convert json date string to javascript date
@@ -59,21 +62,37 @@ export const parseMovieProviders = (json) => {
   return providerList;
 };
 
-export const parseAllProviders = (json) => {
-  let providerList = []
+export const parseDiscoverList = (json) => {
+  let movieList = [];
 
-  const results = json.results
-
-  for (const providerItem of results) {
-    let newProvider = new WatchProvider()
-
-    newProvider.id = providerItem.provider_id
-    newProvider.displayPriority = providerItem.display_priorities.DE
-    newProvider.label = providerItem.provider_name
-    newProvider.logoPath = providerItem.logo_path
-    
-    providerList.push(newProvider)
+  if (json.results) {
+    if (json.results.length > 0) {
+      const moviesJsonArray = json.results;
+      for (const movieJSON of moviesJsonArray) {
+        movieList.push(movieJSON.id);
+        console.log(movieJSON.title);
+      }
+    }
   }
 
-  return providerList
+  return movieList;
+};
+
+export const parseAllProviders = (json) => {
+  let providerList = [];
+
+  const results = json.results;
+
+  for (const providerItem of results) {
+    let newProvider = new WatchProvider();
+
+    newProvider.id = providerItem.provider_id;
+    newProvider.displayPriority = providerItem.display_priorities.DE;
+    newProvider.label = providerItem.provider_name;
+    newProvider.logoPath = providerItem.logo_path;
+
+    providerList.push(newProvider);
+  }
+
+  return providerList;
 };
