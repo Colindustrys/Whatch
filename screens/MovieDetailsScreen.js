@@ -1,6 +1,6 @@
 //React
 import React, { useState, useEffect } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, useWindowDimensions } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 //API
@@ -22,7 +22,11 @@ import {
 //Components
 import MovieDetailsButtonComponent from "../components/MovieDetailsButtonComponent.js";
 
-export default MovieDetailsScreen = ({ route, navigation }) => {
+export default MovieDetailsScreen = ({ movieID }) => {
+
+  console.log("detailscreen");
+  console.log(movieID);
+
   //Get States from Async Storage
   const storedWatchList = useSelector((state) => state.watchList);
   const storedSeenList = useSelector((state) => state.seenList);
@@ -73,6 +77,7 @@ export default MovieDetailsScreen = ({ route, navigation }) => {
     try {
       //get movie object from getMovieDetails()
       receivedMovie = await getMovieDetails(id);
+      console.log(receivedMovie);
       //set the usestate with the movie
       setMovie(receivedMovie);
       //set loading usestate false when done loading
@@ -89,7 +94,7 @@ export default MovieDetailsScreen = ({ route, navigation }) => {
   //fetch movie details once on startup
   useEffect(() => {
     //TODO: How to pass movieID to MovieDetailsScreen? --> optional chaining for now because home screens dont pass arguments
-    fetchMovieDetails(route?.params?.movieID ? route.params.movieID : 11);
+    fetchMovieDetails(movieID);
   }, []);
 
   //check if element exists in Watchlist and update useState
@@ -109,7 +114,7 @@ export default MovieDetailsScreen = ({ route, navigation }) => {
   }, [loading]);
 
   return (
-    <View>
+    <View style={{width: useWindowDimensions().width}}>
       {loading ? (
         // Display a loading indicator while fetching data
         <StyledActivityIndicator />
@@ -159,7 +164,7 @@ export default MovieDetailsScreen = ({ route, navigation }) => {
             <ParagraphSmall>{movie.genres}</ParagraphSmall>
             <ParagraphSmall>
               Als Stream verfügbar auf
-              {movie.watchprovider.map((provider) => " " + provider.label)}
+              {movie?.watchprovider?.map((provider) => " " + provider.label)}
             </ParagraphSmall>
           </Container>
         </ScrollView>

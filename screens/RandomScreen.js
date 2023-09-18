@@ -15,7 +15,7 @@ export default RandomScreen = ({ navigation }) => {
     <Container>
       <HeadlineSmall>Lass dich überraschen!</HeadlineSmall>
       <Button
-        onPress={() => navigation.navigate("MovieDetailsScreen")}
+        onPress={() => navigation.navigate("MovieDetailsListScreen")}
         title="To Details"
       />
     </Container>
