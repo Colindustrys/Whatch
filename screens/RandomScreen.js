@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, View } from "react-native";
 
 //API
-import { getMovieDetails } from "../api/endpoints.js";
+import { getMovieDiscover } from "../api/endpoints.js";
 
 //Styled Components
 import {
@@ -30,9 +30,9 @@ export default RandomScreen = ({ navigation }) => {
   //get movie object from getMovieDetails() and set movie state.
   const fetchMovieDetails = async (id) => {
     try {
-      receivedMovie = await getMovieDetails(id);
+      let receivedMovie = await getMovieDiscover();
       navigation.navigate("MovieDetailsScreen", {
-        movieID: receivedMovie.id,
+        movieID: receivedMovie[0],
       });
     } catch (e) {
       setError("No internet");
