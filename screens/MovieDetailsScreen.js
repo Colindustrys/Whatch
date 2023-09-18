@@ -24,9 +24,6 @@ import MovieDetailsButtonComponent from "../components/MovieDetailsButtonCompone
 
 export default MovieDetailsScreen = ({ movieID }) => {
 
-  console.log("detailscreen");
-  console.log(movieID);
-
   //Get States from Async Storage
   const storedWatchList = useSelector((state) => state.watchList);
   const storedSeenList = useSelector((state) => state.seenList);
@@ -77,7 +74,8 @@ export default MovieDetailsScreen = ({ movieID }) => {
     try {
       //get movie object from getMovieDetails()
       receivedMovie = await getMovieDetails(id);
-      console.log(receivedMovie);
+      console.log(receivedMovie.title);
+      console.log(id);
       //set the usestate with the movie
       setMovie(receivedMovie);
       //set loading usestate false when done loading

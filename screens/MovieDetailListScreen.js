@@ -9,6 +9,7 @@ import MovieDetailsScreen from "./MovieDetailsScreen.js";
 
 export default MovieDetailListScreen = ({ route, navigation }) => {
   tempIdList = [11, 976573, 120, 346698, 634649]; //976573, 120, 346698, 634649, 
+  const {movieIDs} = route.params
 
   const renderItem = ({ item }) => {
     return <MovieDetailsScreen movieID={item}/>;
@@ -17,7 +18,7 @@ export default MovieDetailListScreen = ({ route, navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <FlatList
-        data={tempIdList}
+        data={movieIDs}
         keyExtractor={(item) => item}
         renderItem={renderItem}
         horizontal
