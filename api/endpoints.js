@@ -13,6 +13,7 @@ export const getMovieDetails = async (id) => {
 };
 
 export const getMovieDiscover = async (requestParams) => {
+  
   if (!requestParams) {
     requestParams = { page: 1 };
   }

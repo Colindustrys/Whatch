@@ -4,17 +4,16 @@ import { getMovieWatchProvider } from "./watchProvider";
 
 // gets the movie info from tmdb and converts it to a movie object then returns that
 export const getMovieDetailsObject = async (id) => {
+
   try {
     //get json from tmdb
     const res = await moviedb.movieInfo(id);
 
     //parse json to movie object
-    movieObject = parseMovie(res);
+    let movieObject = parseMovie(res);
 
     //set flatrate provider for the movie, if there are none the list is empty
     movieObject.watchprovider = await getMovieWatchProvider(id);
-
-    //console.log(movieObject);
 
     return movieObject;
   } catch (error) {

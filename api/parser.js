@@ -70,7 +70,7 @@ export const parseDiscoverList = (json) => {
       const moviesJsonArray = json.results;
       for (const movieJSON of moviesJsonArray) {
         movieList.push(movieJSON.id);
-        console.log(movieJSON.title);
+        
       }
     }
   }

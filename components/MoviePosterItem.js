@@ -16,7 +16,7 @@ export default MoviePosterItem = ({ clickHandler, moviePosterPath }) => {
           resizeMode: "contain",
         }}
         source={{
-          uri: "https://image.tmdb.org/t/p/w1280" + moviePosterPath,
+          uri: "https://image.tmdb.org/t/p/w92" + moviePosterPath,
         }}
       />
     </Pressable>

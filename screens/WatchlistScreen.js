@@ -41,6 +41,7 @@ export default WatchlistScreen = ({ navigation }) => {
     try {
       //TODO another API function pls that accepts array of id and returns array of movie objects
       let receivedMovie = await getMovieDetails(id);
+      console.log(receivedMovie.title);
       setMovies((previous) => [...previous, receivedMovie]);
       setLoading(false);
     } catch (e) {
@@ -50,10 +51,10 @@ export default WatchlistScreen = ({ navigation }) => {
     }
   };
 
-  const clickHandler = (movieID) => {
-    //pass movieID to MovieDetailsScreen
-    navigation.navigate("MovieDetailsScreen", {
-      movieID: movieID,
+  const clickHandler = () => {
+    
+    navigation.navigate("MovieDetailsListScreen", {
+      movieIDs: storedWatchList.movies,
     });
   };
 

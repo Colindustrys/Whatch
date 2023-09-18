@@ -28,6 +28,8 @@ export const getMovieDiscoverList = async ({
   releaseDateMin,
   releaseDateMax,
 }) => {
+  console.log(watchProvider);
+
   requestParams = {
     page: page,
     sort_by: sort,
@@ -41,6 +43,7 @@ export const getMovieDiscoverList = async ({
     "primary_release_date.gte": releaseDateMin,
     "primary_release_date.lte": releaseDateMax,
   };
+  
 
   try {
     //get json from tmdb
@@ -48,8 +51,6 @@ export const getMovieDiscoverList = async ({
 
     //parse json to list of movie objects
     movieIDList = parseDiscoverList(res);
-
-    console.log(movieIDList);
     return movieIDList;
   } catch (error) {
     throw error;

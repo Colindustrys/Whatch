@@ -74,8 +74,6 @@ export default MovieDetailsScreen = ({ movieID }) => {
     try {
       //get movie object from getMovieDetails()
       receivedMovie = await getMovieDetails(id);
-      console.log(receivedMovie.title);
-      console.log(id);
       //set the usestate with the movie
       setMovie(receivedMovie);
       //set loading usestate false when done loading

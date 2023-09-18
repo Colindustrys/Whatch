@@ -81,8 +81,8 @@ export default MainStackNavigator = ({ isLightMode }) => {
           }}
         />
         <Stack.Screen
-          name="MovieDetailsScreen"
-          component={MovieDetailsScreen}
+          name="MovieDetailsListScreen"
+          component={MovieDetailListScreen}
           options={{
             title: "Details",
           }}

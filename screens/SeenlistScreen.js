@@ -52,8 +52,8 @@ export default SeenlistScreen = ({ navigation }) => {
 
   const clickHandler = (movieID) => {
     //pass movieID to MovieDetailsScreen
-    navigation.navigate("MovieDetailsScreen", {
-      movieID: movieID,
+    navigation.navigate("MovieDetailsListScreen", {
+      movieIDs: storedSeenList.movies,
     });
   };
 

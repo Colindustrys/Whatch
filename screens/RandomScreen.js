@@ -1,6 +1,7 @@
 //React
 import React, { useEffect, useState } from "react";
 import { Button, View } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 
 //API
 import { getMovieDiscover } from "../api/endpoints.js";
@@ -22,6 +23,10 @@ export default RandomScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [movie, setMovie] = useState([]);
 
+  const storedPersonalProvider = useSelector(
+    (state) => state.personalProviderList
+  );
+
   const onRandomClick = () => {
     //TODO get List of random movies
     fetchMovieDetails(11);
@@ -30,7 +35,8 @@ export default RandomScreen = ({ navigation }) => {
   //get movie object from getMovieDetails() and set movie state.
   const fetchMovieDetails = async (id) => {
     try {
-      let receivedMovie = await getMovieDiscover();
+      console.log(storedPersonalProvider.provider);
+      let receivedMovie = await getMovieDiscover({watchProvider: storedPersonalProvider.provider});
       navigation.navigate("MovieDetailsListScreen", {
         movieIDs: receivedMovie,
       });

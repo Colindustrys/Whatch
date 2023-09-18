@@ -24,10 +24,10 @@ export default function SearchStackNavigator() {
         }}
       />
       <Stack.Screen
-        name="MovieDetailsScreen"
-        component={MovieDetailsScreen}
+        name="MovieDetailsListScreen"
+        component={MovieDetailListScreen}
         options={{
-          title: "MovieDetailsScreen",
+          title: "MovieDetailsListScreen",
         }}
       />
     </Stack.Navigator>
