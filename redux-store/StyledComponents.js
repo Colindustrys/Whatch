@@ -111,8 +111,8 @@ export const ParagraphSmall = styled.Text`
 `;
 
 //React Components
-
-export const TopNavigationButton = styled.Pressable`
+/*
+export const RoundedButton = styled.Pressable`
   width: 32px;
   height: 32px;
   border-radius: 100px;
@@ -120,6 +120,18 @@ export const TopNavigationButton = styled.Pressable`
   justify-content: center;
   align-items: center;
 `;
+*/
+
+export const RoundedButton = styled(Pressable).attrs((props) => ({
+  width: props.size,
+  height: props.size,
+  borderRadius: props.size,
+  backgroundColor: props.usedInNavigation
+    ? props.theme.SPECIAL
+    : props.theme.TEXT_COLOR,
+  justifyContent: "center",
+  alignItems: "center",
+}))``;
 
 export const StyledActivityIndicator = styled.ActivityIndicator`
   size: large;
@@ -146,7 +158,9 @@ export const StyledPoster = styled(Image).attrs((props) => ({
 */
 
 export const StyledIonicon = styled(Ionicons).attrs((props) => ({
-  color: props.theme.TEXT_COLOR,
+  color: props.colorIsTextColor
+    ? props.theme.TEXT_COLOR
+    : props.theme.BACKGROUND_COLOR,
 }))``;
 
 export const StyledSwitch = styled(Switch).attrs((props) => ({

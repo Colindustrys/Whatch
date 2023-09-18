@@ -10,7 +10,7 @@ import BrowseStackNavigator from "./BrowseStackNavigator";
 import SearchStackNavigator from "./SearchStackNavigator";
 
 //Components
-import NavigationButtonComponent from "../components/NavigationButtonComponent";
+import RoundedButtonComponent from "../components/RoundedButtonComponent";
 import NavigationSwitchComponent from "../components/NavigationSwitchComponent";
 
 import {
@@ -41,13 +41,21 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
           isEnabled={storedFilterMethod.freeToCharge}
         />
         <InnerNavigationTopContainer>
-          <NavigationButtonComponent
+          <RoundedButtonComponent
             clickHandler={() => navigation.navigate("WatchlistScreen")}
             iconName={"heart"}
+            size={32}
+            iconSize={24}
+            usedInNavigation={true}
+            colorIsTextColor={true}
           />
-          <NavigationButtonComponent
+          <RoundedButtonComponent
             clickHandler={() => navigation.navigate("SettingsScreen")}
             iconName={"settings"}
+            size={32}
+            iconSize={24}
+            usedInNavigation={true}
+            colorIsTextColor={true}
           />
         </InnerNavigationTopContainer>
       </TopNavigationContainer>
