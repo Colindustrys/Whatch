@@ -73,12 +73,6 @@ export const StyledRowContainer = styled.View`
   justify-content: space-around;
 `;
 
-export const StyledPosterContainer = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 16px;
-`;
-
 // Text
 
 export const HeadlineMovie = styled.Text`
@@ -139,8 +133,8 @@ export const StyledBackdrop = styled.Image`
 `;
 
 export const StyledPoster = styled.Image`
-  width: 200px;
-  aspect-ratio: 3 / 2;
+  width: 72px;
+  aspect-ratio: 2 / 3;
   resize-mode: contain;
 `;
 /*

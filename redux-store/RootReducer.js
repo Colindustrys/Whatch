@@ -6,16 +6,18 @@ import AppearanceReducer from "./AppearanceReducer";
 import ThemeSettingSelectReducer from "./ThemeSettingSelectReducer";
 import WatchListReducer from "./WatchListReducer ";
 import SeenListReducer from "./SeenListReducer";
+import PersonalProviderReducer from "./PersonalProviderReducer";
 
 const rootReducer = combineReducers({
   // Define a top-level state field named `todos`, handled by `todosReducer`
   theme: themeReducer,
-  provider: ProviderReducer,
   filterMethod: FilterMethodReducer,
   appearance: AppearanceReducer,
   themeSettingSelect: ThemeSettingSelectReducer,
-  watchListReducer: WatchListReducer,
-  seenListReducer: SeenListReducer,
+  watchList: WatchListReducer,
+  seenList: SeenListReducer,
+  providerList: ProviderReducer,
+  personalProviderList: PersonalProviderReducer,
 });
 
 export default rootReducer;

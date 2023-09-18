@@ -1,6 +1,6 @@
 //React
 import React, { useEffect, useState } from "react";
-import { View, Button, ScrollView, Pressable, Image } from "react-native";
+import { View, FlatList, useWindowDimensions } from "react-native";
 import { useSelector } from "react-redux";
 
 //API
@@ -13,10 +13,6 @@ import {
   Paragraph,
   ParagraphSmall,
   StyledActivityIndicator,
-  StyledBackdrop,
-  StyledPoster,
-  StyledRowContainer,
-  StyledPosterContainer,
 } from "../redux-store/StyledComponents.js";
 
 //Components
@@ -24,8 +20,14 @@ import MoviePosterItem from "../components/MoviePosterItem.js";
 
 export default WatchlistScreen = ({ navigation }) => {
   //Get States from Async Storage
-  const storedWatchList = useSelector((state) => state.watchListReducer);
+  const storedWatchList = useSelector((state) => state.watchList);
 
+  //Calculate numColumns for FlatList
+  const itemFixedWidth = 80;
+  const listWidth = useWindowDimensions().width - 48;
+  const numCols = Math.floor(listWidth / itemFixedWidth);
+
+  //useStates
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [movies, setMovies] = useState([]);
@@ -56,31 +58,36 @@ export default WatchlistScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <Container>
       {loading ? (
         //TODO own ActivityIndicator with Logo?
         <StyledActivityIndicator />
       ) : error ? (
         <HeadlineSmall>{error}</HeadlineSmall>
       ) : (
-        <ScrollView>
-          <Container>
-            <Paragraph>Schau dir deine persönliche Watchlist an</Paragraph>
-            <ParagraphSmall>
-              Du kannst deine gespeicherten Filme verwalten, indem du sie
-              anklickst.
-            </ParagraphSmall>
-            <StyledPosterContainer>
-              {movies.map((movie) => (
-                <MoviePosterItem
-                  moviePosterPath={movie.poster_path}
-                  clickHandler={() => clickHandler(movie.id)}
-                />
-              ))}
-            </StyledPosterContainer>
-          </Container>
-        </ScrollView>
+        <FlatList
+          numColumns={numCols}
+          contentContainerStyle={{
+            gap: 8,
+          }}
+          ListHeaderComponent={
+            <View>
+              <Paragraph>Schau dir deine persönliche Watchlist an</Paragraph>
+              <ParagraphSmall>
+                Du kannst deine gespeicherten Filme verwalten, indem du sie an
+              </ParagraphSmall>
+            </View>
+          }
+          data={movies}
+          renderItem={({ item }) => (
+            <MoviePosterItem
+              moviePosterPath={item.poster_path}
+              clickHandler={() => clickHandler(item.id)}
+            />
+          )}
+          keyExtractor={(item, index) => index}
+        />
       )}
-    </View>
+    </Container>
   );
 };

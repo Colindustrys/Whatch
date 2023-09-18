@@ -12,7 +12,7 @@ export const getAllWatchProviderObjects = async (id) => {
     const providerarray = parseAllProviders(res);
 
     //sort by display prio
-    providerarray.sort((a, b) => a.id - b.id);
+    providerarray.sort((a, b) => a.displayPriority - b.displayPriority);
 
     //only take the top 20
     const top20providerarray = providerarray.slice(0, 20);

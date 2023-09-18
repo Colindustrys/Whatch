@@ -1,21 +1,17 @@
 //React
-import React, { useEffect, useState } from "react";
-import { View, Button, ScrollView, Pressable, Image } from "react-native";
-import { useSelector } from "react-redux";
+import React from "react";
+import { Pressable } from "react-native";
 
 //Styled Components
-import {
-  StyledSwitch,
-  ParagraphSmall,
-  ProviderItemContainer,
-} from "../redux-store/StyledComponents.js";
+import { StyledPoster } from "../redux-store/StyledComponents.js";
 
 export default MoviePosterItem = ({ clickHandler, moviePosterPath }) => {
   return (
     <Pressable onPress={clickHandler}>
-      <Image
+      <StyledPoster
         style={{
           width: 72,
+          marginRight: 8,
           aspectRatio: 2 / 3,
           resizeMode: "contain",
         }}

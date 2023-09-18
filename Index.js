@@ -1,5 +1,5 @@
 //React
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { StatusBar, Platform } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllWatchProvider } from "./api/endpoints.js";
@@ -28,49 +28,26 @@ import { lightTheme } from "../Whatch/redux-store/Theme";
 import MainStackNavigator from "./navigations/MainStackNavigator";
 
 export default function Index() {
+  //Get States from Async Storage
+  const storedAppearance = useSelector((state) => state.appearance);
   const dispatch = useDispatch();
-  const storedProvider = useSelector((state) => state.provider);
-  const [provider, setProvider] = useState([]);
 
-  const dispatchProvider = async () => {
-    //ALEX, deine Funktion returned nix?
-    setProvider(await getAllWatchProvider());
+  const isLightMode =
+    storedAppearance.theme.BACKGROUND_COLOR == lightTheme.BACKGROUND_COLOR;
+  const PlatformIsAndroid = Platform.OS === "android";
 
-    if (storedProvider.provider.length === 0) {
-      dispatch({
-        type: "SET_PROVIDER",
-        payload: [
-          { label: "Netflix", id: 0, value: false },
-          { label: "Amazon Prime", id: 1, value: false },
-          { label: "Disney Plus", id: 2, value: false },
-          { label: "Netflix", id: 3, value: false },
-          { label: "Amazon Prime", id: 4, value: false },
-          { label: "Disney Plus", id: 5, value: false },
-          { label: "Netflix", id: 6, value: false },
-          { label: "Amazon Prime", id: 7, value: false },
-          { label: "Disney Plus", id: 8, value: false },
-          { label: "Amazon Prime", id: 9, value: false },
-          { label: "Disney Plus", id: 10, value: false },
-          { label: "Netflix", id: 11, value: false },
-          { label: "Amazon Prime", id: 12, value: false },
-          { label: "Disney Pllllus", id: 13, value: false },
-        ],
-      });
-    }
-  };
-
+  //Get 20 mostUsed WatchProvider on Page load
   useEffect(() => {
     dispatchProvider();
   }, []);
 
-  useEffect(() => {
-    console.log(provider);
-  }, [provider]);
-
-  const storedAppearance = useSelector((state) => state.appearance);
-  const isLightMode =
-    storedAppearance.theme.BACKGROUND_COLOR == lightTheme.BACKGROUND_COLOR;
-  const PlatformIsAndroid = Platform.OS === "android";
+  //Store WatchProvider in Redux State
+  const dispatchProvider = async () => {
+    dispatch({
+      type: "SET_PROVIDER",
+      payload: await getAllWatchProvider(),
+    });
+  };
 
   //load font
   let [fontsLoaded] = useFonts({

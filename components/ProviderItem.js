@@ -11,7 +11,7 @@ import {
 export default ProviderItem = ({
   providerLabel,
   providerValue,
-  position,
+  providerID,
   toggleSwitch,
 }) => {
   return (
@@ -20,7 +20,7 @@ export default ProviderItem = ({
 
       <StyledSwitch
         passValue={providerValue}
-        onValueChange={() => toggleSwitch(position)}
+        onValueChange={() => toggleSwitch(providerID, providerValue)}
         value={providerValue}
       />
     </ProviderItemContainer>
