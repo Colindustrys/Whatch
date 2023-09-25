@@ -19,6 +19,10 @@ import {
   Comfortaa_500Medium,
   Comfortaa_600SemiBold,
   Comfortaa_700Bold,
+  Montserrat_300Light,
+  Montserrat_400Regular,
+  Montserrat_800ExtraBold,
+  Montserrat_900Black,
 } from "@expo-google-fonts/comfortaa";
 
 //Redux
@@ -56,6 +60,10 @@ export default function Index() {
     Comfortaa_500Medium,
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
+    Montserrat_300Light,
+    Montserrat_400Regular,
+    Montserrat_800ExtraBold,
+    Montserrat_900Black,
   });
 
   if (!fontsLoaded) {
