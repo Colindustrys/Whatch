@@ -14,16 +14,11 @@ import {
 //Fonts
 import {
   useFonts,
-  Comfortaa_300Light,
-  Comfortaa_400Regular,
-  Comfortaa_500Medium,
-  Comfortaa_600SemiBold,
-  Comfortaa_700Bold,
   Montserrat_300Light,
   Montserrat_400Regular,
   Montserrat_800ExtraBold,
   Montserrat_900Black,
-} from "@expo-google-fonts/comfortaa";
+} from "@expo-google-fonts/montserrat";
 
 //Redux
 import { lightTheme } from "../Whatch/redux-store/Theme";
@@ -55,11 +50,6 @@ export default function Index() {
 
   //load font
   let [fontsLoaded] = useFonts({
-    Comfortaa_300Light,
-    Comfortaa_400Regular,
-    Comfortaa_500Medium,
-    Comfortaa_600SemiBold,
-    Comfortaa_700Bold,
     Montserrat_300Light,
     Montserrat_400Regular,
     Montserrat_800ExtraBold,

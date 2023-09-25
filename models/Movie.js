@@ -49,7 +49,7 @@ export default class Movie {
 
   _genres;
   get genres() {
-    return this._genres.join(", ");
+    return this._genres.join(" • ");
   }
   set genres(value) {
     this._genres = value;

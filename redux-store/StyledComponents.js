@@ -18,7 +18,7 @@ import {
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Ionicons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -36,6 +36,25 @@ export const MainContainer = styled.View`
 
 export const MovieDetailListContainer = styled.View`
   flex: 1;
+`;
+
+export const PressableView = styled.View`
+  opacity: ${(props) => (props.pressed ? 0.3 : 1)};
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const PressableRoundedView = styled.View`
+  opacity: ${(props) => (props.pressed ? 0.7 : 1)};
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
+  border-radius: ${(props) => props.size}px;
+  background-color: ${(props) =>
+    props.isTransparent ? props.theme.SPECIAL : props.theme.TEXT_COLOR};
+  justify-content: center;
+  align-items: center;
 `;
 
 export const MovieDetailContainer = styled.View`
@@ -67,8 +86,19 @@ export const ProviderItemContainer = styled.View`
 `;
 
 export const RowContainer = styled.View`
+  display: flex;
+  justify-items: center;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: ${(props) => props.justifyContent};
+  padding-bottom: ${(props) => (props.paddingBottom ? "32px" : "0px")};
+  gap: ${(props) => (props.gap ? "16px" : "0")};
+`;
+
+export const CenterContainer = styled.View`
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledSafeAreaView = styled.SafeAreaView`
@@ -79,52 +109,33 @@ export const StyledSafeAreaView = styled.SafeAreaView`
 `;
 
 // Text
-export const HeadlineUppercase = styled.Text`
-  text-align: center;
-  padding-bottom: 16px;
-  color: ${(props) => props.theme.TEXT_COLOR};
-  font-size: ${(props) => props.theme.FONT_SIZE_MASSIVE};
-  font-family: ${(props) => props.theme.FONT_FAMILY_BOLD};
-  text-transform: uppercase;
-`;
-
 export const Headline = styled.Text`
   text-align: center;
-  padding-bottom: 16px;
+  padding-bottom: ${(props) => (props.uppercase ? "32px" : "16px")};
   color: ${(props) => props.theme.TEXT_COLOR};
-  font-size: ${(props) => props.theme.FONT_SIZE_EXTRA_LARGE};
-  font-family: ${(props) => props.theme.FONT_FAMILY_BOLD};
-  margin-bottom: 32px;
+  font-size: ${(props) =>
+    props.length > 40 || props.small
+      ? props.theme.FONT_SIZE_EXTRA_LARGE
+      : props.theme.FONT_SIZE_MASSIVE};
+  font-family: ${(props) =>
+    props.uppercase
+      ? props.theme.FONT_FAMILY_EXTRA_BOLD
+      : props.theme.FONT_FAMILY_REGULAR};
+  text-transform: ${(props) => (props.uppercase ? "uppercase" : "none")};
 `;
 
 export const Paragraph = styled.Text`
-  text-align: left;
+  text-align: ${(props) => (props.textCenter ? "center" : "left")};
   padding-bottom: 16px;
   color: ${(props) => props.theme.TEXT_COLOR};
-  font-size: ${(props) => props.theme.FONT_SIZE_LARGE};
-  font-family: ${(props) => props.theme.FONT_FAMILY};
-`;
-
-export const ParagraphSmall = styled.Text`
-  text-align: left;
-  padding-bottom: 16px;
-  color: ${(props) => props.theme.TEXT_COLOR};
-  font-size: ${(props) => props.theme.FONT_SIZE_SMALL};
-  font-family: ${(props) => props.theme.FONT_FAMILY};
+  font-size: ${(props) =>
+    props.small ? props.theme.FONT_SIZE_MEDIUM : props.theme.FONT_SIZE_LARGE};
+  font-family: ${(props) => props.theme.FONT_FAMILY_REGULAR};
   line-height: 18px;
+  opacity: ${(props) => (props.textIsTransparent ? "0.7" : "1")};
 `;
 
 // React Components
-export const RoundedPressable = styled.Pressable`
-  width: ${(props) => props.size}px;
-  height: ${(props) => props.size}px;
-  border-radius: ${(props) => props.size}px;
-  background-color: ${(props) =>
-    props.isTransparent ? props.theme.SPECIAL : props.theme.TEXT_COLOR};
-  justify-content: center;
-  align-items: center;
-`;
-
 export const StyledActivityIndicator = styled.ActivityIndicator`
   size: large;
   color: ${(props) => props.theme.TEXT_COLOR};
@@ -142,8 +153,14 @@ export const PosterImage = styled.Image`
   resize-mode: contain;
 `;
 
+export const LogoImage = styled.Image`
+  width: 45px;
+  aspect-ratio: 1 / 1;
+  resize-mode: contain;
+`;
+
 //Third Party Components
-export const StyledIonicon = styled(Ionicons)`
+export const StyledIonicon = styled(Entypo)`
   color: ${(props) =>
     props.colorIsTextColor
       ? props.theme.TEXT_COLOR

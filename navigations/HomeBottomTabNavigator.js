@@ -1,7 +1,7 @@
 //React
 import React, { Fragment } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 
 //Navigator
@@ -51,7 +51,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
           />
           <RoundedButtonComponent
             clickHandler={() => navigation.navigate("SettingsScreen")}
-            iconName={"settings"}
+            iconName={"cog"}
             size={32}
             iconSize={24}
             isTransparent={true}
@@ -72,7 +72,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
           options={{
             tabBarLabel: "random",
             tabBarIcon: ({ color }) => (
-              <Ionicons name="shuffle-outline" size={24} color={color} />
+              <Entypo name="shuffle" size={24} color={color} />
             ),
           }}
         />
@@ -82,7 +82,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
           options={{
             tabBarLabel: "browse",
             tabBarIcon: ({ color }) => (
-              <Ionicons name="albums-outline" size={24} color={color} />
+              <Entypo name="list" size={24} color={color} />
             ),
           }}
         />
@@ -92,7 +92,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
           options={{
             tabBarLabel: "search",
             tabBarIcon: ({ color }) => (
-              <Ionicons name="search-outline" size={24} color={color} />
+              <Entypo name="magnifying-glass" size={24} color={color} />
             ),
           }}
         />

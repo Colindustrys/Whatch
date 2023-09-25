@@ -10,7 +10,6 @@ import {
   Headline,
   MainContainer,
   Paragraph,
-  ParagraphSmall,
 } from "../redux-store/StyledComponents.js";
 
 export default BrowseScreen = ({ navigation }) => {
@@ -33,7 +32,7 @@ export default BrowseScreen = ({ navigation }) => {
 
   return (
     <MainContainer>
-      <Headline>Zeit zum stöbern...</Headline>
+      <Headline small>Zeit zum stöbern...</Headline>
       <Button
         onPress={() => navigation.navigate("MovieDetailsScreen")}
         title="To Details"

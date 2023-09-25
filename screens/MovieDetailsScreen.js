@@ -1,6 +1,12 @@
 //React
 import React, { useState, useEffect } from "react";
-import { View, ScrollView, useWindowDimensions } from "react-native";
+import {
+  FlatList,
+  Image,
+  View,
+  ScrollView,
+  useWindowDimensions,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 //API
@@ -13,11 +19,10 @@ import {
   Headline,
   MainContainer,
   Paragraph,
-  ParagraphSmall,
-  HeadlineUppercase,
   RowContainer,
   StyledActivityIndicator,
   BackdropImage,
+  LogoImage,
 } from "../redux-store/StyledComponents.js";
 
 //Components
@@ -108,7 +113,7 @@ export default MovieDetailsScreen = ({ movieID }) => {
       {loading ? (
         <StyledActivityIndicator />
       ) : error ? (
-        <HeadlineUppercase>{error}</HeadlineUppercase>
+        <Headline uppercase>{error}</Headline>
       ) : (
         <ScrollView>
           <BackdropImage
@@ -117,42 +122,55 @@ export default MovieDetailsScreen = ({ movieID }) => {
             }}
           />
           <MainContainer>
-            <HeadlineUppercase>{movie.title}</HeadlineUppercase>
-            <RowContainer>
-              <ParagraphSmall>{movie.release_date_string}</ParagraphSmall>
-              <ParagraphSmall>{movie.runtime} Min</ParagraphSmall>
-              <ParagraphSmall>{movie.vote_average}</ParagraphSmall>
+            <Headline uppercase length={movie.title.length}>
+              {movie.title}
+            </Headline>
+            <Paragraph small textCenter>
+              {movie.genres}
+            </Paragraph>
+            <Paragraph small textCenter textIsTransparent>
+              {movie.runtime} Min
+              {/*TODO: use pseudo class before in styled components */}
+              {" • "}
+              {movie.release_date_string}
+              {" • "}
+              {movie.vote_average}
+            </Paragraph>
+            <Paragraph small>{movie.description}</Paragraph>
+            {true ?? <Paragraph small>Als Stream verfügbr auf:</Paragraph>}
+
+            <RowContainer justifyContent={"flex-start"} paddingBottom gap>
+              {movie?.watchprovider?.map((provider, index) => {
+                return (
+                  <LogoImage
+                    key={index}
+                    source={{
+                      uri: "https://image.tmdb.org/t/p/w92" + provider.logoPath,
+                    }}
+                  ></LogoImage>
+                );
+              })}
             </RowContainer>
-            <RowContainer>
+            <RowContainer justifyContent={"center"}>
               <MovieDetailsButtonComponent
-                iconName={"share-social-outline"}
+                iconName={"share"}
                 clickHandler={() => onShareClick()}
               >
                 Teilen
               </MovieDetailsButtonComponent>
               <MovieDetailsButtonComponent
-                iconName={
-                  elementExistInWatchList ? "remove-outline" : "add-outline"
-                }
+                iconName={elementExistInWatchList ? "minus" : "plus"}
                 clickHandler={() => onAddToWatchlist()}
               >
                 Watchlist
               </MovieDetailsButtonComponent>
               <MovieDetailsButtonComponent
-                iconName={
-                  elementExistInSeenList ? "close-outline" : "checkmark-outline"
-                }
+                iconName={elementExistInSeenList ? "cross" : "check"}
                 clickHandler={() => onAddToSeenlist()}
               >
                 Seenlist
               </MovieDetailsButtonComponent>
             </RowContainer>
-            <ParagraphSmall>{movie.description}</ParagraphSmall>
-            <ParagraphSmall>{movie.genres}</ParagraphSmall>
-            <ParagraphSmall>
-              Als Stream verfügbar auf
-              {movie?.watchprovider?.map((provider) => " " + provider.label)}
-            </ParagraphSmall>
           </MainContainer>
         </ScrollView>
       )}

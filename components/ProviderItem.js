@@ -4,7 +4,7 @@ import React from "react";
 //Styled Components
 import {
   StyledSwitch,
-  ParagraphSmall,
+  Paragraph,
   ProviderItemContainer,
 } from "../redux-store/StyledComponents.js";
 
@@ -16,7 +16,7 @@ export default ProviderItem = ({
 }) => {
   return (
     <ProviderItemContainer>
-      <ParagraphSmall>{providerLabel}</ParagraphSmall>
+      <Paragraph small>{providerLabel}</Paragraph>
 
       <StyledSwitch
         passValue={providerValue}

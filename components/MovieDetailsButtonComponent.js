@@ -4,15 +4,20 @@ import { Pressable } from "react-native";
 
 //Styled Components
 import {
-  ParagraphSmall,
+  Paragraph,
   StyledIonicon,
+  PressableView,
 } from "../redux-store/StyledComponents.js";
 
 export default ({ clickHandler, iconName, children }) => {
   return (
     <Pressable onPress={clickHandler}>
-      <StyledIonicon name={iconName} size={48} colorIsTextColor={true} />
-      <ParagraphSmall>{children}</ParagraphSmall>
+      {({ pressed }) => (
+        <PressableView pressed={pressed} size={80}>
+          <StyledIonicon name={iconName} size={32} colorIsTextColor={true} />
+          <Paragraph small>{children}</Paragraph>
+        </PressableView>
+      )}
     </Pressable>
   );
 };
