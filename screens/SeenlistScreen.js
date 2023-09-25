@@ -8,8 +8,8 @@ import { getMovieDetails } from "../api/endpoints.js";
 
 //Styled Components
 import {
-  HeadlineSmall,
-  Container,
+  Headline,
+  MainContainer,
   Paragraph,
   ParagraphSmall,
   StyledActivityIndicator,
@@ -22,10 +22,10 @@ export default SeenlistScreen = ({ navigation }) => {
   //Get States from Async Storage
   const storedSeenList = useSelector((state) => state.seenList);
 
-  //Calculate numColumns for FlatList
+  //Calculate numberOfColumns for FlatList
   const itemFixedWidth = 80;
   const listWidth = useWindowDimensions().width - 48;
-  const numCols = Math.floor(listWidth / itemFixedWidth);
+  const numberOfColumns = Math.floor(listWidth / itemFixedWidth);
 
   //useStates
   const [loading, setLoading] = useState(true);
@@ -58,15 +58,15 @@ export default SeenlistScreen = ({ navigation }) => {
   };
 
   return (
-    <Container>
+    <MainContainer>
       {loading ? (
         //TODO own ActivityIndicator with Logo?
         <StyledActivityIndicator />
       ) : error ? (
-        <HeadlineSmall>{error}</HeadlineSmall>
+        <Headline>{error}</Headline>
       ) : (
         <FlatList
-          numColumns={numCols}
+          numColumns={numberOfColumns}
           contentContainerStyle={{
             gap: 8,
           }}
@@ -88,6 +88,6 @@ export default SeenlistScreen = ({ navigation }) => {
           keyExtractor={(item, index) => index}
         />
       )}
-    </Container>
+    </MainContainer>
   );
 };

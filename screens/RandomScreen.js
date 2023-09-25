@@ -8,11 +8,11 @@ import { getMovieDiscover } from "../api/endpoints.js";
 
 //Styled Components
 import {
-  HeadlineSmall,
-  Container,
+  Headline,
+  MainContainer,
   Paragraph,
   ParagraphSmall,
-  RoundedButton,
+  RoundedPressable,
 } from "../redux-store/StyledComponents.js";
 
 import RoundedButtonComponent from "../components/RoundedButtonComponent.js";
@@ -23,6 +23,7 @@ export default RandomScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [movie, setMovie] = useState([]);
 
+  //Get States from Async Storage
   const storedPersonalProvider = useSelector(
     (state) => state.personalProviderList
   );
@@ -35,8 +36,9 @@ export default RandomScreen = ({ navigation }) => {
   //get movie object from getMovieDetails() and set movie state.
   const fetchMovieDetails = async (id) => {
     try {
-      console.log(storedPersonalProvider.provider);
-      let receivedMovie = await getMovieDiscover({watchProvider: storedPersonalProvider.provider});
+      let receivedMovie = await getMovieDiscover({
+        watchProvider: storedPersonalProvider.provider,
+      });
       navigation.navigate("MovieDetailsListScreen", {
         movieIDs: receivedMovie,
       });
@@ -47,8 +49,8 @@ export default RandomScreen = ({ navigation }) => {
   };
 
   return (
-    <Container>
-      <HeadlineSmall>Lass dich überraschen!</HeadlineSmall>
+    <MainContainer>
+      <Headline>Lass dich überraschen!</Headline>
       <View style={{ flex: 1, justifyContent: "center" }}>
         <RoundedButtonComponent
           clickHandler={onRandomClick}
@@ -57,6 +59,6 @@ export default RandomScreen = ({ navigation }) => {
           iconSize={160}
         />
       </View>
-    </Container>
+    </MainContainer>
   );
 };

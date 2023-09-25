@@ -2,11 +2,11 @@
 import React from "react";
 
 //Styled Components
-import { Container, Paragraph } from "../redux-store/StyledComponents.js";
+import { MainContainer, Paragraph } from "../redux-store/StyledComponents.js";
 
 export default SettingsScreen = ({ navigation }) => {
   return (
-    <Container>
+    <MainContainer>
       <Paragraph onPress={() => navigation.navigate("ProviderSettingsScreen")}>
         Deine Streamingdienste
       </Paragraph>
@@ -19,6 +19,6 @@ export default SettingsScreen = ({ navigation }) => {
       <Paragraph onPress={() => navigation.navigate("ThemeSettingsScreen")}>
         Theme
       </Paragraph>
-    </Container>
+    </MainContainer>
   );
 };

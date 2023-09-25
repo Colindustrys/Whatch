@@ -1,22 +1,24 @@
 //React
-import React, { useState, useEffect } from "react";
-import { View, ScrollView, FlatList } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { FlatList } from "react-native";
 
 //API
-import { getMovieDetails } from "../api/endpoints.js";
 import MovieDetailsScreen from "./MovieDetailsScreen.js";
 
-export default MovieDetailListScreen = ({ route, navigation }) => {
-  tempIdList = [11, 976573, 120, 346698, 634649]; //976573, 120, 346698, 634649, 
-  const {movieIDs} = route.params
+//Styled Components
+import { MovieDetailListContainer } from "../redux-store/StyledComponents.js";
 
+export default MovieDetailListScreen = ({ route, navigation }) => {
+  //get list of movieIDs from routing parameter
+  const { movieIDs } = route.params;
+
+  //pass movieIDs to MovieDetailsScreen and render every ID as own movieScreen
   const renderItem = ({ item }) => {
-    return <MovieDetailsScreen movieID={item}/>;
+    return <MovieDetailsScreen movieID={item} />;
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <MovieDetailListContainer>
       <FlatList
         data={movieIDs}
         keyExtractor={(item) => item}
@@ -24,6 +26,6 @@ export default MovieDetailListScreen = ({ route, navigation }) => {
         horizontal
         pagingEnabled
       />
-    </View>
+    </MovieDetailListContainer>
   );
 };

@@ -3,7 +3,7 @@ import * as React from "react";
 
 //Styled Components
 import {
-  RoundedButton,
+  RoundedPressable,
   StyledIonicon,
 } from "../redux-store/StyledComponents.js";
 
@@ -12,20 +12,20 @@ export default ({
   iconName,
   size,
   colorIsTextColor,
-  usedInNavigation,
+  isTransparent,
   iconSize,
 }) => {
   return (
-    <RoundedButton
+    <RoundedPressable
       onPress={() => clickHandler()}
       size={size}
-      usedInNavigation={usedInNavigation}
+      isTransparent={isTransparent}
     >
       <StyledIonicon
         name={iconName}
         size={iconSize}
         colorIsTextColor={colorIsTextColor}
       />
-    </RoundedButton>
+    </RoundedPressable>
   );
 };

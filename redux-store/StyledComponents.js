@@ -23,14 +23,23 @@ import { Ionicons } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-//Container
-export const Container = styled.View`
+//Views
+export const MainContainer = styled.View`
   flex: 1;
   justify-content: flex-start;
   padding-top: 24px;
   padding-bottom: 24px;
   padding-left: 24px;
   padding-right: 24px;
+  background-color: ${(props) => props.theme.BACKGROUND_COLOR};
+`;
+
+export const MovieDetailListContainer = styled.View`
+  flex: 1;
+`;
+
+export const MovieDetailContainer = styled.View`
+  width: ${(props) => props.windowWidth}px;
   background-color: ${(props) => props.theme.BACKGROUND_COLOR};
 `;
 
@@ -57,25 +66,20 @@ export const ProviderItemContainer = styled.View`
   padding-bottom: 8px;
 `;
 
-export const StyledSafeAreaView = styled(SafeAreaView).attrs((props) => ({
-  flex: 1,
-  backgroundColor: props.theme.BACKGROUND_COLOR,
-  paddingTop: props.platformIsAndroid ? props.StatusBar.currentHeight : 0,
-}))``;
-
-export const StyledStatusBar = styled(StatusBar).attrs((props) => ({
-  backgroundColor: props.theme.BACKGROUND_COLOR,
-  barStyle: props.barStyleIsDarkContent ? "dark-content" : "light-content",
-}))``;
-
-export const StyledRowContainer = styled.View`
+export const RowContainer = styled.View`
   flex-direction: row;
   justify-content: space-around;
 `;
 
-// Text
+export const StyledSafeAreaView = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${(props) => props.theme.BACKGROUND_COLOR};
+  padding-top: ${(props) =>
+    props.platformIsAndroid ? props.StatusBar.currentHeight : 0}px;
+`;
 
-export const HeadlineMovie = styled.Text`
+// Text
+export const HeadlineUppercase = styled.Text`
   text-align: center;
   padding-bottom: 16px;
   color: ${(props) => props.theme.TEXT_COLOR};
@@ -84,7 +88,7 @@ export const HeadlineMovie = styled.Text`
   text-transform: uppercase;
 `;
 
-export const HeadlineSmall = styled.Text`
+export const Headline = styled.Text`
   text-align: center;
   padding-bottom: 16px;
   color: ${(props) => props.theme.TEXT_COLOR};
@@ -110,58 +114,41 @@ export const ParagraphSmall = styled.Text`
   line-height: 18px;
 `;
 
-//React Components
-/*
-export const RoundedButton = styled.Pressable`
-  width: 32px;
-  height: 32px;
-  border-radius: 100px;
-  background-color: props.theme.SPECIAL;
+// React Components
+export const RoundedPressable = styled.Pressable`
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
+  border-radius: ${(props) => props.size}px;
+  background-color: ${(props) =>
+    props.isTransparent ? props.theme.SPECIAL : props.theme.TEXT_COLOR};
   justify-content: center;
   align-items: center;
 `;
-*/
-
-export const RoundedButton = styled(Pressable).attrs((props) => ({
-  width: props.size,
-  height: props.size,
-  borderRadius: props.size,
-  backgroundColor: props.usedInNavigation
-    ? props.theme.SPECIAL
-    : props.theme.TEXT_COLOR,
-  justifyContent: "center",
-  alignItems: "center",
-}))``;
 
 export const StyledActivityIndicator = styled.ActivityIndicator`
   size: large;
-  color: props.theme.TEXT_COLOR;
+  color: ${(props) => props.theme.TEXT_COLOR};
 `;
 
-export const StyledBackdrop = styled.Image`
+export const BackdropImage = styled.Image`
   width: 100%;
   height: 230px;
   align-self: center;
 `;
 
-export const StyledPoster = styled.Image`
+export const PosterImage = styled.Image`
   width: 72px;
   aspect-ratio: 2 / 3;
   resize-mode: contain;
 `;
-/*
-export const StyledPoster = styled(Image).attrs((props) => ({
-  width: 200,
-  height: 200,
-  resizeMode: "contain",
-}))``;
-*/
 
-export const StyledIonicon = styled(Ionicons).attrs((props) => ({
-  color: props.colorIsTextColor
-    ? props.theme.TEXT_COLOR
-    : props.theme.BACKGROUND_COLOR,
-}))``;
+//Third Party Components
+export const StyledIonicon = styled(Ionicons)`
+  color: ${(props) =>
+    props.colorIsTextColor
+      ? props.theme.TEXT_COLOR
+      : props.theme.BACKGROUND_COLOR};
+`;
 
 export const StyledSwitch = styled(Switch).attrs((props) => ({
   trackColor: { true: props.theme.TEXT_COLOR, false: props.theme.TEXT_COLOR },
@@ -169,6 +156,11 @@ export const StyledSwitch = styled(Switch).attrs((props) => ({
     ? props.theme.ACCENT_COLOR
     : props.theme.COMPLEMENT,
   ios_backgroundColor: props.theme.TEXT_COLOR,
+}))``;
+
+export const StyledStatusBar = styled(StatusBar).attrs((props) => ({
+  backgroundColor: props.theme.BACKGROUND_COLOR,
+  barStyle: props.barStyleIsDarkContent ? "dark-content" : "light-content",
 }))``;
 
 export const StyledRadioButtonInput = styled(RadioButtonInput).attrs(

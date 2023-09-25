@@ -8,7 +8,7 @@ import ProviderItem from "../components/ProviderItem.js";
 
 //Styled Components
 import {
-  Container,
+  MainContainer,
   Paragraph,
   ParagraphSmall,
 } from "../redux-store/StyledComponents.js";
@@ -21,6 +21,8 @@ export default ProviderSettingsScreen = ({ navigation }) => {
   );
   const dispatch = useDispatch();
 
+  //Function is called if specific Switch is toggled
+  //Depending on state of switch, providerID is deleted oder added to async storage
   const toggleSwitch = (providerID, providerValue) => {
     let type;
     if (!providerValue) {
@@ -31,6 +33,7 @@ export default ProviderSettingsScreen = ({ navigation }) => {
     dispatchHandler(type, providerID);
   };
 
+  //TODO: outsource dispatch in actionHandler
   const dispatchHandler = (type, providerID) => {
     dispatch({
       type: type,
@@ -39,7 +42,7 @@ export default ProviderSettingsScreen = ({ navigation }) => {
   };
 
   return (
-    <Container>
+    <MainContainer>
       <FlatList
         ListHeaderComponent={
           <View>
@@ -61,6 +64,6 @@ export default ProviderSettingsScreen = ({ navigation }) => {
         )}
         keyExtractor={(item) => item.id}
       />
-    </Container>
+    </MainContainer>
   );
 };

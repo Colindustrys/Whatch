@@ -1,13 +1,14 @@
 //React
 import React from "react";
 import { Button } from "react-native";
-import moviedb from "../api/movieDbInstance.js";
+
+//API
 import { getMovieDetails } from "../api/endpoints.js";
 
 //Styled Components
 import {
-  HeadlineSmall,
-  Container,
+  Headline,
+  MainContainer,
   Paragraph,
   ParagraphSmall,
 } from "../redux-store/StyledComponents.js";
@@ -17,7 +18,7 @@ export default BrowseScreen = ({ navigation }) => {
 
   const temp = () => {
     for (const id of movieIDs) {
-      getDetails(id)
+      getDetails(id);
     }
   };
 
@@ -31,13 +32,13 @@ export default BrowseScreen = ({ navigation }) => {
   };
 
   return (
-    <Container>
-      <HeadlineSmall>Zeit zum stöbern...</HeadlineSmall>
+    <MainContainer>
+      <Headline>Zeit zum stöbern...</Headline>
       <Button
         onPress={() => navigation.navigate("MovieDetailsScreen")}
         title="To Details"
       />
       <Button onPress={temp} title="test" />
-    </Container>
+    </MainContainer>
   );
 };

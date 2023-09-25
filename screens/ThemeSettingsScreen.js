@@ -4,21 +4,21 @@ import React from "react";
 
 //Styled Components
 import {
-  Container,
+  MainContainer,
   Paragraph,
   ParagraphSmall,
   StyledRadioButtonInput,
   StyledRadioButtonLabel,
 } from "../redux-store/StyledComponents.js";
 
-//Others
+//Third Partys Components
 import RadioForm, { RadioButton } from "react-native-simple-radio-button";
 
 //Theme
 import { darkTheme, lightTheme } from "../redux-store/Theme";
 
 export default ThemeSettingsScreen = () => {
-  //get selected radioField
+  //Get Selected Radiofield from Async Storage
   const storedthemeSettingSelect = useSelector(
     (state) => state.themeSettingSelect
   );
@@ -33,6 +33,7 @@ export default ThemeSettingsScreen = () => {
     { label: "Dunkel", value: darkTheme, id: 2 },
   ];
 
+  //TODO: outsource dispatch in actionHandler
   const onPressHandler = (value, optionId) => {
     dispatch({
       type: "SELECT_ID",
@@ -46,7 +47,7 @@ export default ThemeSettingsScreen = () => {
   };
 
   return (
-    <Container>
+    <MainContainer>
       <Paragraph>Wähle ein App-Farbschema</Paragraph>
       <ParagraphSmall>
         Tipp: Der Darktheme ist richtig gut für die Umwelt, da dieser weniger
@@ -74,6 +75,6 @@ export default ThemeSettingsScreen = () => {
           </RadioButton>
         ))}
       </RadioForm>
-    </Container>
+    </MainContainer>
   );
 };

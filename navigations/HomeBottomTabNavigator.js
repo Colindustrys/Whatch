@@ -46,7 +46,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
             iconName={"heart"}
             size={32}
             iconSize={24}
-            usedInNavigation={true}
+            isTransparent={true}
             colorIsTextColor={true}
           />
           <RoundedButtonComponent
@@ -54,7 +54,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
             iconName={"settings"}
             size={32}
             iconSize={24}
-            usedInNavigation={true}
+            isTransparent={true}
             colorIsTextColor={true}
           />
         </InnerNavigationTopContainer>

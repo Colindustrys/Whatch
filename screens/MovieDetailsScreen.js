@@ -9,33 +9,30 @@ import { getMovieDetails } from "../api/endpoints.js";
 
 //Styled Components
 import {
-  HeadlineSmall,
-  Container,
+  MovieDetailContainer,
+  Headline,
+  MainContainer,
   Paragraph,
   ParagraphSmall,
-  HeadlineMovie,
-  StyledRowContainer,
+  HeadlineUppercase,
+  RowContainer,
   StyledActivityIndicator,
-  StyledBackdrop,
+  BackdropImage,
 } from "../redux-store/StyledComponents.js";
 
 //Components
 import MovieDetailsButtonComponent from "../components/MovieDetailsButtonComponent.js";
 
 export default MovieDetailsScreen = ({ movieID }) => {
-
   //Get States from Async Storage
   const storedWatchList = useSelector((state) => state.watchList);
   const storedSeenList = useSelector((state) => state.seenList);
   const dispatch = useDispatch();
 
-  //usestate to know if the data is still being loaded from the api
+  //Usestates
   const [loading, setLoading] = useState(true);
-  //usestate to know if an error occured while loading data
   const [error, setError] = useState(null);
-  //usestate for the movieObject with the movie data
   const [movie, setMovie] = useState(null);
-  //useStates for element existing in List
   const [elementExistInWatchList, setElementExistInWatchList] = useState(false);
   const [elementExistInSeenList, setElementExistInSeenList] = useState(false);
 
@@ -70,19 +67,16 @@ export default MovieDetailsScreen = ({ movieID }) => {
     });
   };
 
+  //get movie object from getMovieDetails() and set movie with promise.
+  //set loading state to true if process finished
   const fetchMovieDetails = async (id) => {
     try {
-      //get movie object from getMovieDetails()
       receivedMovie = await getMovieDetails(id);
-      //set the usestate with the movie
       setMovie(receivedMovie);
-      //set loading usestate false when done loading
       setLoading(false);
     } catch (e) {
       console.log(e);
-      //set the error usestate to indicate an error has occured
       setError("No internet");
-      //set loading usestate false when done loading
       setLoading(false);
     }
   };
@@ -110,29 +104,26 @@ export default MovieDetailsScreen = ({ movieID }) => {
   }, [loading]);
 
   return (
-    <View style={{width: useWindowDimensions().width}}>
+    <MovieDetailContainer windowWidth={useWindowDimensions().width}>
       {loading ? (
-        // Display a loading indicator while fetching data
         <StyledActivityIndicator />
       ) : error ? (
-        // Display an error message if an error occurred
-        <HeadlineMovie>{error}</HeadlineMovie>
+        <HeadlineUppercase>{error}</HeadlineUppercase>
       ) : (
-        //display the movie data when it is loaded
         <ScrollView>
-          <StyledBackdrop
+          <BackdropImage
             source={{
               uri: "https://image.tmdb.org/t/p/w1280" + movie.backdrop_path,
             }}
           />
-          <Container>
-            <HeadlineMovie>{movie.title}</HeadlineMovie>
-            <StyledRowContainer>
+          <MainContainer>
+            <HeadlineUppercase>{movie.title}</HeadlineUppercase>
+            <RowContainer>
               <ParagraphSmall>{movie.release_date_string}</ParagraphSmall>
               <ParagraphSmall>{movie.runtime} Min</ParagraphSmall>
               <ParagraphSmall>{movie.vote_average}</ParagraphSmall>
-            </StyledRowContainer>
-            <StyledRowContainer>
+            </RowContainer>
+            <RowContainer>
               <MovieDetailsButtonComponent
                 iconName={"share-social-outline"}
                 clickHandler={() => onShareClick()}
@@ -145,7 +136,7 @@ export default MovieDetailsScreen = ({ movieID }) => {
                 }
                 clickHandler={() => onAddToWatchlist()}
               >
-                Teilen
+                Watchlist
               </MovieDetailsButtonComponent>
               <MovieDetailsButtonComponent
                 iconName={
@@ -153,18 +144,18 @@ export default MovieDetailsScreen = ({ movieID }) => {
                 }
                 clickHandler={() => onAddToSeenlist()}
               >
-                Teilen
+                Seenlist
               </MovieDetailsButtonComponent>
-            </StyledRowContainer>
+            </RowContainer>
             <ParagraphSmall>{movie.description}</ParagraphSmall>
             <ParagraphSmall>{movie.genres}</ParagraphSmall>
             <ParagraphSmall>
               Als Stream verfügbar auf
               {movie?.watchprovider?.map((provider) => " " + provider.label)}
             </ParagraphSmall>
-          </Container>
+          </MainContainer>
         </ScrollView>
       )}
-    </View>
+    </MovieDetailContainer>
   );
 };

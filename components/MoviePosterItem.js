@@ -3,12 +3,12 @@ import React from "react";
 import { Pressable } from "react-native";
 
 //Styled Components
-import { StyledPoster } from "../redux-store/StyledComponents.js";
+import { PosterImage } from "../redux-store/StyledComponents.js";
 
 export default MoviePosterItem = ({ clickHandler, moviePosterPath }) => {
   return (
     <Pressable onPress={clickHandler}>
-      <StyledPoster
+      <PosterImage
         style={{
           width: 72,
           marginRight: 8,

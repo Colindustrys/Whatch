@@ -8,8 +8,8 @@ import { getMovieDetails } from "../api/endpoints.js";
 
 //Styled Components
 import {
-  HeadlineSmall,
-  Container,
+  Headline,
+  MainContainer,
   Paragraph,
   ParagraphSmall,
   StyledActivityIndicator,
@@ -22,10 +22,10 @@ export default WatchlistScreen = ({ navigation }) => {
   //Get States from Async Storage
   const storedWatchList = useSelector((state) => state.watchList);
 
-  //Calculate numColumns for FlatList
+  //Calculate numberOfColumns for FlatList
   const itemFixedWidth = 80;
   const listWidth = useWindowDimensions().width - 48;
-  const numCols = Math.floor(listWidth / itemFixedWidth);
+  const numberOfColumns = Math.floor(listWidth / itemFixedWidth);
 
   //useStates
   const [loading, setLoading] = useState(true);
@@ -41,7 +41,6 @@ export default WatchlistScreen = ({ navigation }) => {
     try {
       //TODO another API function pls that accepts array of id and returns array of movie objects
       let receivedMovie = await getMovieDetails(id);
-      console.log(receivedMovie.title);
       setMovies((previous) => [...previous, receivedMovie]);
       setLoading(false);
     } catch (e) {
@@ -52,22 +51,21 @@ export default WatchlistScreen = ({ navigation }) => {
   };
 
   const clickHandler = () => {
-    
     navigation.navigate("MovieDetailsListScreen", {
       movieIDs: storedWatchList.movies,
     });
   };
 
   return (
-    <Container>
+    <MainContainer>
       {loading ? (
         //TODO own ActivityIndicator with Logo?
         <StyledActivityIndicator />
       ) : error ? (
-        <HeadlineSmall>{error}</HeadlineSmall>
+        <Headline>{error}</Headline>
       ) : (
         <FlatList
-          numColumns={numCols}
+          numColumns={numberOfColumns}
           contentContainerStyle={{
             gap: 8,
           }}
@@ -89,6 +87,6 @@ export default WatchlistScreen = ({ navigation }) => {
           keyExtractor={(item, index) => index}
         />
       )}
-    </Container>
+    </MainContainer>
   );
 };
