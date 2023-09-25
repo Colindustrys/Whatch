@@ -1,5 +1,7 @@
 import Movie from "../models/Movie";
+import Genre from "../models/Genre";
 import WatchProvider from "../models/WatchProvider";
+import MovieList from "../models/MovieList";
 
 export const parseMovie = (json) => {
   newMovie = new Movie();
@@ -62,20 +64,20 @@ export const parseMovieProviders = (json) => {
   return providerList;
 };
 
+//parses the json from the discover endpoint to a MovieListObject
 export const parseDiscoverList = (json) => {
-  let movieList = [];
+  let movieListObject = new MovieList();
 
   if (json.results) {
     if (json.results.length > 0) {
       const moviesJsonArray = json.results;
       for (const movieJSON of moviesJsonArray) {
-        movieList.push(movieJSON.id);
-        
+        movieListObject.push(movieJSON.id, movieJSON.poster_path)
       }
     }
   }
 
-  return movieList;
+  return movieListObject;
 };
 
 export const parseAllProviders = (json) => {
@@ -95,4 +97,20 @@ export const parseAllProviders = (json) => {
   }
 
   return providerList;
+};
+
+export const parseAllGenres = (json) => {
+  let genreList = [];
+  const genresJson = json.genres;
+
+  for (const genreItem of genresJson) {
+    let newGenre = new Genre();
+
+    newGenre.label = genreItem.name;
+    newGenre.id = genreItem.id;
+
+    genreList.push(newGenre);
+  }
+
+  return genreList;
 };

@@ -1,6 +1,6 @@
 //React
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, useWindowDimensions } from "react-native";
 
 //API
 import MovieDetailsScreen from "./MovieDetailsScreen.js";
@@ -10,7 +10,9 @@ import { MovieDetailListContainer } from "../redux-store/StyledComponents.js";
 
 export default MovieDetailListScreen = ({ route, navigation }) => {
   //get list of movieIDs from routing parameter
-  const { movieIDs } = route.params;
+  const { movieIDs, initialScrollIndex } = route.params;
+
+  const itemheight = useWindowDimensions().width;
 
   //pass movieIDs to MovieDetailsScreen and render every ID as own movieScreen
   const renderItem = ({ item }) => {
@@ -25,6 +27,12 @@ export default MovieDetailListScreen = ({ route, navigation }) => {
         renderItem={renderItem}
         horizontal
         pagingEnabled
+        initialScrollIndex={initialScrollIndex}
+        getItemLayout={(data, index) => ({
+          length: itemheight,
+          offset: itemheight * index,
+          index,
+        })}
       />
     </MovieDetailListContainer>
   );

@@ -36,11 +36,10 @@ export default RandomScreen = ({ navigation }) => {
   //get movie object from getMovieDetails() and set movie state.
   const fetchMovieDetails = async (id) => {
     try {
-      let receivedMovie = await getMovieDiscover({
-        watchProvider: storedPersonalProvider.provider,
-      });
+      let movieListObject = await getMovieDiscover();
+      movieIdsArray = movieListObject.ids;
       navigation.navigate("MovieDetailsListScreen", {
-        movieIDs: receivedMovie,
+        movieIDs: movieIdsArray,
       });
     } catch (e) {
       setError("No internet");

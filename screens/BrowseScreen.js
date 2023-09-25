@@ -1,9 +1,9 @@
 //React
-import React from "react";
-import { Button } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Button, FlatList, Text, View } from "react-native";
 
 //API
-import { getMovieDetails } from "../api/endpoints.js";
+import { getBrowse } from "../api/endpoints.js";
 
 //Styled Components
 import {
@@ -11,34 +11,84 @@ import {
   MainContainer,
   Paragraph,
   ParagraphSmall,
+  StyledActivityIndicator,
 } from "../redux-store/StyledComponents.js";
 
-export default BrowseScreen = ({ navigation }) => {
-  movieIDs = [11, 976573, 120, 346698, 634649];
+import MoviePosterItem from "../components/MoviePosterItem.js";
 
+export default BrowseScreen = ({ navigation }) => {
   const temp = () => {
-    for (const id of movieIDs) {
-      getDetails(id);
-    }
+    fetchMovies();
   };
 
-  const getDetails = async (id) => {
-    try {
-      res = await getMovieDetails(id);
-      //console.log(res.title);
-    } catch (error) {
-      console.log("error");
-    }
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [movieLists, setMovieLists] = useState(null);
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+
+  const fetchMovies = async () => {
+    const tempMovieLists = await getBrowse();
+    // console.log("fetchmovies");
+    // console.log(tempMovieList[0].data());
+    setMovieLists(tempMovieLists);
+    setLoading(false);
+  };
+
+  const clickHandler = (nr, movieList) => {
+    navigation.navigate("MovieDetailsListScreen", {
+      movieIDs: movieList,
+      initialScrollIndex: nr,
+    });
+  };
+
+  const renderItemPoster = ({ item, index }) => {
+    // console.log("renderitem");
+    // console.log(item);
+    return (
+      // <Text>{item.id} </Text>
+      <MoviePosterItem
+        moviePosterPath={item.posterPath}
+        clickHandler={() => clickHandler(index, item.ids)}
+      />
+    );
+  };
+
+  const renderItemFlatlist = ({ item, index }) => {
+    const movieList = item.data();
+
+    return (
+      <View>
+        <ParagraphSmall>{item.title}</ParagraphSmall>
+        <FlatList
+          data={movieList}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItemPoster}
+          horizontal
+        />
+      </View>
+    );
   };
 
   return (
     <MainContainer>
       <Headline>Zeit zum stöbern...</Headline>
-      <Button
-        onPress={() => navigation.navigate("MovieDetailsScreen")}
-        title="To Details"
-      />
-      <Button onPress={temp} title="test" />
+
+      {loading ? (
+        <StyledActivityIndicator />
+      ) : error ? (
+        <HeadlineUppercase>{error}</HeadlineUppercase>
+      ) : (
+        <View>
+          <FlatList
+            data={movieLists}
+            keyExtractor={(item) => item.title}
+            renderItem={renderItemFlatlist}
+          />
+        </View>
+      )}
     </MainContainer>
   );
 };

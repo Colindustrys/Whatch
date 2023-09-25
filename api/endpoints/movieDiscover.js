@@ -1,15 +1,16 @@
 import moviedb from "../movieDbInstance";
 import { parseDiscoverList } from "../parser";
 import { DiscoverMovieRequest } from "moviedb-promise";
+import { store } from "../../redux-store/store";
 
-// gets the movie list from tmdb and converts it to a list of movie ids
+// gets the movie list from the tmdb discover endpoint and converts it to a MovieList object
 // takes a json with optional parameters
 // parameter:
 // page: int
 // sort: String
 // voteMin: number aus 10
 // voteMax: number aus 10
-// genre: array of genre ids, gets movies that have one of the genres 
+// genre: array of genre ids, gets movies that have one of the genres
 // runtimeMin: in minuten, sieht die api irgenwie nicht so streng
 // runtimeMax: in minuten
 // watchProvider: array mit ids
@@ -24,11 +25,17 @@ export const getMovieDiscoverList = async ({
   genres,
   runtimeMin,
   runtimeMax,
-  watchProvider,
   releaseDateMin,
   releaseDateMax,
 }) => {
-  console.log(watchProvider);
+  //console.log("discover with genre: " + genres);
+
+  //falls der schalter oben link auf nur eigenen provider gestellt ist 
+  let providerArray = []
+  if (true) {
+    const state = store.getState();
+    providerArray = state.personalProviderList.provider;
+  }
 
   requestParams = {
     page: page,
@@ -37,21 +44,20 @@ export const getMovieDiscoverList = async ({
     "vote_average.lte": voteMax,
     with_genres: genres?.join("|"),
     watch_region: "DE",
-    with_watch_providers: watchProvider?.join("|"),
+    with_watch_providers: providerArray?.join("|"),
     "with_runtime.gte": runtimeMin,
     "with_runtime.lte": runtimeMax,
     "primary_release_date.gte": releaseDateMin,
     "primary_release_date.lte": releaseDateMax,
   };
-  
 
   try {
     //get json from tmdb
     const res = await moviedb.discoverMovie(requestParams);
 
     //parse json to list of movie objects
-    movieIDList = parseDiscoverList(res);
-    return movieIDList;
+    const movieListObject = parseDiscoverList(res);
+    return movieListObject;
   } catch (error) {
     throw error;
   }

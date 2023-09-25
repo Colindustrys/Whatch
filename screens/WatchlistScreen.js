@@ -50,9 +50,10 @@ export default WatchlistScreen = ({ navigation }) => {
     }
   };
 
-  const clickHandler = () => {
+  const clickHandler = (nr) => {
     navigation.navigate("MovieDetailsListScreen", {
       movieIDs: storedWatchList.movies,
+      initialScrollIndex: nr,
     });
   };
 
@@ -78,10 +79,10 @@ export default WatchlistScreen = ({ navigation }) => {
             </View>
           }
           data={movies}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <MoviePosterItem
               moviePosterPath={item.poster_path}
-              clickHandler={() => clickHandler(item.id)}
+              clickHandler={() => clickHandler(index)}
             />
           )}
           keyExtractor={(item, index) => index}
