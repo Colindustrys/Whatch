@@ -1,5 +1,5 @@
-import moviedb from "./movieDbInstance";
-import { parseAllProviders } from "./parser";
+import moviedb from "../movieDbInstance";
+import { parseAllProviders } from "../parser";
 
 // gets all watchproviders for movies from tmdb and converts it to a list of watch provider objects
 export const getAllWatchProviderObjects = async (id) => {

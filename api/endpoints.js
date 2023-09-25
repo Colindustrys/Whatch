@@ -1,7 +1,6 @@
-import { getMovieDetailsObject } from "./movieDetails";
-import { getMovieDiscoverList } from "./movieDiscover";
-import { getAllWatchProviderObjects } from "./allWatchProvider";
-import moviedb from "./movieDbInstance";
+import { getMovieDetailsObject } from "./endpoints/movieDetails";
+import { getMovieDiscoverList } from "./endpoints/movieDiscover";
+import { getAllWatchProviderObjects } from "./endpoints/allWatchProvider";
 
 export const getMovieDetails = async (id) => {
   try {

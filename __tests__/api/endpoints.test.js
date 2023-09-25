@@ -1,5 +1,5 @@
 import { getMovieDetails } from "../../api/endpoints";
-import { getMovieDetailsObject } from "../../api/movieDetails";
+import { getMovieDetailsObject } from "../../api/endpoints/movieDetails";
 
 jest.mock("../../api/movieDetails"); // Mock the module containing getMovieDetailsJsonFromApi
 

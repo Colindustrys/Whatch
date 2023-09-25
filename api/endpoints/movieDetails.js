@@ -1,6 +1,6 @@
-import moviedb from "./movieDbInstance";
-import { parseMovie } from "./parser";
-import { getMovieWatchProvider } from "./watchProvider";
+import moviedb from "../movieDbInstance";
+import { parseMovie } from "../parser";
+import { getMovieWatchProvider } from "./movieWatchProvider";
 
 // gets the movie info from tmdb and converts it to a movie object then returns that
 export const getMovieDetailsObject = async (id) => {

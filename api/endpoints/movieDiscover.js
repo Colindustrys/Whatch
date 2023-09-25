@@ -1,5 +1,5 @@
-import moviedb from "./movieDbInstance";
-import { parseDiscoverList } from "./parser";
+import moviedb from "../movieDbInstance";
+import { parseDiscoverList } from "../parser";
 import { DiscoverMovieRequest } from "moviedb-promise";
 
 // gets the movie list from tmdb and converts it to a list of movie ids

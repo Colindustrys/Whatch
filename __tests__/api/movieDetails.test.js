@@ -1,4 +1,4 @@
-import { getMovieDetailsObject } from "../../api/movieDetails";
+import { getMovieDetailsObject } from "../../api/endpoints/movieDetails";
 import moviedb from "../../api/movieDbInstance";
 
 //mock the moviedb singleton

@@ -1,4 +1,4 @@
-import { getMovieDetailsObject } from "./movieDetails";
+import { getMovieDetailsObject } from "./endpoints/movieDetails";
 
 export const getMovieDetails = async (id) => {
   try {
