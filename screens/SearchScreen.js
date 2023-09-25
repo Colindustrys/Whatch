@@ -7,13 +7,12 @@ import {
   Headline,
   MainContainer,
   Paragraph,
-  ParagraphSmall,
 } from "../redux-store/StyledComponents.js";
 
 export default SearchScreen = ({ navigation }) => {
   return (
     <MainContainer>
-      <Headline>Was suchst du?</Headline>
+      <Headline small>Was suchst du?</Headline>
       <Button
         onPress={() => navigation.navigate("MovieDetailsScreen")}
         title="To Details"

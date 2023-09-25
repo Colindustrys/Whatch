@@ -74,12 +74,12 @@ export default BrowseScreen = ({ navigation }) => {
 
   return (
     <MainContainer>
-      <Headline>Zeit zum stöbern...</Headline>
+      <Headline small>Zeit zum stöbern...</Headline>
 
       {loading ? (
         <StyledActivityIndicator />
       ) : error ? (
-        <HeadlineUppercase>{error}</HeadlineUppercase>
+        <Headline small>{error}</Headline>
       ) : (
         <View>
           <FlatList

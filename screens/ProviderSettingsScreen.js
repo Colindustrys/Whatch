@@ -7,11 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ProviderItem from "../components/ProviderItem.js";
 
 //Styled Components
-import {
-  MainContainer,
-  Paragraph,
-  ParagraphSmall,
-} from "../redux-store/StyledComponents.js";
+import { MainContainer, Paragraph } from "../redux-store/StyledComponents.js";
 
 export default ProviderSettingsScreen = ({ navigation }) => {
   //Get States from Async Storage
@@ -47,10 +43,10 @@ export default ProviderSettingsScreen = ({ navigation }) => {
         ListHeaderComponent={
           <View>
             <Paragraph>Wähle deine abonnierten Streamingdienste</Paragraph>
-            <ParagraphSmall>
+            <Paragraph small>
               Deine persönlichen Streamingdienste benötigen wir, um dir die
               perfekten Ergebnisse liefern zu können.
-            </ParagraphSmall>
+            </Paragraph>
           </View>
         }
         data={storedProvider.provider}

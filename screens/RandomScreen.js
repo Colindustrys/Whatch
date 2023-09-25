@@ -10,9 +10,8 @@ import { getMovieDiscover } from "../api/endpoints.js";
 import {
   Headline,
   MainContainer,
+  CenterContainer,
   Paragraph,
-  ParagraphSmall,
-  RoundedPressable,
 } from "../redux-store/StyledComponents.js";
 
 import RoundedButtonComponent from "../components/RoundedButtonComponent.js";
@@ -49,15 +48,15 @@ export default RandomScreen = ({ navigation }) => {
 
   return (
     <MainContainer>
-      <Headline>Lass dich überraschen!</Headline>
-      <View style={{ flex: 1, justifyContent: "center" }}>
+      <Headline small>Lass dich überraschen!</Headline>
+      <CenterContainer>
         <RoundedButtonComponent
           clickHandler={onRandomClick}
           iconName={"shuffle"}
           size={320}
           iconSize={160}
         />
-      </View>
+      </CenterContainer>
     </MainContainer>
   );
 };

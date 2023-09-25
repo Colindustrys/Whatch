@@ -1,10 +1,11 @@
 //React
 import * as React from "react";
+import { Pressable } from "react-native";
 
 //Styled Components
 import {
-  RoundedPressable,
   StyledIonicon,
+  PressableRoundedView,
 } from "../redux-store/StyledComponents.js";
 
 export default ({
@@ -16,16 +17,20 @@ export default ({
   iconSize,
 }) => {
   return (
-    <RoundedPressable
-      onPress={() => clickHandler()}
-      size={size}
-      isTransparent={isTransparent}
-    >
-      <StyledIonicon
-        name={iconName}
-        size={iconSize}
-        colorIsTextColor={colorIsTextColor}
-      />
-    </RoundedPressable>
+    <Pressable onPress={() => clickHandler()}>
+      {({ pressed }) => (
+        <PressableRoundedView
+          pressed={pressed}
+          size={size}
+          isTransparent={isTransparent}
+        >
+          <StyledIonicon
+            name={iconName}
+            size={iconSize}
+            colorIsTextColor={colorIsTextColor}
+          />
+        </PressableRoundedView>
+      )}
+    </Pressable>
   );
 };

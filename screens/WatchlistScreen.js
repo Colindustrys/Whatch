@@ -11,7 +11,6 @@ import {
   Headline,
   MainContainer,
   Paragraph,
-  ParagraphSmall,
   StyledActivityIndicator,
 } from "../redux-store/StyledComponents.js";
 
@@ -73,9 +72,9 @@ export default WatchlistScreen = ({ navigation }) => {
           ListHeaderComponent={
             <View>
               <Paragraph>Schau dir deine persönliche Watchlist an</Paragraph>
-              <ParagraphSmall>
+              <Paragraph small>
                 Du kannst deine gespeicherten Filme verwalten, indem du sie an
-              </ParagraphSmall>
+              </Paragraph>
             </View>
           }
           data={movies}

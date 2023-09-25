@@ -6,7 +6,6 @@ import React from "react";
 import {
   MainContainer,
   Paragraph,
-  ParagraphSmall,
   StyledRadioButtonInput,
   StyledRadioButtonLabel,
 } from "../redux-store/StyledComponents.js";
@@ -49,10 +48,10 @@ export default ThemeSettingsScreen = () => {
   return (
     <MainContainer>
       <Paragraph>Wähle ein App-Farbschema</Paragraph>
-      <ParagraphSmall>
+      <Paragraph small>
         Tipp: Der Darktheme ist richtig gut für die Umwelt, da dieser weniger
         Energie verbraucht.
-      </ParagraphSmall>
+      </Paragraph>
       <RadioForm>
         {themeOptions.map((option, optionId, value) => (
           <RadioButton labelHorizontal={true} key={optionId}>

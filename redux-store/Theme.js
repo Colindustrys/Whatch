@@ -18,8 +18,10 @@ export const base = {
   FONT_WEIGHT_MEDIUM: "500",
   FONT_WEIGHT_BOLD: "700",
 
-  FONT_FAMILY: "Comfortaa_300Light",
-  FONT_FAMILY_BOLD: "Comfortaa_700Bold",
+  FONT_FAMILY_LIGHT: "Montserrat_300Light",
+  FONT_FAMILY_REGULAR: "Montserrat_400Regular",
+  FONT_FAMILY_EXTRA_BOLD: "Montserrat_800ExtraBold",
+  FONT_FAMILY_BLACK: "Montserrat_900Black",
 };
 
 export const darkTheme = {
