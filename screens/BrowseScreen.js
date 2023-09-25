@@ -10,7 +10,6 @@ import {
   Headline,
   MainContainer,
   Paragraph,
-  ParagraphSmall,
   StyledActivityIndicator,
 } from "../redux-store/StyledComponents.js";
 
@@ -61,7 +60,7 @@ export default BrowseScreen = ({ navigation }) => {
 
     return (
       <View>
-        <ParagraphSmall>{item.title}</ParagraphSmall>
+        <Paragraph small>{item.title}</Paragraph>
         <FlatList
           data={movieList}
           keyExtractor={(item) => item.id}

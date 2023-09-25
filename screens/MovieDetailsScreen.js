@@ -137,7 +137,7 @@ export default MovieDetailsScreen = ({ movieID }) => {
               {movie.vote_average}
             </Paragraph>
             <Paragraph small>{movie.description}</Paragraph>
-            {true ?? <Paragraph small>Als Stream verfügbr auf:</Paragraph>}
+            <Paragraph small>Als Stream verfügbr auf:</Paragraph>
 
             <RowContainer justifyContent={"flex-start"} paddingBottom gap>
               {movie?.watchprovider?.map((provider, index) => {
