@@ -31,62 +31,37 @@ export default WatchlistScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [movies, setMovies] = useState([]);
 
-  useEffect(() => {
-    //TODO call function with array as parameter
-    storedWatchList.movies.map((movieID) => fetchSeenlistMovies(movieID));
-  }, []);
-
-  const fetchSeenlistMovies = async (id) => {
-    try {
-      //TODO another API function pls that accepts array of id and returns array of movie objects
-      let receivedMovie = await getMovieDetails(id);
-      setMovies((previous) => [...previous, receivedMovie]);
-      setLoading(false);
-    } catch (e) {
-      //TODO: modal for errormessage
-      setError("No internet");
-      setLoading(false);
-    }
-  };
-
-  const clickHandler = (nr) => {
+  const clickHandler = (movieIndex) => {
     navigation.navigate("MovieDetailsListScreen", {
       movieIDs: storedWatchList.movies,
-      initialScrollIndex: nr,
+      initialScrollIndex: movieIndex,
     });
   };
 
   return (
     <MainContainer>
-      {loading ? (
-        //TODO own ActivityIndicator with Logo?
-        <StyledActivityIndicator />
-      ) : error ? (
-        <Headline>{error}</Headline>
-      ) : (
-        <FlatList
-          numColumns={numberOfColumns}
-          contentContainerStyle={{
-            gap: 8,
-          }}
-          ListHeaderComponent={
-            <View>
-              <Paragraph>Schau dir deine persönliche Watchlist an</Paragraph>
-              <Paragraph small>
-                Du kannst deine gespeicherten Filme verwalten, indem du sie an
-              </Paragraph>
-            </View>
-          }
-          data={movies}
-          renderItem={({ item, index }) => (
-            <MoviePosterItem
-              moviePosterPath={item.poster_path}
-              clickHandler={() => clickHandler(index)}
-            />
-          )}
-          keyExtractor={(item, index) => index}
-        />
-      )}
+      <FlatList
+        numColumns={numberOfColumns}
+        contentContainerStyle={{
+          gap: 8,
+        }}
+        ListHeaderComponent={
+          <View>
+            <Paragraph>Schau dir deine persönliche Watchlist an</Paragraph>
+            <Paragraph small>
+              Du kannst deine gespeicherten Filme verwalten, indem du sie an
+            </Paragraph>
+          </View>
+        }
+        data={storedWatchList.movies}
+        renderItem={({ item, index }) => (
+          <MoviePosterItem
+            moviePosterPath={item.poster_path}
+            clickHandler={() => clickHandler(index)}
+          />
+        )}
+        keyExtractor={(item, index) => index}
+      />
     </MainContainer>
   );
 };

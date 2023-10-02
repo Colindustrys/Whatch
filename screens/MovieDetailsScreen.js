@@ -28,7 +28,10 @@ import {
 //Components
 import MovieDetailsButtonComponent from "../components/MovieDetailsButtonComponent.js";
 
-export default MovieDetailsScreen = ({ movieID }) => {
+//Models
+import Movie from "../models/Movie.js";
+
+export default MovieDetailsScreen = ({ passedMovie }) => {
   //Get States from Async Storage
   const storedWatchList = useSelector((state) => state.watchList);
   const storedSeenList = useSelector((state) => state.seenList);
@@ -40,6 +43,26 @@ export default MovieDetailsScreen = ({ movieID }) => {
   const [movie, setMovie] = useState(null);
   const [elementExistInWatchList, setElementExistInWatchList] = useState(false);
   const [elementExistInSeenList, setElementExistInSeenList] = useState(false);
+
+  //fetch movie details once on startup
+  useEffect(() => {
+    //TODO: How to pass movieID to MovieDetailsScreen? --> optional chaining for now because home screens dont pass arguments
+    fetchMovieDetails();
+  }, []);
+
+  //get movie object from getMovieDetails() and set movie with promise.
+  //set loading state to true if process finished
+  const fetchMovieDetails = async () => {
+    try {
+      let receivedMovie = await getMovieDetails(passedMovie.id);
+      setMovie(receivedMovie);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setError("No internet");
+      setLoading(false);
+    }
+  };
 
   const onShareClick = () => {
     //TODO: Share
@@ -66,46 +89,27 @@ export default MovieDetailsScreen = ({ movieID }) => {
   };
 
   const dispatchHandler = (type) => {
+    console.log(type);
     dispatch({
       type: type,
-      payload: movie.id,
+      payload: movie,
     });
   };
 
-  //get movie object from getMovieDetails() and set movie with promise.
-  //set loading state to true if process finished
-  const fetchMovieDetails = async (id) => {
-    try {
-      receivedMovie = await getMovieDetails(id);
-      setMovie(receivedMovie);
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
-      setError("No internet");
-      setLoading(false);
-    }
-  };
-
-  //fetch movie details once on startup
-  useEffect(() => {
-    //TODO: How to pass movieID to MovieDetailsScreen? --> optional chaining for now because home screens dont pass arguments
-    fetchMovieDetails(movieID);
-  }, []);
-
   //check if element exists in Watchlist and update useState
   useEffect(() => {
-    setElementExistInWatchList(storedWatchList.movies.includes(movie?.id));
+    setElementExistInWatchList(storedWatchList.movies.includes(movie));
   }, [storedWatchList]);
 
   //check if element exists in Seenlist and update useState
   useEffect(() => {
-    setElementExistInSeenList(storedSeenList.movies.includes(movie?.id));
+    setElementExistInSeenList(storedSeenList.movies.includes(movie));
   }, [storedSeenList]);
 
   //set States after movies are loaded
   useEffect(() => {
-    setElementExistInWatchList(storedWatchList.movies.includes(movie?.id));
-    setElementExistInSeenList(storedSeenList.movies.includes(movie?.id));
+    setElementExistInWatchList(storedWatchList.movies.includes(movie));
+    setElementExistInSeenList(storedSeenList.movies.includes(movie));
   }, [loading]);
 
   return (
