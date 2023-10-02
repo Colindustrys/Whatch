@@ -29,7 +29,7 @@ export default SeenlistScreen = ({ navigation }) => {
   const clickHandler = (movieIndex) => {
     //pass movieID to MovieDetailsScreen
     navigation.navigate("MovieDetailsListScreen", {
-      movieIDs: storedSeenList.movies,
+      movies: storedSeenList.movies,
       initialScrollIndex: movieIndex,
     });
   };
@@ -52,7 +52,7 @@ export default SeenlistScreen = ({ navigation }) => {
         data={storedSeenList.movies}
         renderItem={({ item, index }) => (
           <MoviePosterItem
-            moviePosterPath={item.poster_path}
+            moviePosterPath={item._poster_path}
             clickHandler={() => clickHandler(index)}
           />
         )}

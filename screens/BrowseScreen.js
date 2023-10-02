@@ -13,13 +13,9 @@ import {
   StyledActivityIndicator,
 } from "../redux-store/StyledComponents.js";
 
-import MoviePosterItem from "../components/MoviePosterItem.js";
+import GenreListItem from "../components/GenreListItem.js";
 
 export default BrowseScreen = ({ navigation }) => {
-  const temp = () => {
-    fetchMovies();
-  };
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [movieLists, setMovieLists] = useState(null);
@@ -29,46 +25,14 @@ export default BrowseScreen = ({ navigation }) => {
   }, []);
 
   const fetchMovies = async () => {
-    const tempMovieLists = await getBrowse();
-    // console.log("fetchmovies");
-    // console.log(tempMovieList[0].data());
-    setMovieLists(tempMovieLists);
-    setLoading(false);
-  };
-
-  const clickHandler = (nr, movieList) => {
-    navigation.navigate("MovieDetailsListScreen", {
-      movieIDs: movieList,
-      initialScrollIndex: nr,
-    });
-  };
-
-  const renderItemPoster = ({ item, index }) => {
-    // console.log("renderitem");
-    // console.log(item);
-    return (
-      // <Text>{item.id} </Text>
-      <MoviePosterItem
-        moviePosterPath={item.posterPath}
-        clickHandler={() => clickHandler(index, item.ids)}
-      />
-    );
-  };
-
-  const renderItemFlatlist = ({ item, index }) => {
-    const movieList = item.data();
-
-    return (
-      <View>
-        <Paragraph small>{item.title}</Paragraph>
-        <FlatList
-          data={movieList}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItemPoster}
-          horizontal
-        />
-      </View>
-    );
+    try {
+      const newMovieLists = await getBrowse();
+      setMovieLists(newMovieLists);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+    }
   };
 
   return (
@@ -84,7 +48,13 @@ export default BrowseScreen = ({ navigation }) => {
           <FlatList
             data={movieLists}
             keyExtractor={(item) => item.title}
-            renderItem={renderItemFlatlist}
+            renderItem={({ item, index }) => (
+              <GenreListItem
+                title={item.title}
+                movieList={item.movieArray}
+                navigation={navigation}
+              />
+            )}
           />
         </View>
       )}

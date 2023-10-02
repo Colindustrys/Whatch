@@ -7,23 +7,27 @@ import MovieDetailsScreen from "./MovieDetailsScreen.js";
 
 //Styled Components
 import { MovieDetailListContainer } from "../redux-store/StyledComponents.js";
+import Movie from "../models/Movie.js";
 
 export default MovieDetailListScreen = ({ route, navigation }) => {
   //get list of movieIDs from routing parameter
   const { movies, initialScrollIndex } = route.params;
 
+  
+
   const itemheight = useWindowDimensions().width;
 
   //pass movieIDs to MovieDetailsScreen and render every ID as own movieScreen
   const renderItem = ({ item }) => {
-    return <MovieDetailsScreen passedMovie={item} />;
+    const movie = new Movie(item);
+    return <MovieDetailsScreen passedMovie={movie} />;
   };
 
   return (
     <MovieDetailListContainer>
       <FlatList
         data={movies}
-        keyExtractor={(item) => item}
+        keyExtractor={(item, index) => index}
         renderItem={renderItem}
         horizontal
         pagingEnabled

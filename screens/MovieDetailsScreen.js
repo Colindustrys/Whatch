@@ -54,7 +54,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   //set loading state to true if process finished
   const fetchMovieDetails = async () => {
     try {
-      let receivedMovie = await getMovieDetails(passedMovie.id);
+      let receivedMovie = await getMovieDetails(passedMovie._id);
       setMovie(receivedMovie);
       setLoading(false);
     } catch (e) {
@@ -81,7 +81,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   const onAddToSeenlist = () => {
     let type;
     if (elementExistInSeenList) {
-      type = "DELETE_MOVIE_FROM_SEENLIST";
+      type = "DELETE_MOVIE_FROM_SEENLIST"; 
     } else {
       type = "ADD_MOVIE_TO_SEENLIST";
     }
@@ -98,18 +98,31 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
 
   //check if element exists in Watchlist and update useState
   useEffect(() => {
-    setElementExistInWatchList(storedWatchList.movies.includes(movie));
+    //setElementExistInWatchList(storedWatchList.movies.includes(movie));
+    setElementExistInWatchList(
+      storedWatchList.movies.some(
+        (storedMovie) => storedMovie._id === movie?.id
+      )
+    );
   }, [storedWatchList]);
 
   //check if element exists in Seenlist and update useState
   useEffect(() => {
-    setElementExistInSeenList(storedSeenList.movies.includes(movie));
+    setElementExistInSeenList(
+      storedSeenList.movies.some((storedMovie) => storedMovie._id === movie?.id)
+    );
   }, [storedSeenList]);
 
   //set States after movies are loaded
   useEffect(() => {
-    setElementExistInWatchList(storedWatchList.movies.includes(movie));
-    setElementExistInSeenList(storedSeenList.movies.includes(movie));
+    setElementExistInWatchList(
+      storedWatchList.movies.some(
+        (storedMovie) => storedMovie._id === movie?.id
+      )
+    );
+    setElementExistInSeenList(
+      storedSeenList.movies.some((storedMovie) => storedMovie._id === movie?.id)
+    );
   }, [loading]);
 
   return (

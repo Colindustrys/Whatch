@@ -26,14 +26,9 @@ export default WatchlistScreen = ({ navigation }) => {
   const listWidth = useWindowDimensions().width - 48;
   const numberOfColumns = Math.floor(listWidth / itemFixedWidth);
 
-  //useStates
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [movies, setMovies] = useState([]);
-
   const clickHandler = (movieIndex) => {
     navigation.navigate("MovieDetailsListScreen", {
-      movieIDs: storedWatchList.movies,
+      movies: storedWatchList.movies,
       initialScrollIndex: movieIndex,
     });
   };
@@ -56,7 +51,7 @@ export default WatchlistScreen = ({ navigation }) => {
         data={storedWatchList.movies}
         renderItem={({ item, index }) => (
           <MoviePosterItem
-            moviePosterPath={item.poster_path}
+            moviePosterPath={item._poster_path}
             clickHandler={() => clickHandler(index)}
           />
         )}
