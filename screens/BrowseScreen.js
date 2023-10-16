@@ -51,7 +51,8 @@ export default BrowseScreen = ({ navigation }) => {
             renderItem={({ item, index }) => (
               <GenreListItem
                 title={item.title}
-                movieList={item.movieArray}
+                passedMovieList={item.movieArray}
+                requestParams={item.requestParams}
                 navigation={navigation}
               />
             )}

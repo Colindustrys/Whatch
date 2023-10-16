@@ -11,11 +11,13 @@ export const getBrowseMovieLists = async (id) => {
 
     //get list of movies for each genre
     for (const genre of allGenres) {
-      let movieArray = await getMovieDiscoverList({ genres: [genre.id] });
+      let requestParams = { genres: [genre.id] };
+      let movieArray = await getMovieDiscoverList(requestParams);
 
       const newTitleAndMoviearray = {
         title: genre.label,
         movieArray: movieArray,
+        requestParams: requestParams,
       };
 
       titleAndMoviearrayObjectList.push(newTitleAndMoviearray);
