@@ -15,6 +15,8 @@ export default genreListItem = ({
   const [movieList, setMovieList] = useState(passedMovieList);
   const [pageNR, setPageNR] = useState(1);
 
+  itemheight = 80;
+
   const clickHandler = (index) => {
     navigation.navigate("MovieDetailsListScreen", {
       movies: movieList,
@@ -57,7 +59,14 @@ export default genreListItem = ({
         )}
         horizontal
         onEndReached={loadMoreData}
-        //TODO add a loading indicator at the end 
+        getItemLayout={(data, index) => ({
+          length: itemheight,
+          offset: itemheight * index,
+          index,
+        })}
+        windowSize={4}
+        maxToRenderPerBatch={3}
+        //TODO add a loading indicator at the end
       />
     </View>
   );
