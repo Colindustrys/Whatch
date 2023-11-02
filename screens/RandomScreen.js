@@ -22,23 +22,17 @@ export default RandomScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [movie, setMovie] = useState([]);
 
-  //Get States from Async Storage
-  const storedPersonalProvider = useSelector(
-    (state) => state.personalProviderList
-  );
-
   const onRandomClick = () => {
     //TODO get List of random movies
-    fetchMovieDetails(11);
+    fetchMovies();
   };
 
   //get movie object from getMovieDetails() and set movie state.
-  const fetchMovieDetails = async (id) => {
+  const fetchMovies = async () => {
     try {
-      let movieListObject = await getMovieDiscover();
-      movieIdsArray = movieListObject.ids;
+      let movieArray = await getMovieDiscover();
       navigation.navigate("MovieDetailsListScreen", {
-        movieIDs: movieIdsArray,
+        movies: movieArray,
       });
     } catch (e) {
       setError("No internet");

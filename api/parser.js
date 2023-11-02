@@ -3,8 +3,10 @@ import Genre from "../models/Genre";
 import WatchProvider from "../models/WatchProvider";
 import MovieList from "../models/MovieList";
 
+//parses a movie object from the tmdb response json
 export const parseMovie = (json) => {
   newMovie = new Movie();
+
   newMovie.title = json.title;
   newMovie.id = json.id;
   newMovie.imdb_id = json.imdb_id;
@@ -12,11 +14,19 @@ export const parseMovie = (json) => {
   newMovie.backdrop_path = json.backdrop_path;
   newMovie.poster_path = json.poster_path;
 
-  //make genres array
-  newMovie.genres = json.genres.map((genre) => genre.name);
+  //TODO nicht 2 array für genre name und id verwenden sondern die Genre Klasse
+  //für movieDetails json
+  if (json.genres) {
+    //make genres array
+    newMovie.genres = json.genres.map((genre) => genre.name);
+    //make genreIDs array
+    newMovie.genreIDs = json.genres.map((genre) => genre.id);
+  }
 
-  //make genreIDs array
-  newMovie.genreIDs = json.genres.map((genre) => genre.id);
+  //für discover json
+  if (json.genre_ids) {
+    newMovie.genreIDs = json.genre_ids.map((genre) => genre.id);
+  }
 
   newMovie.original_language = json.original_language;
 
@@ -35,6 +45,23 @@ export const parseMovie = (json) => {
   newMovie.vote_count = json.vote_count;
 
   return newMovie;
+};
+
+//parses the json from the discover endpoint to an array of movie objects
+export const parseDiscoverList = (json) => {
+  let moviesArray = [];
+
+  if (json.results) {
+    if (json.results.length > 0) {
+      const moviesJsonArray = json.results;
+      for (const movieJSON of moviesJsonArray) {
+        newMovie = parseMovie(movieJSON);
+        moviesArray.push(newMovie);
+      }
+    }
+  }
+
+  return moviesArray;
 };
 
 export const parseMovieProviders = (json) => {
@@ -62,22 +89,6 @@ export const parseMovieProviders = (json) => {
   }
 
   return providerList;
-};
-
-//parses the json from the discover endpoint to a MovieListObject
-export const parseDiscoverList = (json) => {
-  let movieListObject = new MovieList();
-
-  if (json.results) {
-    if (json.results.length > 0) {
-      const moviesJsonArray = json.results;
-      for (const movieJSON of moviesJsonArray) {
-        movieListObject.push(movieJSON.id, movieJSON.poster_path)
-      }
-    }
-  }
-
-  return movieListObject;
 };
 
 export const parseAllProviders = (json) => {

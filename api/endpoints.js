@@ -3,7 +3,6 @@ import { getMovieDiscoverList } from "./endpoints/movieDiscover";
 import { getAllWatchProviderObjects } from "./endpoints/allWatchProvider";
 import { getBrowseMovieLists } from "./endpoints/browse";
 
-
 export const getMovieDetails = async (id) => {
   try {
     const movieObject = await getMovieDetailsObject(id);
@@ -19,8 +18,8 @@ export const getMovieDiscover = async (requestParams) => {
   }
 
   try {
-    const movieListObject = await getMovieDiscoverList(requestParams);
-    return movieListObject;
+    const movieArray = await getMovieDiscoverList(requestParams);
+    return movieArray;
   } catch (error) {
     throw error;
   }
@@ -36,13 +35,13 @@ export const getAllWatchProvider = async () => {
   return allWatchProviders;
 };
 
-
+//gets movies for all categories and returns them as an array of objects that have a title prop and movieList prop
 export const getBrowse = async () => {
-  let arrayWithMovieListObjects;
+  let titleAndMoviearrayObjectList;
   try {
-    arrayWithMovieListObjects = await getBrowseMovieLists();
+    titleAndMoviearrayObjectList = await getBrowseMovieLists();
   } catch (error) {
     throw error;
   }
-  return arrayWithMovieListObjects;
+  return titleAndMoviearrayObjectList;
 };

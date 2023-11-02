@@ -6,6 +6,11 @@ import { Pressable } from "react-native";
 import { PosterImage, PressableView } from "../redux-store/StyledComponents.js";
 
 export default MoviePosterItem = ({ clickHandler, moviePosterPath }) => {
+
+  const shouldComponentUpdate = () => {
+    return false
+  }
+  
   return (
     <Pressable onPress={clickHandler}>
       {({ pressed }) => (

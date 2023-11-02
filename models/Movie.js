@@ -1,4 +1,21 @@
 export default class Movie {
+  constructor(data = {}) {
+    this._backdrop_path = data._backdrop_path || "";
+    this._description = data._description || "";
+    this._genreIDs = data._genreIDs || [];
+    this._genres = data._genres || [];
+    this._id = data._id || 0;
+    this._imdb_id = data._imdb_id || "";
+    this._original_language = data._original_language || "";
+    this._poster_path = data._poster_path || "";
+    this._runtime = data._runtime || 0;
+    this._serialized_release_date = data._serialized_release_date || new Date();
+    this._title = data._title || "";
+    this._vote_average = data._vote_average || 0;
+    this._vote_count = data._vote_count || 0;
+    this._watchprovider = data._watchprovider || [];
+  }
+
   _title;
   get title() {
     return this._title;
@@ -71,24 +88,26 @@ export default class Movie {
     this._original_language = value;
   }
 
-  _release_date;
+  _serialized_release_date;
+  //parse date from _serialized_release_date to date object and return it
   get release_date() {
-    return this._release_date;
+    const release_date = new Date(this._serialized_release_date);
+    return release_date;
   }
   //get date as string in format 14.03.1972
   get release_date_string() {
-    const day = this._release_date.getDate().toString().padStart(2, "0");
-    const month = (this._release_date.getMonth() + 1)
-      .toString()
-      .padStart(2, "0");
-    const year = this._release_date.getFullYear();
+    const release_date = new Date(this._serialized_release_date);
+
+    const day = release_date.getDate().toString().padStart(2, "0");
+    const month = (release_date.getMonth() + 1).toString().padStart(2, "0");
+    const year = release_date.getFullYear();
 
     const formattedDate = `${year}`;
     return formattedDate;
   }
-  //put in a js date object
+  //put in a js date object and save it as _serialized_release_date
   set release_date(value) {
-    this._release_date = value;
+    this._serialized_release_date = value.toISOString();
   }
 
   _runtime;
