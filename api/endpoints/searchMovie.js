@@ -13,16 +13,11 @@ export const SearchMovie = async (string, page) => {
 
   try {
     let searchresultsJson = await moviedb.searchMovie(requestParams);
-    //console.log(searchresults);
 
     //parse movies
     const movieArray = parseDiscoverList(searchresultsJson);
 
-    for (movie of movieArray) {
-      console.log(movie.title);
-    }
-
-    return;
+    return movieArray;
   } catch (error) {
     throw error;
   }

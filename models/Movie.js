@@ -96,14 +96,19 @@ export default class Movie {
   }
   //get date as string in format 14.03.1972
   get release_date_string() {
-    const release_date = new Date(this._serialized_release_date);
+    //check if date is set and return false if not, this is because some movies do not have a date 
+    if (this._serialized_release_date) {
+      const release_date = new Date(this._serialized_release_date);
 
-    const day = release_date.getDate().toString().padStart(2, "0");
-    const month = (release_date.getMonth() + 1).toString().padStart(2, "0");
-    const year = release_date.getFullYear();
+      const day = release_date.getDate().toString().padStart(2, "0");
+      const month = (release_date.getMonth() + 1).toString().padStart(2, "0");
+      const year = release_date.getFullYear();
 
-    const formattedDate = `${year}`;
-    return formattedDate;
+      const formattedDate = `${year}`;
+      return formattedDate;
+    } else {
+      return false;
+    }
   }
   //put in a js date object and save it as _serialized_release_date
   set release_date(value) {

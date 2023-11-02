@@ -31,21 +31,19 @@ export const parseMovie = (json) => {
 
   //convert json date string to javascript date
   if (json.release_date) {
-    console.log("test");
-    console.log(json);
     const dateString = json.release_date;
-    console.log(dateString);
+
     const dateParts = dateString.split("-");
-    console.log(dateParts);
+
     const dateObject = new Date(
       parseInt(dateParts[0]), // Year
       parseInt(dateParts[1]) - 1, // Month
       parseInt(dateParts[2]) // Day
     );
-    console.log(dateObject);
+
     newMovie.release_date = dateObject;
   }
-  
+
   newMovie.runtime = json.runtime;
   newMovie.vote_average = json.vote_average;
   newMovie.vote_count = json.vote_count;

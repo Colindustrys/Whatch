@@ -149,8 +149,8 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
               {movie.runtime} Min
               {/*TODO: use pseudo class before in styled components */}
               {" • "}
-              {movie.release_date_string}
-              {" • "}
+              {movie.release_date_string? movie.release_date_string + " • " : ""}
+              {/* {" • "} */}
               {movie.vote_average}
             </Paragraph>
             <Paragraph small>{movie.description}</Paragraph>
