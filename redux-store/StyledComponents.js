@@ -30,7 +30,7 @@ export const MainContainer = styled.View`
   padding-top: 24px;
   padding-bottom: 24px;
   padding-left: 24px;
-  padding-right: ${(props) => (props.browse ? 0 : 24)}px;
+  padding-right: 24px;
   background-color: ${(props) => props.theme.BACKGROUND_COLOR};
 `;
 
@@ -148,11 +148,9 @@ export const BackdropImage = styled.Image`
 `;
 
 export const PosterImage = styled.Image`
-  width: 92px;
+  width: 72px;
   aspect-ratio: 2 / 3;
   resize-mode: contain;
-  margin-bottom: 16px;
-  margin-right: 16px;
 `;
 
 export const LogoImage = styled.Image`

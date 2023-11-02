@@ -25,6 +25,7 @@ export default BrowseScreen = ({ navigation }) => {
   }, []);
 
   const fetchMovies = async () => {
+<<<<<<< HEAD
     try {
       const newMovieLists = await getBrowse();
       setMovieLists(newMovieLists);
@@ -33,10 +34,52 @@ export default BrowseScreen = ({ navigation }) => {
       setLoading(false);
       setError(true);
     }
+=======
+    const tempMovieLists = await getBrowse();
+    // console.log("fetchmovies");
+    // console.log(tempMovieList[0].data());
+    setMovieLists(tempMovieLists);
+    setLoading(false);
+  };
+
+  const clickHandler = (nr, movieList) => {
+    navigation.navigate("MovieDetailsListScreen", {
+      movieIDs: movieList,
+      initialScrollIndex: nr,
+    });
+  };
+
+  const renderItemPoster = ({ item, index }) => {
+    // console.log("renderitem");
+    // console.log(item);
+    return (
+      // <Text>{item.id} </Text>
+      <MoviePosterItem
+        moviePosterPath={item.posterPath}
+        clickHandler={() => clickHandler(index, item.ids)}
+      />
+    );
+  };
+
+  const renderItemFlatlist = ({ item, index }) => {
+    const movieList = item.data();
+
+    return (
+      <View>
+        <Paragraph small>{item.title}</Paragraph>
+        <FlatList
+          data={movieList}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItemPoster}
+          horizontal
+        />
+      </View>
+    );
+>>>>>>> parent of d083fd9 (styling browse view)
   };
 
   return (
-    <MainContainer browse>
+    <MainContainer>
       <Headline small>Zeit zum stöbern...</Headline>
 
       {loading ? (
