@@ -3,7 +3,7 @@ import { parseDiscoverList } from "../parser";
 import { DiscoverMovieRequest } from "moviedb-promise";
 import { store } from "../../redux-store/store";
 
-// gets the movie list from the tmdb discover endpoint and converts it to a MovieList object
+// gets the movie list from the tmdb discover endpoint and returns it as an array of movie objects
 // takes a json with optional parameters
 // parameter:
 // page: int
@@ -30,8 +30,8 @@ export const getMovieDiscoverList = async ({
 }) => {
   //console.log("discover with genre: " + genres);
 
-  //falls der schalter oben link auf nur eigenen provider gestellt ist 
-  let providerArray = []
+  //falls der schalter oben link auf nur eigenen provider gestellt ist
+  let providerArray = [];
   if (true) {
     const state = store.getState();
     providerArray = state.personalProviderList.provider;
@@ -56,9 +56,11 @@ export const getMovieDiscoverList = async ({
     const res = await moviedb.discoverMovie(requestParams);
 
     //parse json to list of movie objects
-    const movieListObject = parseDiscoverList(res);
-    return movieListObject;
+    const movieArray = parseDiscoverList(res);
+
+    return movieArray;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };

@@ -1,9 +1,10 @@
 const initialState = {
-  movies: [872585, 298618, 667538, 346698],
+  movies: [],
 };
 
 // Handle action
 const WatchListReducer = (state = initialState, action) => {
+  console.log("test");
   switch (action.type) {
     case "ADD_MOVIE_TO_WATCHLIST":
       let index = state.movies.findIndex((movie) => movie === action.payload);
