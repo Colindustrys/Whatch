@@ -30,7 +30,7 @@ export const MainContainer = styled.View`
   padding-top: 24px;
   padding-bottom: 24px;
   padding-left: 24px;
-  padding-right: 24px;
+  padding-right: ${(props) => (props.browse ? 0 : 24)}px;
   background-color: ${(props) => props.theme.BACKGROUND_COLOR};
 `;
 
