@@ -36,7 +36,7 @@ export default BrowseScreen = ({ navigation }) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer browse>
       <Headline small>Zeit zum stöbern...</Headline>
 
       {loading ? (
