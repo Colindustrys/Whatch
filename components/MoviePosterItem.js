@@ -11,12 +11,6 @@ export default MoviePosterItem = ({ clickHandler, moviePosterPath }) => {
       {({ pressed }) => (
         <PressableView pressed={pressed}>
           <PosterImage
-            style={{
-              width: 72,
-              marginRight: 8,
-              aspectRatio: 2 / 3,
-              resizeMode: "contain",
-            }}
             source={{
               uri: "https://image.tmdb.org/t/p/w92" + moviePosterPath,
             }}

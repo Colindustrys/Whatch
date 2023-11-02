@@ -60,7 +60,7 @@ export default BrowseScreen = ({ navigation }) => {
 
     return (
       <View>
-        <Paragraph small>{item.title}</Paragraph>
+        <Paragraph genreTitle >{item.title}</Paragraph>
         <FlatList
           data={movieList}
           keyExtractor={(item) => item.id}
@@ -72,7 +72,7 @@ export default BrowseScreen = ({ navigation }) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer browse>
       <Headline small>Zeit zum stöbern...</Headline>
 
       {loading ? (
