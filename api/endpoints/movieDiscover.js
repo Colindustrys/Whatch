@@ -37,7 +37,7 @@ export const getMovieDiscoverList = async ({
     providerArray = state.personalProviderList.provider;
   }
 
-  requestParams = {
+  const requestParams = {
     page: page,
     sort_by: sort,
     "vote_average.gte": voteMin,

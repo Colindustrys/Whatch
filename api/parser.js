@@ -1,7 +1,6 @@
 import Movie from "../models/Movie";
 import Genre from "../models/Genre";
 import WatchProvider from "../models/WatchProvider";
-import MovieList from "../models/MovieList";
 
 //parses a movie object from the tmdb response json
 export const parseMovie = (json) => {
@@ -31,14 +30,19 @@ export const parseMovie = (json) => {
   newMovie.original_language = json.original_language;
 
   //convert json date string to javascript date
-  const dateString = json.release_date;
-  const dateParts = dateString.split("-");
-  const dateObject = new Date(
-    parseInt(dateParts[0]), // Year
-    parseInt(dateParts[1]) - 1, // Month
-    parseInt(dateParts[2]) // Day
-  );
-  newMovie.release_date = dateObject;
+  if (json.release_date) {
+    const dateString = json.release_date;
+
+    const dateParts = dateString.split("-");
+
+    const dateObject = new Date(
+      parseInt(dateParts[0]), // Year
+      parseInt(dateParts[1]) - 1, // Month
+      parseInt(dateParts[2]) // Day
+    );
+
+    newMovie.release_date = dateObject;
+  }
 
   newMovie.runtime = json.runtime;
   newMovie.vote_average = json.vote_average;
