@@ -4,6 +4,33 @@ import WatchProvider from "../models/WatchProvider";
 
 //parses a movie object from the tmdb response json
 export const parseMovie = (json) => {
+  // console.log(json.title);
+  // console.log(json);
+
+  // console.log(json.title);
+  // console.log(json.id);
+  // console.log(json.overview);
+  // console.log(json.backdrop_path);
+  // console.log(json.poster_path);
+  // console.log(json.genre_ids);
+  // console.log(json.original_language);
+  // console.log(json.release_date);
+  // console.log(json.vote_average);
+  // console.log(json.vote_count);
+
+  if (
+    !json.title ||
+    !json.id ||
+    !json.overview ||
+    !json.backdrop_path ||
+    !json.poster_path ||
+    !json.release_date ||
+    !json.vote_average ||
+    !json.vote_count
+  ) {
+    return;
+  }
+
   newMovie = new Movie();
 
   newMovie.title = json.title;
@@ -30,19 +57,17 @@ export const parseMovie = (json) => {
   newMovie.original_language = json.original_language;
 
   //convert json date string to javascript date
-  if (json.release_date) {
-    const dateString = json.release_date;
+  const dateString = json.release_date;
 
-    const dateParts = dateString.split("-");
+  const dateParts = dateString.split("-");
 
-    const dateObject = new Date(
-      parseInt(dateParts[0]), // Year
-      parseInt(dateParts[1]) - 1, // Month
-      parseInt(dateParts[2]) // Day
-    );
+  const dateObject = new Date(
+    parseInt(dateParts[0]), // Year
+    parseInt(dateParts[1]) - 1, // Month
+    parseInt(dateParts[2]) // Day
+  );
 
-    newMovie.release_date = dateObject;
-  }
+  newMovie.release_date = dateObject;
 
   newMovie.runtime = json.runtime;
   newMovie.vote_average = json.vote_average;
@@ -60,7 +85,10 @@ export const parseDiscoverList = (json) => {
       const moviesJsonArray = json.results;
       for (const movieJSON of moviesJsonArray) {
         newMovie = parseMovie(movieJSON);
-        moviesArray.push(newMovie);
+        //check if movie was returned, some movies dont get returned because they are missing attributes
+        if (newMovie) {
+          moviesArray.push(newMovie);
+        }
       }
     }
   }

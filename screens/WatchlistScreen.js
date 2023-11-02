@@ -22,7 +22,7 @@ export default WatchlistScreen = ({ navigation }) => {
   const storedWatchList = useSelector((state) => state.watchList);
 
   //Calculate numberOfColumns for FlatList
-  const itemFixedWidth = 80;
+  const itemFixedWidth = 108;
   const listWidth = useWindowDimensions().width - 48;
   const numberOfColumns = Math.floor(listWidth / itemFixedWidth);
 

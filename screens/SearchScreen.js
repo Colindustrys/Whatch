@@ -3,23 +3,37 @@ import React, { useState } from "react";
 import { Butto, Text, View } from "react-native";
 import MySearchBar from "../components/MySearchBar";
 import { SearchMovie } from "../api/endpoints/searchMovie";
+import SearchResults from "../components/SearchResults";
 
 //Styled Components
 import { MainContainer } from "../redux-store/StyledComponents.js";
 
 export default SearchScreen = ({ navigation }) => {
   const [searchString, setSearchString] = useState("");
+  const [movieList, setMovieList] = useState();
 
-  const updateSearch = (searchString) => {
+  const updateSearch = async (searchString) => {
     setSearchString(searchString);
-    //console.log(searchString);
-    SearchMovie(searchString, 1);
+    if (searchString)
+    setMovieList(await SearchMovie(searchString, 1));
   };
+
+  const clickHandler = (movieIndex) => {
+    navigation.navigate("MovieDetailsListScreen", {
+      movies: movieList,
+      initialScrollIndex: movieIndex,
+    });
+  };
+
+  const listEndReached = () => {
+    //load more data 
+    
+  }
 
   return (
     <MainContainer>
       <MySearchBar searchState={searchString} updateSearch={updateSearch} />
-      {/* results */}
+      <SearchResults movieList={movieList} clickHandler={clickHandler} />
     </MainContainer>
   );
 };

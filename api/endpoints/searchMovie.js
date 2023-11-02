@@ -9,7 +9,7 @@ export const SearchMovie = async (string, page) => {
     page: page,
   };
 
-  console.log(requestParams);
+  //console.log(requestParams);
 
   try {
     let searchresultsJson = await moviedb.searchMovie(requestParams);

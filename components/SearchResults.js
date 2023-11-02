@@ -1,19 +1,29 @@
 //React
-import React, {useState} from "react";
-import { View, Text } from "react-native";
-import { SearchBar } from "@rneui/themed";
+import React, { useState } from "react";
+import { View, FlatList, useWindowDimensions } from "react-native";
 
-export default SearchResults = ({ movieList }) => {
+export default SearchResults = ({ movieList, clickHandler }) => {
+  //Calculate numberOfColumns for FlatList
+  const itemFixedWidth = 108;
+  const listWidth = useWindowDimensions().width - 48;
+  const numberOfColumns = Math.floor(listWidth / itemFixedWidth);
 
   return (
     <View>
       <FlatList
-            data={movieList}
-            keyExtractor={(index) => index}
-            renderItem={({ item, index }) => (
-              
-            )}
+        numColumns={numberOfColumns}
+        contentContainerStyle={{
+          gap: 8,
+        }}
+        data={movieList}
+        renderItem={({ item, index }) => (
+          <MoviePosterItem
+            moviePosterPath={item._poster_path}
+            clickHandler={() => clickHandler(index)}
           />
+        )}
+        keyExtractor={(item, index) => index}
+      />
     </View>
   );
 };
