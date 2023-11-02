@@ -148,9 +148,11 @@ export const BackdropImage = styled.Image`
 `;
 
 export const PosterImage = styled.Image`
-  width: 72px;
+  width: 92px;
   aspect-ratio: 2 / 3;
   resize-mode: contain;
+  margin-bottom: 16px;
+  margin-right: 16px
 `;
 
 export const LogoImage = styled.Image`
