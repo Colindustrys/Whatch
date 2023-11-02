@@ -47,7 +47,7 @@ export default genreListItem = ({
 
   return (
     <View>
-      <Paragraph small>{title}</Paragraph>
+      <Paragraph>{title}</Paragraph>
       <FlatList
         data={movieList}
         keyExtractor={(item, index) => index}
