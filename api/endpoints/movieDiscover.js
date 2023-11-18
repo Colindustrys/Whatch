@@ -10,6 +10,7 @@ import { store } from "../../redux-store/store";
 // sort: String
 // voteMin: number aus 10
 // voteMax: number aus 10
+// voteCountMin: int
 // genre: array of genre ids, gets movies that have one of the genres
 // runtimeMin: in minuten, sieht die api irgenwie nicht so streng
 // runtimeMax: in minuten
@@ -22,6 +23,7 @@ export const getMovieDiscoverList = async ({
   sort,
   voteMin,
   voteMax,
+  voteCountMin,
   genres,
   runtimeMin,
   runtimeMax,
@@ -42,6 +44,7 @@ export const getMovieDiscoverList = async ({
     sort_by: sort,
     "vote_average.gte": voteMin,
     "vote_average.lte": voteMax,
+    "vote_count.gte": voteCountMin,
     with_genres: genres?.join("|"),
     watch_region: "DE",
     with_watch_providers: providerArray?.join("|"),

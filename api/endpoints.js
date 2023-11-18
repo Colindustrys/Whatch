@@ -12,6 +12,7 @@ export const getMovieDetails = async (id) => {
   }
 };
 
+//request params is a json with values set
 export const getMovieDiscover = async (requestParams) => {
   if (!requestParams) {
     requestParams = { page: 1 };
