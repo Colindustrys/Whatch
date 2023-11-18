@@ -1,7 +1,10 @@
 import { base, darkTheme, lightTheme } from "./Theme";
 
+//TODO: rename theme so its not theme.theme in styledComps
+
 const initialState = {
-  theme: { ...darkTheme, ...base },
+  appearance: { ...darkTheme, ...base },
+  isTablet: null,
 };
 
 const AppearanceReducer = (state = initialState, action) => {
@@ -9,9 +12,16 @@ const AppearanceReducer = (state = initialState, action) => {
     case "SWITCH_THEME":
       let newState = {
         ...state,
-        theme: { ...state.theme, ...action.baseTheme },
+        appearance: { ...state.appearance, ...action.baseTheme },
       };
       return newState;
+    case "DETECT_DEVICE": {
+      let newState = {
+        ...state,
+        isTablet: action.payload,
+      };
+      return {...newState};
+    }
     default:
       return state;
   }

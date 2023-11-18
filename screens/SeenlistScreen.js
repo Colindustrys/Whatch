@@ -12,6 +12,7 @@ import {
   MainContainer,
   Paragraph,
   StyledActivityIndicator,
+  HalfWidthView,
 } from "../redux-store/StyledComponents.js";
 
 //Components

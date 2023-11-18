@@ -8,6 +8,7 @@ import {
   Paragraph,
   StyledRadioButtonInput,
   StyledRadioButtonLabel,
+  HalfWidthView,
 } from "../redux-store/StyledComponents.js";
 
 //Third Partys Components
@@ -47,33 +48,35 @@ export default ThemeSettingsScreen = () => {
 
   return (
     <MainContainer>
-      <Paragraph>Wähle ein App-Farbschema</Paragraph>
-      <Paragraph small>
-        Tipp: Der Darktheme ist richtig gut für die Umwelt, da dieser weniger
-        Energie verbraucht.
-      </Paragraph>
-      <RadioForm>
-        {themeOptions.map((option, optionId, value) => (
-          <RadioButton labelHorizontal={true} key={optionId}>
-            <StyledRadioButtonInput
-              obj={option}
-              id={optionId}
-              isSelected={optionId === storedthemeSettingSelect.id}
-              onPress={(value) => {
-                onPressHandler(value, optionId);
-              }}
-            />
-            <StyledRadioButtonLabel
-              obj={option}
-              id={optionId}
-              labelHorizontal={true}
-              onPress={(value) => {
-                onPressHandler(value, optionId);
-              }}
-            />
-          </RadioButton>
-        ))}
-      </RadioForm>
+      <HalfWidthView>
+        <Paragraph>Wähle ein App-Farbschema</Paragraph>
+        <Paragraph small>
+          Tipp: Der Darktheme ist richtig gut für die Umwelt, da dieser weniger
+          Energie verbraucht.
+        </Paragraph>
+        <RadioForm>
+          {themeOptions.map((option, optionId, value) => (
+            <RadioButton labelHorizontal={true} key={optionId}>
+              <StyledRadioButtonInput
+                obj={option}
+                id={optionId}
+                isSelected={optionId === storedthemeSettingSelect.id}
+                onPress={(value) => {
+                  onPressHandler(value, optionId);
+                }}
+              />
+              <StyledRadioButtonLabel
+                obj={option}
+                id={optionId}
+                labelHorizontal={true}
+                onPress={(value) => {
+                  onPressHandler(value, optionId);
+                }}
+              />
+            </RadioButton>
+          ))}
+        </RadioForm>
+      </HalfWidthView>
     </MainContainer>
   );
 };
