@@ -7,7 +7,11 @@ import { useSelector, useDispatch } from "react-redux";
 import ProviderItem from "../components/ProviderItem.js";
 
 //Styled Components
-import { MainContainer, Paragraph } from "../redux-store/StyledComponents.js";
+import {
+  MainContainer,
+  Paragraph,
+  HalfWidthView,
+} from "../redux-store/StyledComponents.js";
 
 export default ProviderSettingsScreen = ({ navigation }) => {
   //Get States from Async Storage
@@ -39,27 +43,31 @@ export default ProviderSettingsScreen = ({ navigation }) => {
 
   return (
     <MainContainer>
-      <FlatList
-        ListHeaderComponent={
-          <View>
-            <Paragraph>Wähle deine abonnierten Streamingdienste</Paragraph>
-            <Paragraph small>
-              Deine persönlichen Streamingdienste benötigen wir, um dir die
-              perfekten Ergebnisse liefern zu können.
-            </Paragraph>
-          </View>
-        }
-        data={storedProvider.provider}
-        renderItem={({ item }) => (
-          <ProviderItem
-            providerLabel={item.label}
-            providerValue={storedPersonalProvider?.provider?.includes(item.id)}
-            toggleSwitch={toggleSwitch}
-            providerID={item.id}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-      />
+      <HalfWidthView>
+        <FlatList
+          ListHeaderComponent={
+            <View>
+              <Paragraph>Wähle deine abonnierten Streamingdienste</Paragraph>
+              <Paragraph small>
+                Deine persönlichen Streamingdienste benötigen wir, um dir die
+                perfekten Ergebnisse liefern zu können.
+              </Paragraph>
+            </View>
+          }
+          data={storedProvider.provider}
+          renderItem={({ item }) => (
+            <ProviderItem
+              providerLabel={item.label}
+              providerValue={storedPersonalProvider?.provider?.includes(
+                item.id
+              )}
+              toggleSwitch={toggleSwitch}
+              providerID={item.id}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </HalfWidthView>
     </MainContainer>
   );
 };

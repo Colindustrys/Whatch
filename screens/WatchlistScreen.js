@@ -12,6 +12,7 @@ import {
   MainContainer,
   Paragraph,
   StyledActivityIndicator,
+  HalfWidthView,
 } from "../redux-store/StyledComponents.js";
 
 //Components
@@ -34,19 +35,19 @@ export default WatchlistScreen = ({ navigation }) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer notCentered>
       <FlatList
         numColumns={numberOfColumns}
         contentContainerStyle={{
           gap: 8,
         }}
         ListHeaderComponent={
-          <View>
+          <HalfWidthView>
             <Paragraph>Schau dir deine persönliche Watchlist an</Paragraph>
             <Paragraph small>
               Du kannst deine gespeicherten Filme verwalten, indem du sie an
             </Paragraph>
-          </View>
+          </HalfWidthView>
         }
         data={storedWatchList.movies}
         renderItem={({ item, index }) => (

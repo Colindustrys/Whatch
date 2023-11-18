@@ -6,8 +6,11 @@ import {
   View,
   ScrollView,
   useWindowDimensions,
+  ImageBackground,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import Device from "react-native-device-detection";
+import { LinearGradient } from "expo-linear-gradient";
 
 //API
 import { getMovieDetails } from "../api/endpoints.js";
@@ -16,6 +19,7 @@ import { getMovieDetails } from "../api/endpoints.js";
 //Styled Components
 import {
   MovieDetailContainer,
+  InnerMovieDetailContainer,
   Headline,
   MainContainer,
   Paragraph,
@@ -23,6 +27,7 @@ import {
   StyledActivityIndicator,
   BackdropImage,
   LogoImage,
+  BackdropGradient,
 } from "../redux-store/StyledComponents.js";
 
 //Components
@@ -81,7 +86,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   const onAddToSeenlist = () => {
     let type;
     if (elementExistInSeenList) {
-      type = "DELETE_MOVIE_FROM_SEENLIST"; 
+      type = "DELETE_MOVIE_FROM_SEENLIST";
     } else {
       type = "ADD_MOVIE_TO_SEENLIST";
     }
@@ -126,6 +131,8 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   }, [loading]);
 
   return (
+    //TODO: create own styledComps for new Views and add inline styles + clean up :)
+    //TODO: use MainContainer?!
     <MovieDetailContainer windowWidth={useWindowDimensions().width}>
       {loading ? (
         <StyledActivityIndicator />
@@ -137,22 +144,62 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
             source={{
               uri: "https://image.tmdb.org/t/p/w1280" + movie.backdrop_path,
             }}
-          />
-          <MainContainer>
-            <Headline uppercase length={movie.title.length}>
-              {movie.title}
-            </Headline>
-            <Paragraph small textCenter>
-              {movie.genres}
-            </Paragraph>
-            <Paragraph small textCenter textIsTransparent>
-              {movie.runtime} Min
-              {/*TODO: use pseudo class before in styled components */}
-              {" • "}
-              {movie.release_date_string}
-              {" • "}
-              {movie.vote_average}
-            </Paragraph>
+          >
+            <BackdropGradient
+              style={{ height: "100%", width: "100%" }}
+            ></BackdropGradient>
+          </BackdropImage>
+
+          <InnerMovieDetailContainer>
+            <View
+              style={{ flex: 1, flexDirection: "row", alignItems: "flex-end" }}
+            >
+              <View style={{ width: Device.isTablet ? "50%" : "100%" }}>
+                <Headline
+                  uppercase
+                  length={movie.title.length}
+                  isTablet={Device.isTablet}
+                >
+                  {movie.title}
+                </Headline>
+                <Paragraph small textCenter>
+                  {movie.genres}
+                </Paragraph>
+                <Paragraph small textCenter textIsTransparent>
+                  {movie.runtime} Min
+                  {/*TODO: use pseudo class before in styled components */}
+                  {" • "}
+                  {movie.release_date_string}
+                  {" • "}
+                  {movie.vote_average}
+                </Paragraph>
+              </View>
+              {Device.isTablet ? (
+                <View style={{ width: Device.isTablet ? "50%" : "100%" }}>
+                  <RowContainer justifyContent={"center"}>
+                    <MovieDetailsButtonComponent
+                      iconName={"share"}
+                      clickHandler={() => onShareClick()}
+                    >
+                      Teilen
+                    </MovieDetailsButtonComponent>
+                    <MovieDetailsButtonComponent
+                      iconName={elementExistInWatchList ? "minus" : "plus"}
+                      clickHandler={() => onAddToWatchlist()}
+                    >
+                      Watchlist
+                    </MovieDetailsButtonComponent>
+                    <MovieDetailsButtonComponent
+                      iconName={elementExistInSeenList ? "cross" : "check"}
+                      clickHandler={() => onAddToSeenlist()}
+                    >
+                      Seenlist
+                    </MovieDetailsButtonComponent>
+                  </RowContainer>
+                </View>
+              ) : null}
+            </View>
+
             <Paragraph small>{movie.description}</Paragraph>
             <Paragraph small>Als Stream verfügbr auf:</Paragraph>
 
@@ -168,27 +215,29 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
                 );
               })}
             </RowContainer>
-            <RowContainer justifyContent={"center"}>
-              <MovieDetailsButtonComponent
-                iconName={"share"}
-                clickHandler={() => onShareClick()}
-              >
-                Teilen
-              </MovieDetailsButtonComponent>
-              <MovieDetailsButtonComponent
-                iconName={elementExistInWatchList ? "minus" : "plus"}
-                clickHandler={() => onAddToWatchlist()}
-              >
-                Watchlist
-              </MovieDetailsButtonComponent>
-              <MovieDetailsButtonComponent
-                iconName={elementExistInSeenList ? "cross" : "check"}
-                clickHandler={() => onAddToSeenlist()}
-              >
-                Seenlist
-              </MovieDetailsButtonComponent>
-            </RowContainer>
-          </MainContainer>
+            {Device.isTablet ? null : (
+              <RowContainer justifyContent={"center"}>
+                <MovieDetailsButtonComponent
+                  iconName={"share"}
+                  clickHandler={() => onShareClick()}
+                >
+                  Teilen
+                </MovieDetailsButtonComponent>
+                <MovieDetailsButtonComponent
+                  iconName={elementExistInWatchList ? "minus" : "plus"}
+                  clickHandler={() => onAddToWatchlist()}
+                >
+                  Watchlist
+                </MovieDetailsButtonComponent>
+                <MovieDetailsButtonComponent
+                  iconName={elementExistInSeenList ? "cross" : "check"}
+                  clickHandler={() => onAddToSeenlist()}
+                >
+                  Seenlist
+                </MovieDetailsButtonComponent>
+              </RowContainer>
+            )}
+          </InnerMovieDetailContainer>
         </ScrollView>
       )}
     </MovieDetailContainer>

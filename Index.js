@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { StatusBar, Platform } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllWatchProvider } from "./api/endpoints.js";
+import Device from "react-native-device-detection";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 //Styled Components
 import { ThemeProvider } from "styled-components";
@@ -32,19 +34,39 @@ export default function Index() {
   const dispatch = useDispatch();
 
   const isLightMode =
-    storedAppearance.theme.BACKGROUND_COLOR == lightTheme.BACKGROUND_COLOR;
+    storedAppearance.appearance.BACKGROUND_COLOR == lightTheme.BACKGROUND_COLOR;
   const PlatformIsAndroid = Platform.OS === "android";
 
   //Get 20 mostUsed WatchProvider on Page load
+  //Detect active device only if its not already saved
   useEffect(() => {
     dispatchProvider();
+    if (storedAppearance.isTablet == null) {
+      dispatchDevice();
+    }
+    if (storedAppearance.isTablet) {
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+    } else {
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+    }
+    //
   }, []);
+
+  //TODO: clean up Stled Comps and use special styles not on all views. only on detailScreen --> props.theme.isTablet !!!
 
   //Store WatchProvider in Redux State
   const dispatchProvider = async () => {
     dispatch({
       type: "SET_PROVIDER",
       payload: await getAllWatchProvider(),
+    });
+  };
+
+  //Store Device in Redux State as Boolean
+  const dispatchDevice = () => {
+    dispatch({
+      type: "DETECT_DEVICE",
+      payload: Device.isTablet,
     });
   };
 
@@ -61,7 +83,7 @@ export default function Index() {
   }
 
   return (
-    <ThemeProvider theme={storedAppearance.theme}>
+    <ThemeProvider theme={storedAppearance}>
       <StyledSafeAreaView
         platformIsAndroid={PlatformIsAndroid}
         StatusBar={StatusBar}
