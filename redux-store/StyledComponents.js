@@ -35,7 +35,7 @@ export const MainContainer = styled.View`
   padding-bottom: 24px;
   padding-left: ${(props) => (props.theme.isTablet ? 56 : 24)}px;
   padding-right: ${(props) => (props.browse ? 0 : 24)}px;
-  background-color: ${(props) => props.theme.BACKGROUND_COLOR};
+  background-color: ${(props) => props.theme.appearance.BACKGROUND_COLOR};
 `;
 
 export const MovieDetailListContainer = styled.View`
