@@ -6,6 +6,7 @@ import { FlatList, View } from "react-native";
 import { Paragraph } from "../redux-store/StyledComponents";
 import { getMovieDiscover } from "../api/endpoints";
 
+//horizontale poste Liste im Browse screen
 export default genreListItem = ({
   title,
   passedMovieList,
