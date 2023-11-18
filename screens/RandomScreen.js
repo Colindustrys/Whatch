@@ -27,6 +27,9 @@ export default RandomScreen = ({ navigation }) => {
   const fetchMovies = async () => {
     try {
       let movieArray = await getMovieDiscover(randomRequestParams());
+      while (movieArray.length < 5) {
+        movieArray = await getMovieDiscover(randomRequestParams());
+      }
       navigation.navigate("MovieDetailsListScreen", {
         movies: movieArray,
       });
@@ -45,8 +48,8 @@ export default RandomScreen = ({ navigation }) => {
 
     requestParams = {
       page: 1,
-      voteMin: voteMin,
-      voteMax: voteMax,
+      // voteMin: voteMin,
+      // voteMax: voteMax,
       voteCountMin: 100,
       genres: randomGenreId,
       runtimeMin: runtimeMin,
@@ -68,7 +71,6 @@ export default RandomScreen = ({ navigation }) => {
       { id: 16, name: "Animation" },
       { id: 35, name: "Comedy" },
       { id: 80, name: "Crime" },
-      { id: 99, name: "Documentary" },
       { id: 18, name: "Drama" },
       { id: 10751, name: "Family" },
       { id: 14, name: "Fantasy" },
@@ -78,10 +80,8 @@ export default RandomScreen = ({ navigation }) => {
       { id: 9648, name: "Mystery" },
       { id: 10749, name: "Romance" },
       { id: 878, name: "Science Fiction" },
-      { id: 10770, name: "TV Movie" },
       { id: 53, name: "Thriller" },
       { id: 10752, name: "War" },
-      { id: 37, name: "Western" },
     ];
 
     // Choose a random genre
@@ -95,10 +95,8 @@ export default RandomScreen = ({ navigation }) => {
   const randomRuntimes = () => {
     // 80-100 100-120 120-140 120-180min
     const randomNumberSet = [
-      [80, 100],
-      [100, 120],
-      [120, 140],
-      [140, 180],
+      [80, 120],
+      [120, 180],
     ];
 
     const randomIndex = Math.floor(Math.random() * randomNumberSet.length);
@@ -110,8 +108,7 @@ export default RandomScreen = ({ navigation }) => {
   const randomVotes = () => {
     const randomNumberSet = [
       [6, 8],
-      [8, 9],
-      [9, 10],
+      [8, 10],
     ];
 
     const randomIndex = Math.floor(Math.random() * randomNumberSet.length);
@@ -129,7 +126,7 @@ export default RandomScreen = ({ navigation }) => {
     startDate.setFullYear(currentDate.getFullYear() - randomYear);
 
     const endDate = new Date(startDate);
-    endDate.setFullYear(startDate.getFullYear() + 1);
+    endDate.setFullYear(startDate.getFullYear() + 5);
 
     const startDateString = startDate.toISOString().split("T")[0];
     const endDateSting = endDate.toISOString().split("T")[0];
