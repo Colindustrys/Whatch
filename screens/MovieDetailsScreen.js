@@ -51,7 +51,6 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
 
   //fetch movie details once on startup
   useEffect(() => {
-    //TODO: How to pass movieID to MovieDetailsScreen? --> optional chaining for now because home screens dont pass arguments
     fetchMovieDetails();
   }, []);
 
@@ -63,7 +62,6 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
       setMovie(receivedMovie);
       setLoading(false);
     } catch (e) {
-      console.log(e);
       setError("No internet");
       setLoading(false);
     }
@@ -80,6 +78,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
     } else {
       type = "ADD_MOVIE_TO_WATCHLIST";
     }
+
     dispatchHandler(type);
   };
 
@@ -94,7 +93,6 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   };
 
   const dispatchHandler = (type) => {
-    console.log(type);
     dispatch({
       type: type,
       payload: movie,
@@ -103,7 +101,6 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
 
   //check if element exists in Watchlist and update useState
   useEffect(() => {
-    //setElementExistInWatchList(storedWatchList.movies.includes(movie));
     setElementExistInWatchList(
       storedWatchList.movies.some(
         (storedMovie) => storedMovie._id === movie?.id

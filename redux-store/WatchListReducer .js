@@ -18,10 +18,19 @@ const WatchListReducer = (state = initialState, action) => {
         };
       }
     case "DELETE_MOVIE_FROM_WATCHLIST":
-      return {
-        ...state,
-        movies: state.movies.filter((movie) => movie !== action.payload),
-      };
+      let deleteIndex = state.movies.findIndex(
+        (movie) => movie._id === action.payload._id
+      );
+      if (deleteIndex !== -1) {
+        let updatedMovies = [...state.movies];
+        updatedMovies.splice(deleteIndex, 1);
+        return {
+          ...state,
+          movies: updatedMovies,
+        };
+      } else {
+        return state;
+      }
 
     default:
       return state;
