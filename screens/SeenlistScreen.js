@@ -58,14 +58,6 @@ export default SeenlistScreen = ({ navigation }) => {
         contentContainerStyle={{
           gap: 8,
         }}
-        ListHeaderComponent={
-          <View>
-            <Paragraph>Schau dir deine persönliche Seenlist an</Paragraph>
-            <Paragraph small>
-              Du kannst deine gespeicherten Filme verwalten, indem du sie an
-            </Paragraph>
-          </View>
-        }
         data={storedSeenList.movies}
         renderItem={({ item, index }) => (
           <MoviePosterItem

@@ -54,14 +54,6 @@ export default WatchlistScreen = ({ navigation }) => {
         contentContainerStyle={{
           gap: 8,
         }}
-        ListHeaderComponent={
-          <HalfWidthView>
-            <Paragraph>Schau dir deine persönliche Watchlist an</Paragraph>
-            <Paragraph small>
-              Du kannst deine gespeicherten Filme verwalten, indem du sie an
-            </Paragraph>
-          </HalfWidthView>
-        }
         data={storedWatchList.movies}
         renderItem={({ item, index }) => (
           <MoviePosterItem

@@ -4,7 +4,6 @@ import { getMovieWatchProvider } from "./movieWatchProvider";
 
 // gets the movie info from tmdb and converts it to a movie object then returns that
 export const getMovieDetailsObject = async (id) => {
-
   try {
     //get json from tmdb
     const res = await moviedb.movieInfo(id);
@@ -17,6 +16,7 @@ export const getMovieDetailsObject = async (id) => {
 
     return movieObject;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };

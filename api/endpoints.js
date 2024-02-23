@@ -8,6 +8,7 @@ export const getMovieDetails = async (id) => {
     const movieObject = await getMovieDetailsObject(id);
     return movieObject;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
@@ -22,6 +23,7 @@ export const getMovieDiscover = async (requestParams) => {
     const movieArray = await getMovieDiscoverList(requestParams);
     return movieArray;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
@@ -32,6 +34,7 @@ export const getAllWatchProvider = async () => {
     allWatchProviders = await getAllWatchProviderObjects();
   } catch (error) {
     console.log(error);
+    throw error;
   }
   return allWatchProviders;
 };
@@ -42,6 +45,7 @@ export const getBrowse = async () => {
   try {
     titleAndMoviearrayObjectList = await getBrowseMovieLists();
   } catch (error) {
+    console.log(error);
     throw error;
   }
   return titleAndMoviearrayObjectList;

@@ -37,8 +37,6 @@ export default BrowseScreen = ({ navigation }) => {
 
   return (
     <MainContainer browse>
-      
-
       {loading ? (
         <StyledActivityIndicator />
       ) : error ? (
@@ -46,9 +44,7 @@ export default BrowseScreen = ({ navigation }) => {
       ) : (
         <View>
           <FlatList
-            ListHeaderComponent={
-              <Headline small>Zeit zum stöbern...</Headline>
-            }
+            ListHeaderComponent={<Headline small>Browse:</Headline>}
             data={movieLists}
             keyExtractor={(item) => item.title}
             renderItem={({ item, index }) => (

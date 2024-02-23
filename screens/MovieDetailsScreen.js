@@ -62,6 +62,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
       setMovie(receivedMovie);
       setLoading(false);
     } catch (e) {
+      console.log("error: " + e);
       setError("No internet");
       setLoading(false);
     }
@@ -198,7 +199,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
             </View>
 
             <Paragraph small>{movie.description}</Paragraph>
-            <Paragraph small>Als Stream verfügbr auf:</Paragraph>
+            <Paragraph small>Included in the flatrate on:</Paragraph>
 
             <RowContainer justifyContent={"flex-start"} paddingBottom gap>
               {movie?.watchprovider?.map((provider, index) => {
@@ -218,7 +219,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
                   iconName={"share"}
                   clickHandler={() => onShareClick()}
                 >
-                  Teilen
+                  Share
                 </MovieDetailsButtonComponent>
                 <MovieDetailsButtonComponent
                   iconName={elementExistInWatchList ? "minus" : "plus"}
