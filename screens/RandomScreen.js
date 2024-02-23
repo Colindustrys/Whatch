@@ -20,7 +20,6 @@ export default RandomScreen = ({ navigation }) => {
   const onRandomClick = () => {
     //TODO get List of random movies
     fetchMovies();
-    
   };
 
   //get movie object from getMovieDetails() and set movie state.
@@ -58,7 +57,6 @@ export default RandomScreen = ({ navigation }) => {
       releaseDateMax: endDateSting,
     };
 
-    
     console.log("request params:", requestParams);
 
     return requestParams;
@@ -136,7 +134,7 @@ export default RandomScreen = ({ navigation }) => {
 
   return (
     <MainContainer>
-      <Headline small>Lass dich überraschen!</Headline>
+      <Headline small>Explore Random Films</Headline>
       <CenterContainer>
         <RoundedButtonComponent
           clickHandler={onRandomClick}

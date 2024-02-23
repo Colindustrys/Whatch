@@ -16,15 +16,15 @@ export default SettingsScreen = ({ navigation }) => {
         <Paragraph
           onPress={() => navigation.navigate("ProviderSettingsScreen")}
         >
-          Deine Streamingdienste
+          Your streaming services
         </Paragraph>
         <Paragraph onPress={() => navigation.navigate("SeenlistScreen")}>
-          Schon gesehen-Liste
+          Seenlist
         </Paragraph>
         <Paragraph
           onPress={() => navigation.navigate("LanguageSettingsScreen")}
         >
-          Spracheinstellungen
+          Language
         </Paragraph>
         <Paragraph onPress={() => navigation.navigate("ThemeSettingsScreen")}>
           Theme

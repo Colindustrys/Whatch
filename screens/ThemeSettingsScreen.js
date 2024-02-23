@@ -28,9 +28,9 @@ export default ThemeSettingsScreen = () => {
   //TODO: make own dataClass?!
   var themeOptions = [
     //TODO: get systemstandard
-    { label: "Systemstandard", value: "lightTheme", id: 0 },
-    { label: "Hell", value: lightTheme, id: 1 },
-    { label: "Dunkel", value: darkTheme, id: 2 },
+    { label: "System-Setting", value: "lightTheme", id: 0 },
+    { label: "Light", value: lightTheme, id: 1 },
+    { label: "Dark", value: darkTheme, id: 2 },
   ];
 
   //TODO: outsource dispatch in actionHandler
@@ -49,10 +49,9 @@ export default ThemeSettingsScreen = () => {
   return (
     <MainContainer>
       <HalfWidthView>
-        <Paragraph>Wähle ein App-Farbschema</Paragraph>
+        <Paragraph>Choose your color scheme</Paragraph>
         <Paragraph small>
-          Tipp: Der Darktheme ist richtig gut für die Umwelt, da dieser weniger
-          Energie verbraucht.
+          Tip: The dark-theme uses less power on certain screen.
         </Paragraph>
         <RadioForm>
           {themeOptions.map((option, optionId, value) => (

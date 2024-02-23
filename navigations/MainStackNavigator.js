@@ -52,7 +52,7 @@ export default MainStackNavigator = ({ isLightMode }) => {
           name="ProviderSettingsScreen"
           component={ProviderSettingsScreen}
           options={{
-            title: "Provider Settings",
+            title: "Streaming Services",
           }}
           screenOptions={{
             //hide the very thin line under the header

@@ -5,7 +5,7 @@ import { parseAllGenres } from "../parser";
 export const getAllGenresObjects = async (id) => {
   try {
     //get json from tmdb
-    const res = await moviedb.genreMovieList({ language: "de" });
+    const res = await moviedb.genreMovieList({ language: "en" });
 
     //parse watchprovider obejcts from json
     const genreArray = parseAllGenres(res);
