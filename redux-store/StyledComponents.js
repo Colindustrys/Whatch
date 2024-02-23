@@ -33,7 +33,8 @@ export const MainContainer = styled.View`
   justify-content: flex-start;
   padding-top: 24px;
   padding-bottom: 24px;
-  padding-left: ${(props) => (props.theme.isTablet ? 56 : 24)}px;
+  padding-left: ${(props) =>
+    props.browse ? 0 : props.theme.isTablet ? 56 : 24}px;
   padding-right: ${(props) => (props.browse ? 0 : 24)}px;
   background-color: ${(props) => props.theme.appearance.BACKGROUND_COLOR};
 `;
@@ -129,6 +130,10 @@ export const CenterContainer = styled.View`
   align-items: center;
 `;
 
+export const EmptyContainer = styled.View`
+  padding-left: 24px;
+`;
+
 export const StyledSafeAreaView = styled.SafeAreaView`
   flex: 1;
   background-color: ${(props) => props.theme.appearance.BACKGROUND_COLOR};
@@ -155,6 +160,7 @@ export const Headline = styled.Text`
 export const Paragraph = styled.Text`
   text-align: ${(props) => (props.textCenter ? "center" : "left")};
   padding-bottom: 16px;
+  padding-left: ${(props) => (props.browse ? 24 : 0)}px;
   color: ${(props) => props.theme.appearance.TEXT_COLOR};
   font-size: ${(props) =>
     props.small

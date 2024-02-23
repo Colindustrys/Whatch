@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import MoviePosterItem from "./MoviePosterItem";
 import { FlatList, View } from "react-native";
-import { Paragraph } from "../redux-store/StyledComponents";
+import { Paragraph, EmptyContainer } from "../redux-store/StyledComponents";
 import { getMovieDiscover } from "../api/endpoints";
 
 //horizontale poste Liste im Browse screen
@@ -48,8 +48,9 @@ export default genreListItem = ({
 
   return (
     <View>
-      <Paragraph>{title}</Paragraph>
+      <Paragraph browse>{title}</Paragraph>
       <FlatList
+        ListHeaderComponent={<EmptyContainer></EmptyContainer>}
         data={movieList}
         keyExtractor={(item, index) => index}
         renderItem={({ item, index }) => (
