@@ -114,7 +114,9 @@ export const ProviderItemContainer = styled.View`
 export const RowContainer = styled.View`
   display: flex;
   justify-items: center;
+  flex-wrap: wrap;
   flex-direction: row;
+  align-items: flex-start;
   justify-content: ${(props) => props.justifyContent};
   padding-bottom: ${(props) => (props.paddingBottom ? "32px" : "0px")};
   gap: ${(props) => (props.gap ? "16px" : "0")};
@@ -194,6 +196,7 @@ export const LogoImage = styled.Image`
   width: 45px;
   aspect-ratio: 1 / 1;
   resize-mode: contain;
+  border-radius: 5px;
 `;
 
 //Third Party Components
