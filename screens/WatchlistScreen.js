@@ -1,10 +1,7 @@
 //React
 import React, { useEffect, useState } from "react";
-import { View, FlatList, useWindowDimensions } from "react-native";
+import { FlatList, useWindowDimensions } from "react-native";
 import { useSelector } from "react-redux";
-
-//API
-import { getMovieDetails } from "../api/endpoints.js";
 
 //Styled Components
 import {
@@ -22,10 +19,25 @@ export default WatchlistScreen = ({ navigation }) => {
   //Get States from Async Storage
   const storedWatchList = useSelector((state) => state.watchList);
 
+  //useWindowsDimensions hook
+  const { width } = useWindowDimensions();
+
+  //update numberOfColumns when the screen width changes
+  useEffect(() => {
+    setNumberOfColumns(calculateNumColumns(width));
+  }, [width]);
+
   //Calculate numberOfColumns for FlatList
-  const itemFixedWidth = 108;
-  const listWidth = useWindowDimensions().width - 48;
-  const numberOfColumns = Math.floor(listWidth / itemFixedWidth);
+  const calculateNumColumns = (screenWidth) => {
+    listWidth = screenWidth - 48;
+    const itemFixedWidth = 108;
+    return Math.floor(listWidth / itemFixedWidth);
+  };
+
+  //usestate for the column number
+  const [numberOfColumns, setNumberOfColumns] = useState(
+    calculateNumColumns(width)
+  );
 
   const clickHandler = (movieIndex) => {
     navigation.navigate("MovieDetailsListScreen", {
@@ -37,6 +49,7 @@ export default WatchlistScreen = ({ navigation }) => {
   return (
     <MainContainer notCentered>
       <FlatList
+        key={numberOfColumns}
         numColumns={numberOfColumns}
         contentContainerStyle={{
           gap: 8,

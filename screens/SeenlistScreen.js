@@ -22,10 +22,25 @@ export default SeenlistScreen = ({ navigation }) => {
   //Get States from Async Storage
   const storedSeenList = useSelector((state) => state.seenList);
 
+  //useWindowsDimensions hook
+  const { width } = useWindowDimensions();
+
+  //update numberOfColumns when the screen width changes
+  useEffect(() => {
+    setNumberOfColumns(calculateNumColumns(width));
+  }, [width]);
+
   //Calculate numberOfColumns for FlatList
-  const itemFixedWidth = 108;
-  const listWidth = useWindowDimensions().width - 48;
-  const numberOfColumns = Math.floor(listWidth / itemFixedWidth);
+  const calculateNumColumns = (screenWidth) => {
+    listWidth = screenWidth - 48;
+    const itemFixedWidth = 108;
+    return Math.floor(listWidth / itemFixedWidth);
+  };
+
+  //usestate for the column number
+  const [numberOfColumns, setNumberOfColumns] = useState(
+    calculateNumColumns(width)
+  );
 
   const clickHandler = (movieIndex) => {
     //pass movieID to MovieDetailsScreen
@@ -38,6 +53,7 @@ export default SeenlistScreen = ({ navigation }) => {
   return (
     <MainContainer>
       <FlatList
+        key={numberOfColumns}
         numColumns={numberOfColumns}
         contentContainerStyle={{
           gap: 8,

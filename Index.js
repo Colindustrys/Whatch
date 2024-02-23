@@ -44,10 +44,10 @@ export default function Index() {
     if (storedAppearance.isTablet == null) {
       dispatchDevice();
     }
-    if (storedAppearance.isTablet) {
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
-    } else {
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+    if (!storedAppearance.isTablet) {
+      ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT_UP
+      );
     }
     //
   }, []);
