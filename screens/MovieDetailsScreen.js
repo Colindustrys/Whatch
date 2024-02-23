@@ -62,6 +62,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
       setMovie(receivedMovie);
       setLoading(false);
     } catch (e) {
+      console.log("error: " + e);
       setError("No internet");
       setLoading(false);
     }
