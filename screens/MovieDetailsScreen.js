@@ -199,7 +199,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
             </View>
 
             <Paragraph small>{movie.description}</Paragraph>
-            <Paragraph small>Als Stream verfügbr auf:</Paragraph>
+            <Paragraph small>Als Stream verfügbar auf:</Paragraph>
 
             <RowContainer justifyContent={"flex-start"} paddingBottom gap>
               {movie?.watchprovider?.map((provider, index) => {
