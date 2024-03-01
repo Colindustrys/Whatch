@@ -6,6 +6,7 @@ import {
     StyledSwitch,
     ProviderItemContainer, ParagraphListItem
 } from "../redux-store/StyledComponents.js";
+import {Platform} from "react-native";
 
 export default ProviderItem = ({
   providerLabel,
@@ -13,8 +14,11 @@ export default ProviderItem = ({
   providerID,
   toggleSwitch,
 }) => {
-  return (
-    <ProviderItemContainer>
+
+    const PlatformIsAndroid = Platform.OS === "android";
+
+    return (
+    <ProviderItemContainer platformIsAndroid={PlatformIsAndroid}>
       <ParagraphListItem small>{providerLabel}</ParagraphListItem>
 
       <StyledSwitch

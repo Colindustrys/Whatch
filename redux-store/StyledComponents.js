@@ -108,7 +108,7 @@ export const ProviderItemContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 8px;
+  padding-bottom: ${(props) => (props.platformIsAndroid ? "8" : "16")}px;
 `;
 
 export const RowContainer = styled.View`
