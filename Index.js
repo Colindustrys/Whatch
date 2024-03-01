@@ -11,7 +11,8 @@ import { ThemeProvider } from "styled-components";
 import {
   StyledSafeAreaView,
   StyledStatusBar,
-} from "../Whatch/redux-store/StyledComponents.js";
+} from "./redux-store/StyledComponents.js";
+
 
 //Fonts
 import {
@@ -23,7 +24,7 @@ import {
 } from "@expo-google-fonts/montserrat";
 
 //Redux
-import { darkTheme, lightTheme } from "../Whatch/redux-store/Theme";
+import { darkTheme, lightTheme } from "./redux-store/Theme";
 
 //Navigator
 import MainStackNavigator from "./navigations/MainStackNavigator";
