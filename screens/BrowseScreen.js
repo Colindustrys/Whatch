@@ -14,20 +14,28 @@ import {
 } from "../redux-store/StyledComponents.js";
 
 import GenreListItem from "../components/GenreListItem.js";
+import { useSelector } from "react-redux";
 
 export default BrowseScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [movieLists, setMovieLists] = useState(null);
 
+  const storedPersonalProvider = useSelector(
+    (state) => state.personalProviderList,
+  );
+
   useEffect(() => {
+    console.log("providers changed");
     fetchMovies();
-  }, []);
+  }, [storedPersonalProvider.provider]);
 
   const fetchMovies = async () => {
     try {
+      setLoading(true);
       const newMovieLists = await getBrowse();
       setMovieLists(newMovieLists);
+      console.log("set new movie list");
       setLoading(false);
     } catch (error) {
       setLoading(false);
