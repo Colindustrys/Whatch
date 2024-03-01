@@ -20,7 +20,7 @@ const AppearanceReducer = (state = initialState, action) => {
         ...state,
         isTablet: action.payload,
       };
-      return {...newState};
+      return { ...newState };
     }
     default:
       return state;
