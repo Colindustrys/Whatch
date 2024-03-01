@@ -6,7 +6,7 @@ export const getAllWatchProviderObjects = async (id) => {
   let providerarray;
   try {
     //get json from tmdb
-    const res = await moviedb.movieWatchProviderList({ watch_region: "de" });
+    const res = await moviedb.movieWatchProviderList({ watch_region: "us" });
 
     //parse watchprovider obejcts from json
     const providerarray = parseAllProviders(res);
