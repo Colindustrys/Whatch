@@ -18,6 +18,7 @@ const getMovies = async (genre, titleAndMoviearrayObjectList) => {
   //console.log("got list for: " + genre.label);
   //console.log(newTitleAndMoviearray);
 };
+
 export const getBrowseMovieLists = async (id) => {
   try {
     const allGenres = await getAllGenresObjects();
@@ -39,6 +40,14 @@ export const getBrowseMovieLists = async (id) => {
       })
       .catch((error) => {
         console.error("Error:", error);
+      });
+
+    //sort list
+    titleAndMoviearrayObjectList = titleAndMoviearrayObjectList
+      .slice()
+      .sort((a, b) => {
+        // Use localeCompare to compare strings in a case-insensitive manner
+        return a.title.localeCompare(b.title);
       });
 
     return titleAndMoviearrayObjectList;
