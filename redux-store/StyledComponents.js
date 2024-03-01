@@ -33,7 +33,8 @@ export const MainContainer = styled.View`
   padding-bottom: 24px;
   padding-left: ${(props) =>
     props.browse ? 0 : props.theme.isTablet ? 56 : 24}px;
-  padding-right: ${(props) => (props.browse ? 0 : 24)}px;
+  padding-right: ${(props) =>
+      props.browse ? 0 : props.theme.isTablet ? 56 : 24}px;
   background-color: ${(props) => props.theme.appearance.BACKGROUND_COLOR};
 `;
 
@@ -106,7 +107,7 @@ export const InnerNavigationTopContainer = styled.View`
 export const ProviderItemContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   padding-bottom: 8px;
 `;
 
@@ -129,7 +130,7 @@ export const CenterContainer = styled.View`
 `;
 
 export const EmptyContainer = styled.View`
-  padding-left: 24px;
+  padding-left: ${(props) => (props.theme.isTablet ? 56 : 24)}px;
 `;
 
 export const StyledSafeAreaView = styled.SafeAreaView`
@@ -158,12 +159,27 @@ export const Headline = styled.Text`
 export const Paragraph = styled.Text`
   text-align: ${(props) => (props.textCenter ? "center" : "left")};
   padding-bottom: 16px;
-  padding-left: ${(props) => (props.browse ? 24 : 0)}px;
+  padding-left: ${(props) =>
+      props.theme.isTablet && props.browse? 56 : props.browse ? 24 : 0}px;
   color: ${(props) => props.theme.appearance.TEXT_COLOR};
   font-size: ${(props) =>
     props.small
       ? props.theme.appearance.FONT_SIZE_MEDIUM
       : props.theme.appearance.FONT_SIZE_LARGE};
+  font-family: ${(props) => props.theme.appearance.FONT_FAMILY_REGULAR};
+  line-height: 18px;
+  opacity: ${(props) => (props.textIsTransparent ? "0.7" : "1")};
+`;
+
+export const ParagraphListItem = styled.Text`
+  text-align: ${(props) => (props.textCenter ? "center" : "left")};
+  padding-left: ${(props) =>
+    props.theme.isTablet && props.browse? 56 : props.browse ? 24 : 0}px;
+  color: ${(props) => props.theme.appearance.TEXT_COLOR};
+  font-size: ${(props) =>
+    props.small
+        ? props.theme.appearance.FONT_SIZE_MEDIUM
+        : props.theme.appearance.FONT_SIZE_LARGE};
   font-family: ${(props) => props.theme.appearance.FONT_FAMILY_REGULAR};
   line-height: 18px;
   opacity: ${(props) => (props.textIsTransparent ? "0.7" : "1")};
@@ -193,7 +209,8 @@ export const PosterImage = styled.Image`
   aspect-ratio: 2 / 3;
   resize-mode: contain;
   margin-bottom: 16px;
-  margin-right: 16px;
+  margin-right: ${(props) => props.withoutMargin? 0 : 16}px;
+
 `;
 
 export const LogoImage = styled.Image`

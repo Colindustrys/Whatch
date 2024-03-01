@@ -21,25 +21,37 @@ import MoviePosterItem from "../components/MoviePosterItem.js";
 export default SeenlistScreen = ({ navigation }) => {
   //Get States from Async Storage
   const storedSeenList = useSelector((state) => state.seenList);
+  const storedAppearance = useSelector((state) => state.appearance);
 
   //useWindowsDimensions hook
   const { width } = useWindowDimensions();
+  //TODO dont use the margin hardcoded, get it from Theme
+  const itemFixedWidth = 92;
 
   //update numberOfColumns when the screen width changes
   useEffect(() => {
     setNumberOfColumns(calculateNumColumns(width));
+    setFlatListColumnGap(calculatePosterImageMarginRight());
   }, [width]);
 
   //Calculate numberOfColumns for FlatList
   const calculateNumColumns = (screenWidth) => {
-    listWidth = screenWidth - 48;
-    const itemFixedWidth = 108;
+    const listWidth = screenWidth - 2* (storedAppearance.isTablet ? 56 : 24);
     return Math.floor(listWidth / itemFixedWidth);
+  };
+
+  const calculatePosterImageMarginRight = () => {
+    //TODO dont use hardcoded nums --> get from Theme
+    const listWidth = width - 2* (storedAppearance.isTablet ? 56 : 24);
+    return Math.floor((listWidth - (numberOfColumns * itemFixedWidth)) / numberOfColumns +1 )
   };
 
   //usestate for the column number
   const [numberOfColumns, setNumberOfColumns] = useState(
     calculateNumColumns(width)
+  );
+  const [flatListColumnGap, setFlatListColumnGap] = useState(
+      calculatePosterImageMarginRight(width)
   );
 
   const clickHandler = (movieIndex) => {
@@ -58,10 +70,14 @@ export default SeenlistScreen = ({ navigation }) => {
         contentContainerStyle={{
           gap: 8,
         }}
+        columnWrapperStyle={{gap: flatListColumnGap}}
+
         data={storedSeenList.movies}
         renderItem={({ item, index }) => (
           <MoviePosterItem
             moviePosterPath={item._poster_path}
+            withoutMargin={true}
+
             clickHandler={() => clickHandler(index)}
           />
         )}
