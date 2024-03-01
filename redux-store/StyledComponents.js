@@ -79,11 +79,11 @@ export const InnerMovieDetailContainer = styled.View`
   justify-content: flex-start;
   padding-top: 24px;
   padding-bottom: 24px;
-  padding-right: ${(props) => (props.theme.isTablet ? 56 : 24)}px;
-  padding-left: ${(props) => (props.theme.isTablet ? 56 : 24)}px;
-  position: ${(props) => (props.theme.isTablet ? "absolute" : "relative")};
+  padding-right: ${(props) => (props.landscapeLayout ? 56 : 24)}px;
+  padding-left: ${(props) => (props.landscapeLayout ? 56 : 24)}px;
+  position: ${(props) => (props.landscapeLayout ? "absolute" : "relative")};
   background-color: ${(props) =>
-    props.theme.isTablet
+    props.landscapeLayout
       ? "transparent"
       : props.theme.appearance.BACKGROUND_COLOR};
 `;

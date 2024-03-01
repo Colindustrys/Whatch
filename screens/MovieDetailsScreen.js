@@ -36,6 +36,7 @@ import MovieDetailsButtonComponent from "../components/MovieDetailsButtonCompone
 
 //Models
 import Movie from "../models/Movie.js";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 export default MovieDetailsScreen = ({ passedMovie }) => {
   //Get States from Async Storage
@@ -49,11 +50,26 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   const [movie, setMovie] = useState(null);
   const [elementExistInWatchList, setElementExistInWatchList] = useState(false);
   const [elementExistInSeenList, setElementExistInSeenList] = useState(false);
+  const [landscapeLayout, setLandscapeLayout] = useState(false);
+
+
+
 
   //fetch movie details once on startup
   useEffect(() => {
     fetchMovieDetails();
+    orientationChangeListener();
+
+    ScreenOrientation.addOrientationChangeListener(orientationChangeListener);
   }, []);
+
+  const orientationChangeListener = async () => {
+    setLandscapeLayout(Device.isTablet && await checkOrientation());
+  };
+
+  const checkOrientation = async () => {
+    return await ScreenOrientation.getOrientationAsync() === 3 || await ScreenOrientation.getOrientationAsync() === 4;
+  }
 
   //get movie object from getMovieDetails() and set movie with promise.
   //set loading state to true if process finished
@@ -158,15 +174,14 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
             ></BackdropGradient>
           </BackdropImage>
 
-          <InnerMovieDetailContainer>
+          <InnerMovieDetailContainer landscapeLayout={landscapeLayout}>
             <View
               style={{ flex: 1, flexDirection: "row", alignItems: "flex-end" }}
             >
-              <View style={{ width: Device.isTablet ? "50%" : "100%" }}>
+              <View style={{ width: landscapeLayout ? "50%" : "100%" }}>
                 <Headline
                   uppercase
                   length={movie.title.length}
-                  isTablet={Device.isTablet}
                 >
                   {movie.title}
                 </Headline>
@@ -182,8 +197,8 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
                   {movie.vote_average}
                 </Paragraph>
               </View>
-              {Device.isTablet ? (
-                <View style={{ width: Device.isTablet ? "50%" : "100%" }}>
+              {landscapeLayout ? (
+                <View style={{ width: landscapeLayout ? "50%" : "100%" }}>
                   <RowContainer justifyContent={"center"}>
                     <MovieDetailsButtonComponent
                       iconName={"share"}
@@ -223,7 +238,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
                 );
               })}
             </RowContainer>
-            {Device.isTablet ? null : (
+            {landscapeLayout ? null : (
               <RowContainer justifyContent={"center"}>
                 <MovieDetailsButtonComponent
                   iconName={"share"}
