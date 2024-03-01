@@ -1,6 +1,7 @@
 //React
 import { useSelector, useDispatch } from "react-redux";
 import React from "react";
+import { Appearance } from "react-native";
 
 //Styled Components
 import {
@@ -35,11 +36,22 @@ export default ThemeSettingsScreen = () => {
 
   //TODO: outsource dispatch in actionHandler
   const onPressHandler = (value, optionId) => {
+    //--theme settings reducer--
     dispatch({
       type: "SELECT_ID",
       id: optionId,
     });
 
+    //--apperance reducer--
+    //overwrite the value variable theme to system theme
+    if (optionId == 0) {
+      if (Appearance.getColorScheme() == "light") {
+        value = lightTheme;
+      } else {
+        value = darkTheme;
+      }
+    }
+    //dispatch theme
     dispatch({
       type: "SWITCH_THEME",
       baseTheme: value,

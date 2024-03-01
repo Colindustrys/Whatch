@@ -7,6 +7,7 @@ import {
   ScrollView,
   useWindowDimensions,
   ImageBackground,
+  Share,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import Device from "react-native-device-detection";
@@ -68,8 +69,13 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
     }
   };
 
-  const onShareClick = () => {
-    //TODO: Share
+  const onShareClick = async () => {
+    let url = "https://www.themoviedb.org/movie/" + passedMovie.id;
+    try {
+      await Share.share({
+        message: url,
+      });
+    } catch (error) {}
   };
 
   const onAddToWatchlist = () => {
@@ -104,15 +110,17 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   useEffect(() => {
     setElementExistInWatchList(
       storedWatchList.movies.some(
-        (storedMovie) => storedMovie._id === movie?.id
-      )
+        (storedMovie) => storedMovie._id === movie?.id,
+      ),
     );
   }, [storedWatchList]);
 
   //check if element exists in Seenlist and update useState
   useEffect(() => {
     setElementExistInSeenList(
-      storedSeenList.movies.some((storedMovie) => storedMovie._id === movie?.id)
+      storedSeenList.movies.some(
+        (storedMovie) => storedMovie._id === movie?.id,
+      ),
     );
   }, [storedSeenList]);
 
@@ -120,11 +128,13 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   useEffect(() => {
     setElementExistInWatchList(
       storedWatchList.movies.some(
-        (storedMovie) => storedMovie._id === movie?.id
-      )
+        (storedMovie) => storedMovie._id === movie?.id,
+      ),
     );
     setElementExistInSeenList(
-      storedSeenList.movies.some((storedMovie) => storedMovie._id === movie?.id)
+      storedSeenList.movies.some(
+        (storedMovie) => storedMovie._id === movie?.id,
+      ),
     );
   }, [loading]);
 
