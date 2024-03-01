@@ -21,11 +21,6 @@ export default SettingsScreen = ({ navigation }) => {
         <Paragraph onPress={() => navigation.navigate("SeenlistScreen")}>
           Seenlist
         </Paragraph>
-        <Paragraph
-          onPress={() => navigation.navigate("LanguageSettingsScreen")}
-        >
-          Language
-        </Paragraph>
         <Paragraph onPress={() => navigation.navigate("ThemeSettingsScreen")}>
           Theme
         </Paragraph>

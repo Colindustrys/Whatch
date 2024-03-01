@@ -60,13 +60,6 @@ export default MainStackNavigator = ({ isLightMode }) => {
           }}
         />
         <Stack.Screen
-          name="LanguageSettingsScreen"
-          component={LanguageSettingsScreen}
-          options={{
-            title: "Language Settings",
-          }}
-        />
-        <Stack.Screen
           name="ThemeSettingsScreen"
           component={ThemeSettingsScreen}
           options={{
