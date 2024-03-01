@@ -57,7 +57,7 @@ export default RandomScreen = ({ navigation }) => {
       releaseDateMax: endDateSting,
     };
 
-    console.log("request params:", requestParams);
+    //console.log("request params:", requestParams);
 
     return requestParams;
   };

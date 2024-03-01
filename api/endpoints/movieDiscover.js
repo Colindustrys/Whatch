@@ -34,8 +34,12 @@ export const getMovieDiscoverList = async ({
 
   //falls der schalter oben link auf nur eigenen provider gestellt ist
   let providerArray = [];
-  if (true) {
-    const state = store.getState();
+  const state = store.getState();
+  //fill array with all providers is switch is set to all or no providers are set
+  if (false || state.personalProviderList.provider.length < 1) {
+    //put all providers into the array
+  } else {
+    //else put the users providers into the array
     providerArray = state.personalProviderList.provider;
   }
 
