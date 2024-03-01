@@ -10,7 +10,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -18,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.alexfahrer.Whatch"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +33,11 @@
           "initialOrientation": "DEFAULT"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "be44d0d2-c337-4cb9-a8c4-dc50fa8543f7"
+      }
+    }
   }
 }
