@@ -1,6 +1,6 @@
 //React
 import React, { useEffect, useState } from "react";
-import { FlatList, useWindowDimensions } from "react-native";
+import { FlatList, useWindowDimensions, Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 
 //Styled Components
@@ -22,37 +22,44 @@ export default WatchlistScreen = ({ navigation }) => {
   const storedWatchList = useSelector((state) => state.watchList);
   const storedAppearance = useSelector((state) => state.appearance);
 
+  const [screenWidth, setScreenWidth] = useState(
+      Dimensions.get('screen').width
+  );
 
   //useWindowsDimensions hook
-  const { width } = useWindowDimensions();
   //TODO dont use the margin hardcoded, get it from Theme
   const itemFixedWidth = 92;
 
-  //update numberOfColumns when the screen width changes
   useEffect(() => {
-    setNumberOfColumns(calculateNumColumns(width));
-    setFlatListColumnGap(calculatePosterImageMarginRight());
-  }, [width]);
+    Dimensions.addEventListener('change', () => {
+      setNumberOfColumns(calculateNumColumns(Dimensions.get('screen').width));
+      setFlatListColumnGap(calculatePosterImageMarginRight(Dimensions.get('screen').width));
+    });
+  }, []);
+
+  //update numberOfColumns when the screen width changes
 
   //Calculate numberOfColumns for FlatList
-  const calculateNumColumns = (screenWidth) => {
+  const calculateNumColumns = () => {
     //TODO dont use the margin hardcoded, get it from Theme
-    const listWidth = screenWidth - 2* (storedAppearance.isTablet ? 56 : 24);
+    const listWidth = Dimensions.get('screen').width - 2* (storedAppearance.isTablet ? 56 : 24);
     return Math.floor(listWidth / itemFixedWidth);
   };
 
   const calculatePosterImageMarginRight = () => {
+    const listWidth = Dimensions.get('screen').width - 2* (storedAppearance.isTablet ? 56 : 24);
+    let nums =  Math.floor(listWidth / itemFixedWidth);
+
     //TODO dont use hardcoded nums --> get from Theme
-    const listWidth = width - 2* (storedAppearance.isTablet ? 56 : 24);
-    return Math.floor((listWidth - (numberOfColumns * itemFixedWidth)) / numberOfColumns +1 )
+    return Math.floor((listWidth - (nums * itemFixedWidth)) / nums +1 )
   };
 
   //usestates
   const [numberOfColumns, setNumberOfColumns] = useState(
-      calculateNumColumns(width)
+      calculateNumColumns()
   );
   const [flatListColumnGap, setFlatListColumnGap] = useState(
-      calculatePosterImageMarginRight(width)
+      calculatePosterImageMarginRight()
   );
 
   const clickHandler = (movieIndex) => {
