@@ -28,8 +28,6 @@ const Stack = createNativeStackNavigator();
 //Views
 export const MainContainer = styled.View`
   flex: 1;
-  align-items: ${(props) =>
-    props.notCentered || !props.theme.isTablet ? "normal" : "center"};
   justify-content: flex-start;
   padding-top: 24px;
   padding-bottom: 24px;
