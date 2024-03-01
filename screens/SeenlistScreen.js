@@ -1,6 +1,6 @@
 //React
 import React, { useEffect, useState } from "react";
-import { View, FlatList, useWindowDimensions } from "react-native";
+import {View, FlatList, useWindowDimensions, Dimensions} from "react-native";
 import { useSelector } from "react-redux";
 
 //API
@@ -23,36 +23,37 @@ export default SeenlistScreen = ({ navigation }) => {
   const storedSeenList = useSelector((state) => state.seenList);
   const storedAppearance = useSelector((state) => state.appearance);
 
-  //useWindowsDimensions hook
-  const { width } = useWindowDimensions();
+  //usestates
+  const [numberOfColumns, setNumberOfColumns] = useState(8);
+  const [flatListColumnGap, setFlatListColumnGap] = useState(20);
+
   //TODO dont use the margin hardcoded, get it from Theme
   const itemFixedWidth = 92;
 
-  //update numberOfColumns when the screen width changes
   useEffect(() => {
-    setNumberOfColumns(calculateNumColumns(width));
-    setFlatListColumnGap(calculatePosterImageMarginRight());
-  }, [width]);
+    calculateDimensions();
+    Dimensions.addEventListener('change', () => {
+      calculateDimensions();
+    });
+  }, []);
 
-  //Calculate numberOfColumns for FlatList
-  const calculateNumColumns = (screenWidth) => {
-    const listWidth = screenWidth - 2* (storedAppearance.isTablet ? 56 : 24);
-    return Math.floor(listWidth / itemFixedWidth);
+
+  //Calculate Dimensions for FlatList
+  const calculateDimensions = () => {
+    //TODO dont use the margin hardcoded, get it from Theme
+    const listWidth = Dimensions.get('screen').width - 2* (storedAppearance.isTablet ? 56 : 24);
+    const newNumberOfColumns = Math.floor(listWidth / itemFixedWidth);
+    const newFlatListColumnGap = (listWidth - (newNumberOfColumns * itemFixedWidth)) / newNumberOfColumns + 1;
+
+
+    // Update state only if values change
+    if (newNumberOfColumns !== numberOfColumns) {
+      setNumberOfColumns(newNumberOfColumns);
+    }
+    if (newFlatListColumnGap !== flatListColumnGap) {
+      setFlatListColumnGap(newFlatListColumnGap);
+    }
   };
-
-  const calculatePosterImageMarginRight = () => {
-    //TODO dont use hardcoded nums --> get from Theme
-    const listWidth = width - 2* (storedAppearance.isTablet ? 56 : 24);
-    return Math.floor((listWidth - (numberOfColumns * itemFixedWidth)) / numberOfColumns +1 )
-  };
-
-  //usestate for the column number
-  const [numberOfColumns, setNumberOfColumns] = useState(
-    calculateNumColumns(width)
-  );
-  const [flatListColumnGap, setFlatListColumnGap] = useState(
-      calculatePosterImageMarginRight(width)
-  );
 
   const clickHandler = (movieIndex) => {
     //pass movieID to MovieDetailsScreen

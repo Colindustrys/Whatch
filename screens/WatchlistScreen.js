@@ -22,45 +22,39 @@ export default WatchlistScreen = ({ navigation }) => {
   const storedWatchList = useSelector((state) => state.watchList);
   const storedAppearance = useSelector((state) => state.appearance);
 
-  const [screenWidth, setScreenWidth] = useState(
-      Dimensions.get('screen').width
-  );
+  //usestates
+  const [numberOfColumns, setNumberOfColumns] = useState(8);
+  const [flatListColumnGap, setFlatListColumnGap] = useState(20);
 
-  //useWindowsDimensions hook
   //TODO dont use the margin hardcoded, get it from Theme
   const itemFixedWidth = 92;
 
   useEffect(() => {
+    calculateDimensions();
     Dimensions.addEventListener('change', () => {
-      setNumberOfColumns(calculateNumColumns(Dimensions.get('screen').width));
-      setFlatListColumnGap(calculatePosterImageMarginRight(Dimensions.get('screen').width));
+      calculateDimensions();
     });
   }, []);
 
-  //update numberOfColumns when the screen width changes
 
-  //Calculate numberOfColumns for FlatList
-  const calculateNumColumns = () => {
+  //Calculate Dimensions for FlatList
+  const calculateDimensions = () => {
     //TODO dont use the margin hardcoded, get it from Theme
     const listWidth = Dimensions.get('screen').width - 2* (storedAppearance.isTablet ? 56 : 24);
-    return Math.floor(listWidth / itemFixedWidth);
+    const newNumberOfColumns = Math.floor(listWidth / itemFixedWidth);
+    const newFlatListColumnGap = (listWidth - (newNumberOfColumns * itemFixedWidth)) / newNumberOfColumns + 1;
+
+    console.log((listWidth - (newNumberOfColumns * itemFixedWidth)), newNumberOfColumns + 1)
+    // Update state only if values change
+    if (newNumberOfColumns !== numberOfColumns) {
+      setNumberOfColumns(newNumberOfColumns);
+    }
+    if (newFlatListColumnGap !== flatListColumnGap) {
+      setFlatListColumnGap(newFlatListColumnGap);
+    }
   };
 
-  const calculatePosterImageMarginRight = () => {
-    const listWidth = Dimensions.get('screen').width - 2* (storedAppearance.isTablet ? 56 : 24);
-    let nums =  Math.floor(listWidth / itemFixedWidth);
 
-    //TODO dont use hardcoded nums --> get from Theme
-    return Math.floor((listWidth - (nums * itemFixedWidth)) / nums +1 )
-  };
-
-  //usestates
-  const [numberOfColumns, setNumberOfColumns] = useState(
-      calculateNumColumns()
-  );
-  const [flatListColumnGap, setFlatListColumnGap] = useState(
-      calculatePosterImageMarginRight()
-  );
 
   const clickHandler = (movieIndex) => {
     navigation.navigate("MovieDetailsListScreen", {

@@ -209,8 +209,8 @@ export const PosterImage = styled.Image`
   aspect-ratio: 2 / 3;
   resize-mode: contain;
   margin-bottom: 16px;
-  margin-right: ${(props) => props.withoutMargin? 0 : 16}px;
-
+  margin-right: ${(props) =>
+      !props.theme.isTablet && props.withoutMargin? 8 : props.theme.isTablet && props.withoutMargin ? 0 : 16}px;
 `;
 
 export const LogoImage = styled.Image`
