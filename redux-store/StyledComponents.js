@@ -34,7 +34,7 @@ export const MainContainer = styled.View`
   padding-left: ${(props) =>
     props.browse ? 0 : props.theme.isTablet ? 56 : 24}px;
   padding-right: ${(props) =>
-      props.browse ? 0 : props.theme.isTablet ? 56 : 24}px;
+    props.browse ? 0 : props.theme.isTablet ? 56 : 24}px;
   background-color: ${(props) => props.theme.appearance.BACKGROUND_COLOR};
 `;
 
@@ -160,7 +160,7 @@ export const Paragraph = styled.Text`
   text-align: ${(props) => (props.textCenter ? "center" : "left")};
   padding-bottom: 16px;
   padding-left: ${(props) =>
-      props.theme.isTablet && props.browse? 56 : props.browse ? 24 : 0}px;
+    props.theme.isTablet && props.browse ? 56 : props.browse ? 24 : 0}px;
   color: ${(props) => props.theme.appearance.TEXT_COLOR};
   font-size: ${(props) =>
     props.small
@@ -174,12 +174,12 @@ export const Paragraph = styled.Text`
 export const ParagraphListItem = styled.Text`
   text-align: ${(props) => (props.textCenter ? "center" : "left")};
   padding-left: ${(props) =>
-    props.theme.isTablet && props.browse? 56 : props.browse ? 24 : 0}px;
+    props.theme.isTablet && props.browse ? 56 : props.browse ? 24 : 0}px;
   color: ${(props) => props.theme.appearance.TEXT_COLOR};
   font-size: ${(props) =>
     props.small
-        ? props.theme.appearance.FONT_SIZE_MEDIUM
-        : props.theme.appearance.FONT_SIZE_LARGE};
+      ? props.theme.appearance.FONT_SIZE_MEDIUM
+      : props.theme.appearance.FONT_SIZE_LARGE};
   font-family: ${(props) => props.theme.appearance.FONT_FAMILY_REGULAR};
   line-height: 18px;
   opacity: ${(props) => (props.textIsTransparent ? "0.7" : "1")};
@@ -210,7 +210,11 @@ export const PosterImage = styled.Image`
   resize-mode: contain;
   margin-bottom: 16px;
   margin-right: ${(props) =>
-      !props.theme.isTablet && props.withoutMargin? 8 : props.theme.isTablet && props.withoutMargin ? 0 : 16}px;
+    !props.theme.isTablet && props.withoutMargin
+      ? 8
+      : props.theme.isTablet && props.withoutMargin
+        ? 0
+        : 16}px;
 `;
 
 export const LogoImage = styled.Image`

@@ -11,10 +11,8 @@ import HomeBottomTabNavigator from "./HomeBottomTabNavigator";
 import SettingsScreen from "../screens/SettingsScreen";
 import WatchlistScreen from "../screens/WatchlistScreen";
 import ProviderSettingsScreen from "../screens/ProviderSettingsScreen";
-import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
 import ThemeSettingsScreen from "../screens/ThemeSettingsScreen";
 import SeenlistScreen from "../screens/SeenlistScreen";
-import MovieDetailsScreen from "../screens/MovieDetailsScreen";
 
 //Components
 import { StyledStackNavigator } from "../redux-store/StyledComponents.js";

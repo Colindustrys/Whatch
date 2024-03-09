@@ -3,6 +3,7 @@ import * as React from "react";
 import { Provider } from "react-redux";
 import { Text } from "react-native";
 import { PersistGate } from "redux-persist/integration/react";
+import "react-native-gesture-handler";
 
 //Index
 import Index from "./Index";
