@@ -1,6 +1,8 @@
 //React
 import React, { useState, useEffect } from "react";
 import { Button, FlatList, Text, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 //API
 import { getBrowse } from "../api/endpoints.js";
@@ -20,14 +22,37 @@ export default BrowseScreen = ({ navigation }) => {
   const [error, setError] = useState(false);
   const [movieLists, setMovieLists] = useState(null);
 
+  const isFocused = useIsFocused();
+
+  const storedPersonalProvider = useSelector(
+    (state) => state.personalProviderList
+  );
+
+  //set providersChanged when user changes them
+  const [providersChanged, setProvidersChanged] = useState(true); //is true on start so that useeffect below fetched movies when page first loads
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    //console.log("providers changed");
+    setProvidersChanged(true);
+  }, [storedPersonalProvider?.provider]);
+
+  //fetch movies when page comes back into focus and the providers have changed
+  //also fetch them on first load
+  useEffect(() => {
+    //console.log("isfocused, providerschanges: " + providersChanged);
+    if (providersChanged) {
+      //console.log("fetching movies");
+      setLoading(true);
+      fetchMovies();
+      setProvidersChanged(false);
+    }
+  }, [isFocused]);
 
   const fetchMovies = async () => {
     try {
-      const newMovieLists = await getBrowse();
+      let newMovieLists = await getBrowse();
       setMovieLists(newMovieLists);
+      //console.log("set new movie list");
+      // console.log(newMovieLists[0]);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -44,6 +69,7 @@ export default BrowseScreen = ({ navigation }) => {
       ) : (
         <View>
           <FlatList
+            key={movieLists}
             ListHeaderComponent={<Headline small>Browse:</Headline>}
             data={movieLists}
             keyExtractor={(item) => item.title}

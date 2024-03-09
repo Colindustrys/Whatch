@@ -19,7 +19,7 @@ const getMovies = async (genre, titleAndMoviearrayObjectList) => {
   //console.log(newTitleAndMoviearray);
 };
 
-export const getBrowseMovieLists = async (id) => {
+export const getBrowseMovieLists = async () => {
   try {
     const allGenres = await getAllGenresObjects();
 
