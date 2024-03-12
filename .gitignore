@@ -40,5 +40,5 @@ yarn-error.*
 #idea
 .idea/
 
-#build
+#builds
 .apk

@@ -35,20 +35,19 @@ export const getMovieDiscoverList = async ({
 
   const state = store.getState();
   let providerIDs = [];
-  //falls der schalter oben link auf nur eigenen provider gestellt ist
-  //sonst werden alle filme angezeigt
-  if (!state.filterMethod.freeToCharge) {
-    //if all providers off
-    if (state.personalProviderList.provider.length == 0) {
-      //get all provider ids
-      let providerObjects = state.providerList.provider;
-      providerObjects.forEach((provider) => {
-        providerIDs.push(provider.id);
-      });
-      //if user has set providers
-    } else {
-      providerIDs = state.personalProviderList.provider;
-    }
+  //falls der schalter auf alle provider ist oder kein provider gesetzt ist
+  if (
+    state.filterMethod.freeToCharge ||
+    state.personalProviderList.provider.length == 0
+  ) {
+    //get all provider ids
+    let providerObjects = state.providerList.provider;
+    providerObjects.forEach((provider) => {
+      providerIDs.push(provider.id);
+    });
+    //if user has set providers
+  } else {
+    providerIDs = state.personalProviderList.provider;
   }
 
   const requestParams = {
