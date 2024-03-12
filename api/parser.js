@@ -118,6 +118,22 @@ export const parseMovieProviders = (json) => {
         providerList.push(newProvider);
       }
     }
+
+    if (json.results.DE.free) {
+      const freeArray = json.results.DE.free;
+
+      for (const freeItem of freeArray) {
+        let newProvider = new WatchProvider();
+
+        //add details to provider obejcts
+        newProvider.id = freeItem.provider_id;
+        newProvider.label = freeItem.provider_name;
+        newProvider.logoPath = freeItem.logo_path;
+        newProvider.displayPriority = freeItem.display_priority;
+        //add to list
+        providerList.push(newProvider);
+      }
+    }
   }
 
   return providerList;

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllWatchProvider } from "./api/endpoints.js";
 import Device from "react-native-device-detection";
 import * as ScreenOrientation from "expo-screen-orientation";
+import providerObjects from "./data/provider.js";
 
 //Styled Components
 import { ThemeProvider } from "styled-components";
@@ -101,7 +102,7 @@ export default function Index() {
   const dispatchProvider = async () => {
     dispatch({
       type: "SET_PROVIDER",
-      payload: await getAllWatchProvider(),
+      payload: providerObjects,
     });
   };
 

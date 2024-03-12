@@ -5,7 +5,23 @@ import { parseMovieProviders } from "../parser";
 export const getMovieWatchProvider = async (id) => {
   try {
     //get json from tmdb
-    const res = await moviedb.movieWatchProviders(id);
+    const res = await moviedb.movieWatchProviders(id).catch((error) => {
+      // Handle error
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.log(
+          "Server responded with status code:",
+          error.response.status
+        );
+        console.log("Response data:", error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log("No response received:", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.log("Error message:", error.message);
+      }
+    });
     //parse list with watchProvider objects
     const providerarray = parseMovieProviders(res);
     return providerarray;
