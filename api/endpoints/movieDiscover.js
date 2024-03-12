@@ -2,6 +2,7 @@ import moviedb from "../movieDbInstance";
 import { parseDiscoverList } from "../parser";
 import { DiscoverMovieRequest } from "moviedb-promise";
 import { store } from "../../redux-store/store";
+import providerObjects from "../../data/provider";
 
 // gets the movie list from the tmdb discover endpoint and returns it as an array of movie objects
 // takes a json with optional parameters
@@ -32,11 +33,22 @@ export const getMovieDiscoverList = async ({
 }) => {
   //console.log("discover with genre: " + genres);
 
+  const state = store.getState();
+  let providerIDs = [];
   //falls der schalter oben link auf nur eigenen provider gestellt ist
-  let providerArray = [];
-  if (true) {
-    const state = store.getState();
-    providerArray = state.personalProviderList.provider;
+  //sonst werden alle filme angezeigt
+  if (!state.filterMethod.freeToCharge) {
+    //if all providers off
+    if (state.personalProviderList.provider.length == 0) {
+      //get all provider ids
+      let providerObjects = state.providerList.provider;
+      providerObjects.forEach((provider) => {
+        providerIDs.push(provider.id);
+      });
+      //if user has set providers
+    } else {
+      providerIDs = state.personalProviderList.provider;
+    }
   }
 
   const requestParams = {
@@ -47,7 +59,7 @@ export const getMovieDiscoverList = async ({
     "vote_count.gte": voteCountMin,
     with_genres: genres?.join("|"),
     watch_region: "DE",
-    with_watch_providers: providerArray?.join("|"),
+    with_watch_providers: providerIDs?.join("|"),
     "with_runtime.gte": runtimeMin,
     "with_runtime.lte": runtimeMax,
     "primary_release_date.gte": releaseDateMin,

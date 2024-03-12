@@ -14,14 +14,14 @@ export const getAllWatchProviderObjects = async (id) => {
     //sort by display prio
     providerarray.sort((a, b) => a.displayPriority - b.displayPriority);
 
-    console.log(providerarray);
+    //console.log(providerarray);
 
     //only take the top 20
-    //const top20providerarray = providerarray.slice(0, 20);
+    const top20providerarray = providerarray.slice(0, 20);
 
     //console.log(top20providerarray);
 
-    return providerarray;
+    return top20providerarray;
   } catch (error) {
     throw error;
   }

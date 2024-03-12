@@ -28,8 +28,10 @@ export default BrowseScreen = ({ navigation }) => {
     (state) => state.personalProviderList
   );
 
+  const freeChargeSwitch = useSelector((state) => state.filterMethod);
+
   //set providersChanged when user changes them
-  const [providersChanged, setProvidersChanged] = useState(true); //is true on start so that useeffect below fetched movies when page first loads
+  const [providersChanged, setProvidersChanged] = useState(false);
   useEffect(() => {
     //console.log("providers changed");
     setProvidersChanged(true);
@@ -47,8 +49,20 @@ export default BrowseScreen = ({ navigation }) => {
     }
   }, [isFocused]);
 
+  useEffect(() => {
+    //console.log("switch changed");
+    setLoading(true);
+    fetchMovies();
+  }, [freeChargeSwitch.freeToCharge]);
+
+  const [isFetching, setIsFetching] = useState(false);
   const fetchMovies = async () => {
+    if (isFetching) {
+      //console.log("Fetch operation is already in progress");
+      return;
+    }
     try {
+      setIsFetching(true);
       let newMovieLists = await getBrowse();
       setMovieLists(newMovieLists);
       //console.log("set new movie list");
@@ -57,6 +71,8 @@ export default BrowseScreen = ({ navigation }) => {
     } catch (error) {
       setLoading(false);
       setError(true);
+    } finally {
+      setIsFetching(false);
     }
   };
 
