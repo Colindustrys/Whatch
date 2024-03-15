@@ -62,6 +62,7 @@ export default MovieDetailListScreen = ({ route, navigation }) => {
         pagingEnabled
         initialScrollIndex={initialScrollIndex}
         onEndReached={loadMoreData}
+        onEndReachedThreshold={3}
         getItemLayout={(data, index) => ({
           length: itemheight,
           offset: itemheight * index,

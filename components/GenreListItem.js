@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 import MoviePosterItem from "./MoviePosterItem";
-import { FlatList, View } from "react-native";
+import { FlatList, View, ActivityIndicator } from "react-native";
 import { Paragraph, EmptyContainer } from "../redux-store/StyledComponents";
 import { getMovieDiscover } from "../api/endpoints";
 import { loaded } from "expo-font/build/memory";
@@ -27,6 +27,9 @@ export default genreListItem = ({
 
     //scroll to beginning of list
     flatlistRef.scrollToOffset({ animated: false, offset: 0 });
+    if (passedMovieList.length < 20) {
+      setEndReached(true);
+    }
   }, [passedMovieList]);
 
   const clickHandler = (index) => {
@@ -39,24 +42,39 @@ export default genreListItem = ({
   };
 
   //is called then the end of the flatlist is reched to add more movies, uses isFunctionRunning to only run a single instance
-  let isFunctionRunning = false;
+  const [isFunctionRunning, setIsFunctionRunning] = useState(false);
   const loadMoreData = async () => {
     if (isFunctionRunning) {
       console.log("Function is already running. Please wait.");
       return;
     }
-    isFunctionRunning = true;
+    setIsFunctionRunning(true);
 
     try {
       requestParams.page = pageNR + 1;
       let newData = await getMovieDiscover(requestParams);
       setMovieList((prevData) => [...prevData, ...newData]);
       setPageNR(pageNR + 1);
+      if (newData.length < 20) {
+        setEndReached(true);
+      }
     } catch (error) {
       //throw error;
     } finally {
-      isFunctionRunning = false;
+      setIsFunctionRunning(false);
     }
+  };
+
+  //render loading indacator if there is still more data to load
+  const [endReached, setEndReached] = useState(false);
+  const renderFooter = () => {
+    if (endReached) return null;
+
+    return (
+      <View style={{ paddingVertical: 20, paddingRight: 40, paddingLeft: 25 }}>
+        <ActivityIndicator animating size="large" />
+      </View>
+    );
   };
 
   return (
@@ -82,7 +100,8 @@ export default genreListItem = ({
         })}
         windowSize={4}
         maxToRenderPerBatch={3}
-        //TODO add a loading indicator at the end
+        ListFooterComponent={renderFooter}
+        contentContainerStyle={{ flexGrow: 1 }}
       />
     </View>
   );
