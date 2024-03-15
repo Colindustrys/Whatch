@@ -1,15 +1,16 @@
 //React
-import React, {useState} from "react";
-import { View, Text } from "react-native";
-import { SearchBar } from "@rneui/themed";
+import React from "react";
+import { View, Platform } from "react-native";
+import { StyledSearchbar } from "../redux-store/StyledComponents";
 
-export default MySearchBar = ({ searchState, updateSearch }) => {
-
-  
+let SearchBarComponent;
+export default SearchBarComponent = ({ searchState, updateSearch }) => {
+  const PlatformIsAndroid = Platform.OS === "android";
 
   return (
     <View>
-      <SearchBar
+      <StyledSearchbar
+        platformIsAndroid={PlatformIsAndroid}
         placeholder="Type Here..."
         onChangeText={updateSearch}
         value={searchState}

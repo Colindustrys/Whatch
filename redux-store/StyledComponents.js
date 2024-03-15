@@ -21,6 +21,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Entypo } from "@expo/vector-icons";
+import { SearchBar } from "@rneui/themed";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -241,6 +242,23 @@ export const StyledSwitch = styled(Switch).attrs((props) => ({
     ? props.theme.appearance.ACCENT_COLOR
     : props.theme.appearance.COMPLEMENT,
   ios_backgroundColor: props.theme.appearance.TEXT_COLOR,
+}))``;
+
+import Ionicons from "@expo/vector-icons/Ionicons";
+
+export const StyledSearchbar = styled(SearchBar).attrs((props) => ({
+  platform: props.platformIsAndroid ? "android" : "ios",
+  containerStyle: {
+    backgroundColor: props.theme.appearance.BACKGROUND_COLOR,
+  },
+  inputContainerStyle: {
+    backgroundColor: props.theme.appearance.TEXT_COLOR,
+    borderRadius: 10,
+  },
+  searchIcon: {name: "search"},
+  clearIcon:{ name: "close"},
+  inputStyle: { color: props.theme.appearance.BACKGROUND_COLOR },
+  placeholderTextColor: "#888",
 }))``;
 
 export const StyledStatusBar = styled(StatusBar).attrs((props) => ({

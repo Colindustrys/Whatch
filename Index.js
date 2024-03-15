@@ -36,7 +36,7 @@ export default function Index() {
 
   //Get useSelector for selected theme setting
   const storedthemeSettingSelect = useSelector(
-    (state) => state.themeSettingSelect
+    (state) => state.themeSettingSelect,
   );
   //save theme setting in useref for the Appearance.addChangeListener callback
   //has to be in a useref otherwise the callbacl does not get the changes
@@ -62,7 +62,7 @@ export default function Index() {
     }
     if (!storedAppearance.isTablet) {
       ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT_UP
+        ScreenOrientation.OrientationLock.PORTRAIT_UP,
       );
     }
 
