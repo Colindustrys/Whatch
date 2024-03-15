@@ -44,7 +44,8 @@ export const MovieDetailListContainer = styled.View`
 `;
 
 export const HalfWidthView = styled.View`
-  width: ${(props) => (props.theme.isTablet ? "50%" : "100%")};
+  width: 100%;
+  max-width: 500px;
   align-self: center;
 `;
 

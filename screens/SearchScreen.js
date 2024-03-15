@@ -4,7 +4,11 @@ import { Butto, Text, View } from "react-native";
 import SearchBarComponent from "../components/MySearchBar";
 import { SearchMovie } from "../api/endpoints/searchMovie";
 import SearchResults from "../components/SearchResults";
-import { StyledSearchbar, Headline } from "../redux-store/StyledComponents.js";
+import {
+  StyledSearchbar,
+  Headline,
+  HalfWidthView,
+} from "../redux-store/StyledComponents.js";
 
 //Styled Components
 import { MainContainer } from "../redux-store/StyledComponents.js";
@@ -59,10 +63,13 @@ export default SearchScreen = ({ navigation }) => {
   return (
     <MainContainer>
       <Headline small>Search</Headline>
-      <SearchBarComponent
-        searchState={searchString}
-        updateSearch={updateSearch}
-      />
+      <HalfWidthView>
+        <SearchBarComponent
+          searchState={searchString}
+          updateSearch={updateSearch}
+        />
+      </HalfWidthView>
+
       <SearchResults
         movieList={movieList}
         clickHandler={clickHandler}
