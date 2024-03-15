@@ -46,7 +46,7 @@ export default genreListItem = ({
 
     try {
       requestParams.page = pageNR + 1;
-      newData = await getMovieDiscover(requestParams);
+      let newData = await getMovieDiscover(requestParams);
       setMovieList((prevData) => [...prevData, ...newData]);
       setPageNR(pageNR + 1);
     } catch (error) {
