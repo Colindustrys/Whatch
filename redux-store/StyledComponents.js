@@ -64,7 +64,7 @@ export const PressableRoundedView = styled.View`
   border-radius: ${(props) => props.size}px;
   background-color: ${(props) =>
     props.isTransparent
-      ? props.theme.appearance.SPECIAL
+      ? props.theme.appearance.BACKGROUND_COLOR
       : props.theme.appearance.TEXT_COLOR};
   justify-content: center;
   align-items: center;
