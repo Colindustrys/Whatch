@@ -5,6 +5,7 @@ import MoviePosterItem from "./MoviePosterItem";
 import { FlatList, View } from "react-native";
 import { Paragraph, EmptyContainer } from "../redux-store/StyledComponents";
 import { getMovieDiscover } from "../api/endpoints";
+import { loaded } from "expo-font/build/memory";
 
 //horizontale poste Liste im Browse screen
 export default genreListItem = ({
@@ -32,6 +33,8 @@ export default genreListItem = ({
     navigation.navigate("MovieDetailsListScreen", {
       movies: movieList,
       initialScrollIndex: index,
+      requestParams: requestParams,
+      passedPageNR: pageNR,
     });
   };
 
@@ -50,7 +53,7 @@ export default genreListItem = ({
       setMovieList((prevData) => [...prevData, ...newData]);
       setPageNR(pageNR + 1);
     } catch (error) {
-      throw error;
+      //throw error;
     } finally {
       isFunctionRunning = false;
     }

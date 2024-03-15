@@ -24,16 +24,22 @@ export default RandomScreen = ({ navigation }) => {
 
   //get movie object from getMovieDetails() and set movie state.
   const fetchMovies = async () => {
+    let requestParams;
     try {
-      let movieArray = await getMovieDiscover(randomRequestParams());
+      requestParams = randomRequestParams();
+      let movieArray = await getMovieDiscover(requestParams);
       while (movieArray.length < 5) {
-        movieArray = await getMovieDiscover(randomRequestParams());
+        requestParams = randomRequestParams();
+        movieArray = await getMovieDiscover(requestParams);
       }
       navigation.navigate("MovieDetailsListScreen", {
         movies: movieArray,
+        initialScrollIndex: 0,
+        requestParams: requestParams,
+        passedPageNR: 1,
       });
     } catch (e) {
-      throw e;
+      //throw e;
     }
   };
 
@@ -45,7 +51,7 @@ export default RandomScreen = ({ navigation }) => {
     const [runtimeMin, runtimeMax] = randomRuntimes();
     const randomGenreId = [randomGenre()];
 
-    requestParams = {
+    let requestParams = {
       page: 1,
       // voteMin: voteMin,
       // voteMax: voteMax,
