@@ -3,7 +3,7 @@ import ProviderReducer from "./ProviderReducer";
 import FilterMethodReducer from "./FilterMethodReducer";
 import AppearanceReducer from "./AppearanceReducer";
 import ThemeSettingSelectReducer from "./ThemeSettingSelectReducer";
-import WatchListReducer from "./WatchListReducer ";
+import WatchListReducer from "./WatchListReducer";
 import SeenListReducer from "./SeenListReducer";
 import PersonalProviderReducer from "./PersonalProviderReducer";
 
