@@ -26,10 +26,16 @@ export default RandomScreen = ({ navigation }) => {
   const fetchMovies = async () => {
     let requestParams;
     try {
-      requestParams = randomRequestParams();
+      let requestParamsConstraints = 3;
+      requestParams = randomRequestParams(requestParamsConstraints);
+      //console.log("request Constraints: " + requestParamsConstraints)
       let movieArray = await getMovieDiscover(requestParams);
-      while (movieArray.length < 5) {
-        requestParams = randomRequestParams();
+      while (movieArray.length < 3) {
+        if (requestParamsConstraints > 1) {
+          requestParamsConstraints = requestParamsConstraints - 1;
+        }
+        requestParams = randomRequestParams(requestParamsConstraints);
+        //console.log("request Constraints: " + requestParamsConstraints)
         movieArray = await getMovieDiscover(requestParams);
       }
       navigation.navigate("MovieDetailsListScreen", {
@@ -43,7 +49,11 @@ export default RandomScreen = ({ navigation }) => {
     }
   };
 
-  const randomRequestParams = () => {
+  //constraints number sets how many restraints are set
+  //1: genre
+  //2: release time
+  //3: runtime
+  const randomRequestParams = (constraints) => {
     //ramdom prarams: releasedate min max, vote min max, runtime min max, genre
 
     const { startDateString, endDateSting } = randomDates();
@@ -53,17 +63,39 @@ export default RandomScreen = ({ navigation }) => {
 
     let requestParams = {
       page: 1,
-      // voteMin: voteMin,
-      // voteMax: voteMax,
       voteCountMin: 100,
-      genres: randomGenreId,
-      runtimeMin: runtimeMin,
-      runtimeMax: runtimeMax,
-      releaseDateMin: startDateString,
-      releaseDateMax: endDateSting,
     };
 
-    console.log("request params:", requestParams);
+    //genre
+    if (constraints >= 1) {
+      requestParams.genre = randomGenreId;
+    }
+
+    //release time
+    if (constraints >= 2) {
+      requestParams.releaseDateMin = startDateString;
+      requestParams.releaseDateMax = endDateSting;
+    }
+
+    //runtome
+    if (constraints >= 3) {
+      requestParams.runtimeMin = runtimeMin;
+      requestParams.runtimeMax = runtimeMax;
+    }
+
+    // requestParams = {
+    //   page: 1,
+    //   // voteMin: voteMin,
+    //   // voteMax: voteMax,
+    //   voteCountMin: 100,
+    //   genres: randomGenreId,
+    //   runtimeMin: runtimeMin,
+    //   runtimeMax: runtimeMax,
+    //   releaseDateMin: startDateString,
+    //   releaseDateMax: endDateSting,
+    // };
+
+    //console.log("request params:", requestParams);
 
     return requestParams;
   };
