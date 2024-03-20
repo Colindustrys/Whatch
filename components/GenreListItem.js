@@ -45,7 +45,7 @@ export default genreListItem = ({
   const [isFunctionRunning, setIsFunctionRunning] = useState(false);
   const loadMoreData = async () => {
     if (isFunctionRunning) {
-      console.log("Function is already running. Please wait.");
+      //console.log("Function is already running. Please wait.");
       return;
     }
     setIsFunctionRunning(true);

@@ -44,7 +44,7 @@ export default WatchlistScreen = ({ navigation }) => {
     const newNumberOfColumns = Math.floor(listWidth / itemFixedWidth);
     const newFlatListColumnGap = (listWidth - (newNumberOfColumns * itemFixedWidth)) / newNumberOfColumns + 1;
 
-    console.log((listWidth - (newNumberOfColumns * itemFixedWidth)), newNumberOfColumns + 1)
+    //console.log((listWidth - (newNumberOfColumns * itemFixedWidth)), newNumberOfColumns + 1)
     // Update state only if values change
     if (newNumberOfColumns !== numberOfColumns) {
       setNumberOfColumns(newNumberOfColumns);

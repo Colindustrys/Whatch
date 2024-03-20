@@ -27,7 +27,7 @@ export default MovieDetailListScreen = ({ route, navigation }) => {
       return;
     }
     if (isFunctionRunning) {
-      console.log("Function is already running. Please wait.");
+      //console.log("Function is already running. Please wait.");
       return;
     }
     setIsFunctionRunning(true);

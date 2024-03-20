@@ -1,7 +1,7 @@
 //React
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Butto, Text, View } from "react-native";
-import SearchBarComponent from "../components/MySearchBar";
+import SearchBarComponent from "../components/SearchBar";
 import { SearchMovie } from "../api/endpoints/searchMovie";
 import SearchResults from "../components/SearchResults";
 import {
@@ -12,19 +12,31 @@ import {
 
 //Styled Components
 import { MainContainer } from "../redux-store/StyledComponents.js";
+import { useDebounce } from "../components/useDebounce";
 
 let SearchScreen;
 export default SearchScreen = ({ navigation }) => {
   const [searchString, setSearchString] = useState("");
-  const [movieList, setMovieList] = useState();
-  const [pageNr, setPageNr] = useState(1);
+  const [movieList, setMovieList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  const { debouncedQuery, setDebouncedQuery } = useDebounce(searchString, 300);
+
+  useEffect(() => {
+    updateSearch(debouncedQuery);
+  }, [debouncedQuery]);
+
+  //takes search string and sets the movielist when received
   const updateSearch = async (searchString) => {
     setSearchString(searchString);
     if (searchString) {
       //todo in try catch
-      setMovieList(await SearchMovie(searchString, 1));
-      setPageNr(2);
+      try {
+        let { newData } = await SearchMovie(searchString, 1);
+        setMovieList(newData);
+      } catch (err) {
+        throw err;
+      }
     } else {
       setMovieList([]);
     }
@@ -38,43 +50,17 @@ export default SearchScreen = ({ navigation }) => {
     });
   };
 
-  //funktion um mehr filme zu laden wenn man am ende angelangt ist
-  let isListEndReachedRunning = false;
-  const listEndReached = async () => {
-    if (isListEndReachedRunning) {
-      console.log("Function is already running. Please wait.");
-      return;
-    }
-    isListEndReachedRunning = true;
-
-    try {
-      //load more data
-      console.log(pageNr);
-      let newData = await SearchMovie(searchString, pageNr);
-      setPageNr(pageNr + 1);
-      setMovieList((prevData) => [...prevData, ...newData]);
-    } catch (error) {
-      throw error;
-    } finally {
-      isListEndReachedRunning = false;
-    }
-  };
-
   return (
     <MainContainer>
       <Headline small>Search</Headline>
       <HalfWidthView>
         <SearchBarComponent
           searchState={searchString}
-          updateSearch={updateSearch}
+          updateSearch={(query) => setSearchString(query)}
         />
       </HalfWidthView>
 
-      <SearchResults
-        movieList={movieList}
-        clickHandler={clickHandler}
-        listEndReached={listEndReached}
-      />
+      <SearchResults movieList={movieList} clickHandler={clickHandler} />
     </MainContainer>
   );
 };

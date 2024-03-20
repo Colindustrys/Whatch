@@ -17,7 +17,14 @@ export const SearchMovie = async (string, page) => {
     //parse movies
     const movieArray = parseDiscoverList(searchresultsJson);
 
-    return movieArray;
+    const totalPages = searchresultsJson.total_pages;
+    const totalResults = searchresultsJson.total_results;
+
+    return {
+      newData: movieArray,
+      totalPages: totalPages,
+      totalResults: totalResults,
+    };
   } catch (error) {
     throw error;
   }

@@ -1,29 +1,21 @@
 //React
 import React, { useState, useEffect } from "react";
-import { View, FlatList, useWindowDimensions, Dimensions } from "react-native";
+import {
+  View,
+  FlatList,
+  useWindowDimensions,
+  Dimensions,
+  ActivityIndicator,
+} from "react-native";
 import MoviePosterItem from "../components/MoviePosterItem.js";
 import { useSelector } from "react-redux";
-
-//Styled Components
-import {
-  Headline,
-  MainContainer,
-  Paragraph,
-  StyledActivityIndicator,
-  HalfWidthView,
-  PosterImage,
-} from "../redux-store/StyledComponents.js";
 
 export default SearchResults = ({
   movieList,
   clickHandler,
   listEndReached,
+  loading,
 }) => {
-  //Calculate numberOfColumns for FlatList
-  // const itemFixedWidth = 108;
-  // const listWidth = useWindowDimensions().width - 48;
-  // const numberOfColumns = Math.floor(listWidth / itemFixedWidth);
-
   const storedAppearance = useSelector((state) => state.appearance);
 
   //usestates
@@ -51,10 +43,10 @@ export default SearchResults = ({
       (listWidth - newNumberOfColumns * itemFixedWidth) / newNumberOfColumns +
       1;
 
-    console.log(
-      listWidth - newNumberOfColumns * itemFixedWidth,
-      newNumberOfColumns + 1,
-    );
+    // console.log(
+    //   listWidth - newNumberOfColumns * itemFixedWidth,
+    //   newNumberOfColumns + 1,
+    // );
     // Update state only if values change
     if (newNumberOfColumns !== numberOfColumns) {
       setNumberOfColumns(newNumberOfColumns);
@@ -64,7 +56,7 @@ export default SearchResults = ({
     }
   };
 
-  return (
+  return movieList.length > 0 ? (
     <FlatList
       key={numberOfColumns}
       numColumns={numberOfColumns}
@@ -73,7 +65,6 @@ export default SearchResults = ({
       }}
       columnWrapperStyle={{ gap: flatListColumnGap }}
       data={movieList}
-      onEndReached={listEndReached}
       renderItem={({ item, index }) => (
         <MoviePosterItem
           moviePosterPath={item._poster_path}
@@ -83,5 +74,5 @@ export default SearchResults = ({
       )}
       keyExtractor={(item, index) => index}
     />
-  );
+  ) : null;
 };
