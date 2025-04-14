@@ -2,7 +2,6 @@
 import { useEffect, useState, useRef } from "react";
 import { StatusBar, Platform, Appearance, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllWatchProvider } from "./api/endpoints.js";
 import Device from "react-native-device-detection";
 import * as ScreenOrientation from "expo-screen-orientation";
 import providerObjects from "./data/provider.js";

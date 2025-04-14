@@ -139,25 +139,6 @@ export const parseMovieProviders = (json) => {
   return providerList;
 };
 
-export const parseAllProviders = (json) => {
-  let providerList = [];
-
-  const results = json.results;
-
-  for (const providerItem of results) {
-    let newProvider = new WatchProvider();
-
-    newProvider.id = providerItem.provider_id;
-    newProvider.displayPriority = providerItem.display_priorities.DE;
-    newProvider.label = providerItem.provider_name;
-    newProvider.logoPath = providerItem.logo_path;
-
-    providerList.push(newProvider);
-  }
-
-  return providerList;
-};
-
 export const parseAllGenres = (json) => {
   let genreList = [];
   const genresJson = json.genres;
