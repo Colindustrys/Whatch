@@ -42,6 +42,8 @@ yarn-error.*
 
 #builds
 *.apk
+android/
 
 #prebuild
 ios/
+

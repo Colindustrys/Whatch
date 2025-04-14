@@ -138,8 +138,6 @@ export const EmptyContainer = styled.View`
 export const StyledSafeAreaView = styled.SafeAreaView`
   flex: 1;
   background-color: ${(props) => props.theme.appearance.BACKGROUND_COLOR};
-  padding-top: ${(props) =>
-    props.platformIsAndroid ? props.StatusBar.currentHeight : 0}px;
 `;
 
 // Text
@@ -256,9 +254,9 @@ export const StyledSearchbar = styled(SearchBar).attrs((props) => ({
     backgroundColor: props.theme.appearance.TEXT_COLOR,
     borderRadius: 10,
   },
-  searchIcon: {name: "search", color: "#888"},
-  clearIcon: {name: "close", color: "#888"},
-  cancelIcon: {color: "#888"},
+  searchIcon: { name: "search", color: "#888" },
+  clearIcon: { name: "close", color: "#888" },
+  cancelIcon: { color: "#888" },
   inputStyle: { color: props.theme.appearance.BACKGROUND_COLOR },
   placeholderTextColor: "#888",
 }))``;
