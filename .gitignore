@@ -40,6 +40,9 @@ yarn-error.*
 #idea
 .idea/
 
+#vscode
+.vscode/
+
 #builds
 *.apk
 android/
