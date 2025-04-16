@@ -36,10 +36,10 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
   return (
     <Fragment>
       <TopNavigationContainer>
-        <NavigationSwitchComponent
+        {/* <NavigationSwitchComponent
           toggleSwitch={toggleSwitch}
           isEnabled={storedFilterMethod.freeToCharge}
-        />
+        /> */}
         <InnerNavigationTopContainer>
           <RoundedButtonComponent
             clickHandler={() => navigation.navigate("WatchlistScreen")}

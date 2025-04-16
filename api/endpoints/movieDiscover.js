@@ -37,7 +37,7 @@ export const getMovieDiscoverList = async ({
   let providerIDs = [];
   //falls der schalter auf alle provider ist oder kein provider gesetzt ist
   if (
-    state.filterMethod.freeToCharge ||
+    // state.filterMethod.freeToCharge || commented out to remove switch
     state.personalProviderList.provider.length == 0
   ) {
     //get all provider ids

@@ -92,7 +92,7 @@ export const InnerMovieDetailContainer = styled.View`
 
 export const TopNavigationContainer = styled.View`
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding-top: 16px;
   padding-bottom: 16px;
