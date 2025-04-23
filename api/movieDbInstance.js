@@ -1,6 +1,8 @@
 import { MovieDb } from "moviedb-promise";
-import { TMDB_KEY } from "@env";
+import Constants from "expo-constants";
 //import MovieDb from "moviedb-promise/dist/moviedb"
+
+const TMDB_KEY = Constants.expoConfig.extra.TMDB_KEY;
 
 // Initialize the MovieDb instance
 const moviedb = new MovieDb(TMDB_KEY);
