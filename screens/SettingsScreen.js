@@ -24,6 +24,9 @@ export default SettingsScreen = ({ navigation }) => {
         <Paragraph onPress={() => navigation.navigate("ThemeSettingsScreen")}>
           Theme
         </Paragraph>
+        <Paragraph onPress={() => navigation.navigate("CreditsSettingsScreen")}>
+          Credits
+        </Paragraph>
       </HalfWidthView>
     </MainContainer>
   );

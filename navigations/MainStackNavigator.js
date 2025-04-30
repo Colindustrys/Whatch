@@ -13,6 +13,7 @@ import WatchlistScreen from "../screens/WatchlistScreen";
 import ProviderSettingsScreen from "../screens/ProviderSettingsScreen";
 import ThemeSettingsScreen from "../screens/ThemeSettingsScreen";
 import SeenlistScreen from "../screens/SeenlistScreen";
+import CreditsSettingsScreen from "../screens/CreditsScreen.js";
 
 //Components
 import { StyledStackNavigator } from "../redux-store/StyledComponents.js";
@@ -62,6 +63,13 @@ export default MainStackNavigator = ({ isLightMode }) => {
           component={ThemeSettingsScreen}
           options={{
             title: "Theme Settings",
+          }}
+        />
+        <Stack.Screen
+          name="CreditsSettingsScreen"
+          component={CreditsSettingsScreen}
+          options={{
+            title: "Credits",
           }}
         />
         <Stack.Screen

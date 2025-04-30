@@ -52,9 +52,6 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   const [elementExistInSeenList, setElementExistInSeenList] = useState(false);
   const [landscapeLayout, setLandscapeLayout] = useState(false);
 
-
-
-
   //fetch movie details once on startup
   useEffect(() => {
     fetchMovieDetails();
@@ -64,12 +61,15 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   }, []);
 
   const orientationChangeListener = async () => {
-    setLandscapeLayout(Device.isTablet && await checkOrientation());
+    setLandscapeLayout(Device.isTablet && (await checkOrientation()));
   };
 
   const checkOrientation = async () => {
-    return await ScreenOrientation.getOrientationAsync() === 3 || await ScreenOrientation.getOrientationAsync() === 4;
-  }
+    return (
+      (await ScreenOrientation.getOrientationAsync()) === 3 ||
+      (await ScreenOrientation.getOrientationAsync()) === 4
+    );
+  };
 
   //get movie object from getMovieDetails() and set movie with promise.
   //set loading state to true if process finished
@@ -126,17 +126,15 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   useEffect(() => {
     setElementExistInWatchList(
       storedWatchList.movies.some(
-        (storedMovie) => storedMovie._id === movie?.id,
-      ),
+        (storedMovie) => storedMovie._id === movie?.id
+      )
     );
   }, [storedWatchList]);
 
   //check if element exists in Seenlist and update useState
   useEffect(() => {
     setElementExistInSeenList(
-      storedSeenList.movies.some(
-        (storedMovie) => storedMovie._id === movie?.id,
-      ),
+      storedSeenList.movies.some((storedMovie) => storedMovie._id === movie?.id)
     );
   }, [storedSeenList]);
 
@@ -144,13 +142,11 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
   useEffect(() => {
     setElementExistInWatchList(
       storedWatchList.movies.some(
-        (storedMovie) => storedMovie._id === movie?.id,
-      ),
+        (storedMovie) => storedMovie._id === movie?.id
+      )
     );
     setElementExistInSeenList(
-      storedSeenList.movies.some(
-        (storedMovie) => storedMovie._id === movie?.id,
-      ),
+      storedSeenList.movies.some((storedMovie) => storedMovie._id === movie?.id)
     );
   }, [loading]);
 
@@ -179,10 +175,7 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
               style={{ flex: 1, flexDirection: "row", alignItems: "flex-end" }}
             >
               <View style={{ width: landscapeLayout ? "50%" : "100%" }}>
-                <Headline
-                  uppercase
-                  length={movie.title.length}
-                >
+                <Headline uppercase length={movie.title.length}>
                   {movie.title}
                 </Headline>
                 <Paragraph small textCenter>
@@ -224,6 +217,13 @@ export default MovieDetailsScreen = ({ passedMovie }) => {
             </View>
 
             <Paragraph small>{movie.description}</Paragraph>
+
+            {/* Just Watch Logo */}
+            <Image
+              source={require("../assets/JustWatch.png")}
+              style={{ width: 150, height: 50, resizeMode: "contain" }}
+            />
+
             <Paragraph small>Included in the flatrate on:</Paragraph>
 
             <RowContainer justifyContent={"flex-start"} paddingBottom gap>

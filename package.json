@@ -24,6 +24,7 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "@types/jest": "^29.5.4",
     "expo": "~52.0.42",
+    "expo-constants": "~17.0.8",
     "expo-font": "~13.0.4",
     "expo-linear-gradient": "~14.0.2",
     "expo-screen-orientation": "~8.0.4",
@@ -42,8 +43,7 @@
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
-    "styled-components": "^6.0.7",
-    "expo-constants": "~17.0.8"
+    "styled-components": "^6.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
