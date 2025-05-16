@@ -18,6 +18,11 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.alexfahrer.Whatch",
+      icon: {
+        dark: "./assets/icon-dark.png",
+        light: "./assets/icon-light.png",
+        tinted: "./assets/icon-tinted.png",
+      },
     },
     android: {
       adaptiveIcon: {
