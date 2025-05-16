@@ -30,8 +30,6 @@ const Stack = createNativeStackNavigator();
 export const MainContainer = styled.View`
   flex: 1;
   justify-content: flex-start;
-  padding-top: 24px;
-  padding-bottom: 24px;
   padding-left: ${(props) =>
     props.browse ? 0 : props.theme.isTablet ? 56 : 24}px;
   padding-right: ${(props) =>
@@ -91,14 +89,12 @@ export const InnerMovieDetailContainer = styled.View`
 `;
 
 export const TopNavigationContainer = styled.View`
+  position: absolute;
+  top: 0px;
+  right: 20px;
   flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  padding-left: 16px;
-  padding-right: 16px;
-  background-color: ${(props) => props.theme.appearance.BACKGROUND_COLOR};
+  gap: 16px;
+  z-index: 10;
 `;
 
 export const InnerNavigationTopContainer = styled.View`
@@ -244,6 +240,7 @@ export const StyledSwitch = styled(Switch).attrs((props) => ({
 }))``;
 
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Fragment } from "react";
 
 export const StyledSearchbar = styled(SearchBar).attrs((props) => ({
   platform: props.platformIsAndroid ? "android" : "ios",
@@ -317,7 +314,6 @@ export const StyledStackNavigator = styled(Stack.Navigator).attrs((props) => ({
       fontSize: 24,
       fontFamily: props.theme.appearance.FONT_FAMILY_BOLD,
     },
-    headerTitleAlign: "center",
     headerShown: true,
   },
 }))``;

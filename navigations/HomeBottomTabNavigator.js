@@ -18,48 +18,14 @@ import {
   InnerNavigationTopContainer,
   StyledTabNavigator,
 } from "../redux-store/StyledComponents.js";
+import BrowseScreen from "../screens/BrowseScreen.js";
+import RandomScreen from "../screens/RandomScreen.js";
 
 export default HomeBottomTabNavigator = ({ navigation }) => {
   const Tab = createBottomTabNavigator();
 
-  //Get States from Async Storage
-  const storedFilterMethod = useSelector((state) => state.filterMethod);
-
-  const dispatch = useDispatch();
-
-  const toggleSwitch = () => {
-    dispatch({
-      type: "TOGGLE_FREE_TO_CHARGE",
-    });
-  };
-
   return (
     <Fragment>
-      <TopNavigationContainer>
-        {/* <NavigationSwitchComponent
-          toggleSwitch={toggleSwitch}
-          isEnabled={storedFilterMethod.freeToCharge}
-        /> */}
-        <InnerNavigationTopContainer>
-          <RoundedButtonComponent
-            clickHandler={() => navigation.navigate("WatchlistScreen")}
-            iconName={"heart"}
-            size={32}
-            iconSize={24}
-            isTransparent={true}
-            colorIsTextColor={true}
-          />
-          <RoundedButtonComponent
-            clickHandler={() => navigation.navigate("SettingsScreen")}
-            iconName={"cog"}
-            size={32}
-            iconSize={24}
-            isTransparent={true}
-            colorIsTextColor={true}
-          />
-        </InnerNavigationTopContainer>
-      </TopNavigationContainer>
-
       <StyledTabNavigator
       //screenOptions={{
       //tabBarLabelStyle: { fontSize: 12 },

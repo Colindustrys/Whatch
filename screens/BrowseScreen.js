@@ -13,9 +13,11 @@ import {
   MainContainer,
   Paragraph,
   StyledActivityIndicator,
+  TopNavigationContainer,
 } from "../redux-store/StyledComponents.js";
 
 import GenreListItem from "../components/GenreListItem.js";
+import RoundedButtonComponent from "../components/RoundedButtonComponent";
 
 export default BrowseScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
@@ -86,7 +88,7 @@ export default BrowseScreen = ({ navigation }) => {
         <View>
           <FlatList
             key={movieLists}
-            ListHeaderComponent={<Headline small>Browse:</Headline>}
+            // ListHeaderComponent={<Headline small>Browse:</Headline>}
             data={movieLists}
             keyExtractor={(item) => item.title}
             renderItem={({ item, index }) => (

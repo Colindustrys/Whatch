@@ -52,7 +52,7 @@ export default SearchScreen = ({ navigation }) => {
 
   return (
     <MainContainer>
-      <Headline small>Search</Headline>
+      {/* <Headline small>Search</Headline> */}
       <HalfWidthView>
         <SearchBarComponent
           searchState={searchString}

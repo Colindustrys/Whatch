@@ -172,7 +172,7 @@ export default RandomScreen = ({ navigation }) => {
 
   return (
     <MainContainer>
-      <Headline small>Explore Random Films</Headline>
+      {/* <Headline small>Explore Random Films</Headline> */}
       <CenterContainer>
         <RoundedButtonComponent
           clickHandler={onRandomClick}

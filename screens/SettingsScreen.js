@@ -19,7 +19,7 @@ export default SettingsScreen = ({ navigation }) => {
           Your streaming services
         </Paragraph>
         <Paragraph onPress={() => navigation.navigate("SeenlistScreen")}>
-          Seenlist
+          Seen List
         </Paragraph>
         <Paragraph onPress={() => navigation.navigate("ThemeSettingsScreen")}>
           Theme

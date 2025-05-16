@@ -76,14 +76,14 @@ export default MainStackNavigator = ({ isLightMode }) => {
           name="SeenlistScreen"
           component={SeenlistScreen}
           options={{
-            title: "Seenlist",
+            title: "Seen List",
           }}
         />
         <Stack.Screen
           name="MovieDetailsListScreen"
           component={MovieDetailListScreen}
           options={{
-            title: "Details",
+            title: "Movie",
           }}
         />
       </StyledStackNavigator>
