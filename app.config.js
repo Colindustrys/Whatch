@@ -7,7 +7,7 @@ export default {
     version: "1.0.0",
     icon: "./assets/icon.png",
     newArchEnabled: true,
-    jsEngine: "jsc",
+    jsEngine: "hermes",
     userInterfaceStyle: "automatic",
     splash: {
       image: "./assets/splash.png",

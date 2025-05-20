@@ -1,6 +1,6 @@
 //React
 import React, { useState, useEffect } from "react";
-import { Button, FlatList, Text, View } from "react-native";
+import { Button, FlatList, Text, View, RefreshControl } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
@@ -35,7 +35,7 @@ export default BrowseScreen = ({ navigation }) => {
   //set providersChanged when user changes them
   const [providersChanged, setProvidersChanged] = useState(false);
   useEffect(() => {
-    //console.log("providers changed");
+    //console.log("storedPersonalProvider changed");
     setProvidersChanged(true);
   }, [storedPersonalProvider?.provider]);
 
@@ -44,18 +44,12 @@ export default BrowseScreen = ({ navigation }) => {
   useEffect(() => {
     //console.log("isfocused, providerschanges: " + providersChanged);
     if (providersChanged) {
-      //console.log("fetching movies");
+      //console.log("provider changed");
       setLoading(true);
       fetchMovies();
       setProvidersChanged(false);
     }
   }, [isFocused]);
-
-  useEffect(() => {
-    //console.log("switch changed");
-    setLoading(true);
-    fetchMovies();
-  }, [freeChargeSwitch.freeToCharge]);
 
   const [isFetching, setIsFetching] = useState(false);
   const fetchMovies = async () => {
@@ -70,6 +64,7 @@ export default BrowseScreen = ({ navigation }) => {
       //console.log("set new movie list");
       // console.log(newMovieLists[0]);
       setLoading(false);
+      setProvidersChanged(false);
     } catch (error) {
       setLoading(false);
       setError(true);
@@ -77,6 +72,11 @@ export default BrowseScreen = ({ navigation }) => {
       setIsFetching(false);
     }
   };
+
+  useEffect(() => {
+    console.log("useeffect");
+    fetchMovies();
+  }, []);
 
   return (
     <MainContainer browse>
@@ -99,6 +99,9 @@ export default BrowseScreen = ({ navigation }) => {
                 navigation={navigation}
               />
             )}
+            refreshControl={
+              <RefreshControl refreshing={loading} onRefresh={fetchMovies} />
+            }
           />
         </View>
       )}

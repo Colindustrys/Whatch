@@ -29,6 +29,7 @@ export const getMovieDiscover = async (requestParams) => {
 
 //gets movies for all categories and returns them as an array of objects that have a title prop and movieList prop
 export const getBrowse = async () => {
+  console.log("getBrowse");
   let titleAndMoviearrayObjectList;
   try {
     titleAndMoviearrayObjectList = await getBrowseMovieLists();

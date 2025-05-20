@@ -1,4 +1,3 @@
-import { LogBox } from "react-native";
 import moviedb from "../movieDbInstance";
 import { parseDiscoverList } from "../parser";
 
