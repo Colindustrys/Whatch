@@ -13,13 +13,7 @@ import SearchStackNavigator from "./SearchStackNavigator";
 import RoundedButtonComponent from "../components/RoundedButtonComponent";
 import NavigationSwitchComponent from "../components/NavigationSwitchComponent";
 
-import {
-  TopNavigationContainer,
-  InnerNavigationTopContainer,
-  StyledTabNavigator,
-} from "../redux-store/StyledComponents.js";
-import BrowseScreen from "../screens/BrowseScreen.js";
-import RandomScreen from "../screens/RandomScreen.js";
+import { StyledTabNavigator } from "../redux-store/StyledComponents.js";
 
 export default HomeBottomTabNavigator = ({ navigation }) => {
   const Tab = createBottomTabNavigator();

@@ -49,7 +49,7 @@ export default RandomStackNavigator = ({ navigation, isLightMode }) => {
           name="MovieDetailsListScreen"
           component={MovieDetailListScreen}
           options={{
-            title: "",
+            title: "Movie",
           }}
         />
       </Stack.Group>

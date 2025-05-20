@@ -305,6 +305,7 @@ export const StyledStackNavigator = styled(Stack.Navigator).attrs((props) => ({
   screenOptions: {
     navigationBarColor: props.theme.appearance.BACKGROUND_COLOR,
     headerShadowVisible: false,
+    headerTitleAlign: "center",
     headerTintColor: props.theme.appearance.TEXT_COLOR,
     headerStyle: {
       backgroundColor: props.theme.appearance.BACKGROUND_COLOR,

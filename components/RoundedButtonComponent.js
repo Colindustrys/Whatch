@@ -17,7 +17,8 @@ export default ({
   iconSize,
 }) => {
   return (
-    <Pressable onPress={() => clickHandler()}>
+    // Has to be onPressOut because of a bug in react native
+    <Pressable onPressOut={() => clickHandler()}>
       {({ pressed }) => (
         <PressableRoundedView
           pressed={pressed}
