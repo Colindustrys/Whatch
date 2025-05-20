@@ -21,10 +21,11 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
   return (
     <Fragment>
       <StyledTabNavigator
-      //screenOptions={{
-      //tabBarLabelStyle: { fontSize: 12 },
-      //tabBarItemStyle: { width: 100 },
-      //}}
+        initialRouteName="browse"
+        //screenOptions={{
+        //tabBarLabelStyle: { fontSize: 12 },
+        //tabBarItemStyle: { width: 100 },
+        //}}
       >
         <Tab.Screen
           name="random"
