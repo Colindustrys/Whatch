@@ -1,13 +1,11 @@
 //React
-import { React, Fragment } from "react";
+import { Fragment } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Screens
 import RandomScreen from "../screens/RandomScreen";
-import MovieDetailsScreen from "../screens/MovieDetailsScreen";
 import MovieDetailListScreen from "../screens/MovieDetailListScreen";
 import { StyledStackNavigator } from "../redux-store/StyledComponents";
-import { NavigationContainer } from "@react-navigation/native";
 import RoundedButtonComponent from "../components/RoundedButtonComponent";
 
 export default RandomStackNavigator = ({ navigation, isLightMode }) => {

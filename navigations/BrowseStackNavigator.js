@@ -1,5 +1,5 @@
 //React
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Screens

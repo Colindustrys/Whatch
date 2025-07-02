@@ -3,6 +3,7 @@ const colorOptions = {
   COMPLEMENT: "#D56363",
   BLACK: "#000000",
   WHITE: "#FFFFFF",
+  DARK_GREY_BG: "#0F0F0F",
   DARK_GREY: "#2C2D3380",
   TRANSPARENT_WHITE: "#FFFFFF80",
 };
@@ -25,16 +26,16 @@ export const base = {
 };
 
 export const darkTheme = {
-  BACKGROUND_COLOR: colorOptions.BLACK,
+  BACKGROUND_COLOR: colorOptions.DARK_GREY_BG,
   TEXT_COLOR: colorOptions.WHITE,
-  ACCENT_COLOR: colorOptions.ACCENT,
+  ACCENT_COLOR: "#8FA0C9",
   COMPLEMENT: colorOptions.COMPLEMENT,
   SPECIAL: colorOptions.DARK_GREY,
 };
 export const lightTheme = {
   BACKGROUND_COLOR: colorOptions.WHITE,
   TEXT_COLOR: colorOptions.BLACK,
-  ACCENT_COLOR: colorOptions.ACCENT,
+  ACCENT_COLOR: "#46587E",
   COMPLEMENT: colorOptions.COMPLEMENT,
   SPECIAL: colorOptions.DARK_GREY,
 };

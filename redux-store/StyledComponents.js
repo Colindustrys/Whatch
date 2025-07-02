@@ -16,6 +16,7 @@ import {
   ActivityIndicator,
   Image,
   ImageBackground,
+  PixelRatio,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -163,7 +164,7 @@ export const Paragraph = styled.Text`
       ? props.theme.appearance.FONT_SIZE_MEDIUM
       : props.theme.appearance.FONT_SIZE_LARGE};
   font-family: ${(props) => props.theme.appearance.FONT_FAMILY_REGULAR};
-  line-height: 18px;
+
   opacity: ${(props) => (props.textIsTransparent ? "0.7" : "1")};
 `;
 
@@ -205,6 +206,7 @@ export const PosterImage = styled.Image`
   aspect-ratio: 2 / 3;
   resize-mode: contain;
   margin-bottom: 16px;
+  border-radius: 5px;
   margin-right: ${(props) =>
     !props.theme.isTablet && props.withoutMargin
       ? 8
@@ -298,6 +300,12 @@ export const StyledTabNavigator = styled(Tab.Navigator).attrs((props) => ({
       elevation: 0,
     },
     headerShown: false,
+    tabBarLabelStyle: {
+      fontSize: 12,
+    },
+    tabBarStyle: {
+      height: Math.max(50, 35 * PixelRatio.getFontScale()), // ✅ let it grow
+    },
   },
 }))``;
 
