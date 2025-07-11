@@ -74,7 +74,7 @@ export default BrowseScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    console.log("useeffect");
+    // console.log("useeffect");
     fetchMovies();
   }, []);
 

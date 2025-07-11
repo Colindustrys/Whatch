@@ -26,14 +26,18 @@ export const base = {
 };
 
 export const darkTheme = {
+  name: "dark",
   BACKGROUND_COLOR: colorOptions.DARK_GREY_BG,
+  BACKGROUND_CONTRAST: colorOptions.WHITE,
   TEXT_COLOR: colorOptions.WHITE,
   ACCENT_COLOR: "#8FA0C9",
   COMPLEMENT: colorOptions.COMPLEMENT,
   SPECIAL: colorOptions.DARK_GREY,
 };
 export const lightTheme = {
+  name: "light",
   BACKGROUND_COLOR: colorOptions.WHITE,
+  BACKGROUND_CONTRAST: colorOptions.DARK_GREY_BG,
   TEXT_COLOR: colorOptions.BLACK,
   ACCENT_COLOR: "#46587E",
   COMPLEMENT: colorOptions.COMPLEMENT,

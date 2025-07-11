@@ -62,9 +62,7 @@ export const PressableRoundedView = styled.View`
   height: ${(props) => props.size}px;
   border-radius: ${(props) => props.size}px;
   background-color: ${(props) =>
-    props.isTransparent
-      ? props.theme.appearance.BACKGROUND_COLOR
-      : props.theme.appearance.TEXT_COLOR};
+    props.isTransparent ? "transparent" : props.theme.appearance.TEXT_COLOR};
   justify-content: center;
   align-items: center;
 `;
@@ -249,15 +247,36 @@ export const StyledSearchbar = styled(SearchBar).attrs((props) => ({
   containerStyle: {
     backgroundColor: props.theme.appearance.BACKGROUND_COLOR,
   },
+  containerStyle: {
+    backgroundColor: props.theme.appearance.BACKGROUND_CONTRAST,
+    height: 52,
+    borderRadius: 10,
+    justifyContent: "center",
+    marginBottom: 20,
+    marginTop: 10,
+  },
   inputContainerStyle: {
-    backgroundColor: props.theme.appearance.TEXT_COLOR,
+    backgroundColor: props.theme.appearance.BACKGROUND_CONTRAST,
     borderRadius: 10,
   },
-  searchIcon: { name: "search", color: "#888" },
-  clearIcon: { name: "close", color: "#888" },
-  cancelIcon: { color: "#888" },
-  inputStyle: { color: props.theme.appearance.BACKGROUND_COLOR },
-  placeholderTextColor: "#888",
+  inputStyle: {
+    color: props.theme.appearance.BACKGROUND_COLOR,
+    height: 48,
+    borderRadius: 10,
+  },
+  searchIcon: {
+    name: "search",
+    color: props.theme.appearance.name == "dark" ? "#595959" : "#A1A1A1",
+  },
+  clearIcon: {
+    name: "close",
+    color: props.theme.appearance.name == "dark" ? "#595959" : "#A1A1A1",
+  },
+  cancelIcon: {
+    color: props.theme.appearance.name == "dark" ? "#595959" : "#A1A1A1",
+  },
+  placeholderTextColor:
+    props.theme.appearance.name == "dark" ? "#595959" : "#A1A1A1",
 }))``;
 
 export const StyledStatusBar = styled(StatusBar).attrs((props) => ({
@@ -304,7 +323,7 @@ export const StyledTabNavigator = styled(Tab.Navigator).attrs((props) => ({
       fontSize: 12,
     },
     tabBarStyle: {
-      height: Math.max(50, 35 * PixelRatio.getFontScale()), // ✅ let it grow
+      height: Math.max(50, 35 * PixelRatio.getFontScale()), // scale to text size
     },
   },
 }))``;

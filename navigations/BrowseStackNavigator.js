@@ -20,16 +20,16 @@ export default BrowseStackNavigator = ({ navigation }) => {
               <RoundedButtonComponent
                 clickHandler={() => navigation.navigate("WatchlistScreen")}
                 iconName={"heart"}
-                size={32}
-                iconSize={24}
+                size={48}
+                iconSize={28}
                 isTransparent={true}
                 colorIsTextColor={true}
               />
               <RoundedButtonComponent
                 clickHandler={() => navigation.navigate("SettingsScreen")}
                 iconName={"cog"}
-                size={32}
-                iconSize={24}
+                size={48}
+                iconSize={28}
                 isTransparent={true}
                 colorIsTextColor={true}
               />
