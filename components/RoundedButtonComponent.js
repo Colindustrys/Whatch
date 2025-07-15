@@ -1,7 +1,7 @@
 //React
 import * as React from "react";
 // import {  } from "react-native";
-import { TouchableOpacity, Pressable } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 //Styled Components
 import {

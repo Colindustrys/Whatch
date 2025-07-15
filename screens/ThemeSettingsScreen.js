@@ -1,7 +1,13 @@
 //React
 import { useSelector, useDispatch } from "react-redux";
 import React from "react";
-import { Appearance } from "react-native";
+import {
+  Appearance,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 //Styled Components
 import {
@@ -10,6 +16,9 @@ import {
   StyledRadioButtonInput,
   StyledRadioButtonLabel,
   HalfWidthView,
+  StyledRadioButton,
+  StyledRadioButtonInner,
+  StyledRadioButtonDescription,
 } from "../redux-store/StyledComponents.js";
 
 //Third Partys Components
@@ -36,6 +45,11 @@ export default ThemeSettingsScreen = () => {
 
   //TODO: outsource dispatch in actionHandler
   const onPressHandler = (value, optionId) => {
+    // console.log("value");
+    // console.log(value);
+    // console.log("optionID");
+    // console.log(optionId);
+
     //--theme settings reducer--
     dispatch({
       type: "SELECT_ID",
@@ -63,30 +77,35 @@ export default ThemeSettingsScreen = () => {
       <HalfWidthView>
         <Paragraph>Choose your color scheme</Paragraph>
         <Paragraph small>
-          Tip: The dark-theme uses less power on certain screen.
+          Tip: The dark-theme uses less power on certain screens.
         </Paragraph>
-        <RadioForm>
+
+        <View style={{ flexDirection: "column", gap: 8 }}>
           {themeOptions.map((option, optionId, value) => (
-            <RadioButton labelHorizontal={true} key={optionId}>
-              <StyledRadioButtonInput
-                obj={option}
-                id={optionId}
-                isSelected={optionId === storedthemeSettingSelect.id}
-                onPress={(value) => {
-                  onPressHandler(value, optionId);
-                }}
-              />
-              <StyledRadioButtonLabel
-                obj={option}
-                id={optionId}
-                labelHorizontal={true}
-                onPress={(value) => {
-                  onPressHandler(value, optionId);
-                }}
-              />
-            </RadioButton>
+            <TouchableOpacity
+              style={{
+                height: 48,
+                flexDirection: "row",
+                width: "100%",
+                alignItems: "center",
+              }}
+              onPress={() => {
+                onPressHandler(option.value, optionId);
+              }}
+              key={optionId}
+            >
+              <StyledRadioButton>
+                {optionId === storedthemeSettingSelect.id && (
+                  <StyledRadioButtonInner />
+                )}
+              </StyledRadioButton>
+
+              <StyledRadioButtonDescription>
+                {option.label}
+              </StyledRadioButtonDescription>
+            </TouchableOpacity>
           ))}
-        </RadioForm>
+        </View>
       </HalfWidthView>
     </MainContainer>
   );

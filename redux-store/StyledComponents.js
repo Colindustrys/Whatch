@@ -284,27 +284,29 @@ export const StyledStatusBar = styled(StatusBar).attrs((props) => ({
   barStyle: props.barStyleIsDarkContent ? "dark-content" : "light-content",
 }))``;
 
-export const StyledRadioButtonInput = styled(RadioButtonInput).attrs(
-  (props) => ({
-    borderWidth: 2,
-    buttonInnerColor: props.theme.appearance.ACCENT_COLOR,
-    buttonOuterColor: props.theme.appearance.ACCENT_COLOR,
-    buttonSize: 10,
-    buttonOuterSize: 20,
-  })
-)``;
+export const StyledRadioButton = styled.View`
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: ${(props) => props.theme.appearance.ACCENT_COLOR};
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+`;
 
-export const StyledRadioButtonLabel = styled(RadioButtonLabel).attrs(
-  (props) => ({
-    labelStyle: {
-      fontSize: 14,
-      textAlign: "left",
-      paddingBottom: 16,
-      fontFamily: props.theme.appearance.FONT_FAMILY,
-      color: props.theme.appearance.TEXT_COLOR,
-    },
-  })
-)``;
+export const StyledRadioButtonInner = styled.View`
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: ${(props) => props.theme.appearance.ACCENT_COLOR};
+`;
+
+export const StyledRadioButtonDescription = styled.Text`
+  font-size: ${(props) => props.theme.appearance.FONT_SIZE_LARGE};
+  font-family: ${(props) => props.theme.appearance.FONT_FAMILY_REGULAR};
+  color: ${(props) => props.theme.appearance.TEXT_COLOR};
+`;
 
 //Navigator
 export const StyledTabNavigator = styled(Tab.Navigator).attrs((props) => ({

@@ -1,5 +1,6 @@
 //React
 import { Fragment } from "react";
+import { View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Screens
@@ -23,6 +24,9 @@ export default RandomStackNavigator = ({ navigation, isLightMode }) => {
                 iconSize={28}
                 isTransparent={true}
                 colorIsTextColor={true}
+              />
+              <View
+                style={{ width: 12, height: 1, backgroundColor: "transparent" }} // 12dp spacer
               />
               <RoundedButtonComponent
                 clickHandler={() => navigation.navigate("SettingsScreen")}

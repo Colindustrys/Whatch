@@ -1,6 +1,7 @@
 //React
 import React from "react";
 import { Button, View, Pressable } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 //Styled Components
 import {
@@ -13,20 +14,28 @@ export default SettingsScreen = ({ navigation }) => {
   return (
     <MainContainer>
       <HalfWidthView>
-        <Paragraph
+        <TouchableOpacity
           onPress={() => navigation.navigate("ProviderSettingsScreen")}
+          style={{ marginTop: 15 }}
         >
-          Your streaming services
-        </Paragraph>
-        <Paragraph onPress={() => navigation.navigate("SeenlistScreen")}>
-          Seen List
-        </Paragraph>
-        <Paragraph onPress={() => navigation.navigate("ThemeSettingsScreen")}>
-          Theme
-        </Paragraph>
-        <Paragraph onPress={() => navigation.navigate("CreditsSettingsScreen")}>
-          Credits
-        </Paragraph>
+          <Paragraph>Your streaming services</Paragraph>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate("SeenlistScreen")}>
+          <Paragraph>Seen List</Paragraph>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("ThemeSettingsScreen")}
+        >
+          <Paragraph>Theme</Paragraph>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("CreditsSettingsScreen")}
+        >
+          <Paragraph>Credits</Paragraph>
+        </TouchableOpacity>
       </HalfWidthView>
     </MainContainer>
   );

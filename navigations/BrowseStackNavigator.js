@@ -1,5 +1,6 @@
 //React
 import { Fragment } from "react";
+import { View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Screens
@@ -21,15 +22,19 @@ export default BrowseStackNavigator = ({ navigation }) => {
                 clickHandler={() => navigation.navigate("WatchlistScreen")}
                 iconName={"heart"}
                 size={48}
-                iconSize={28}
+                iconSize={26}
                 isTransparent={true}
                 colorIsTextColor={true}
+                style={{ marginRight: 12 }}
+              />
+              <View
+                style={{ width: 8, height: 1, backgroundColor: "transparent" }} // 12dp spacer
               />
               <RoundedButtonComponent
                 clickHandler={() => navigation.navigate("SettingsScreen")}
                 iconName={"cog"}
                 size={48}
-                iconSize={28}
+                iconSize={26}
                 isTransparent={true}
                 colorIsTextColor={true}
               />
