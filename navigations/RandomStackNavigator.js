@@ -21,18 +21,18 @@ export default RandomStackNavigator = ({ navigation, isLightMode }) => {
                 clickHandler={() => navigation.navigate("WatchlistScreen")}
                 iconName={"heart"}
                 size={48}
-                iconSize={28}
+                iconSize={26}
                 isTransparent={true}
                 colorIsTextColor={true}
               />
               <View
-                style={{ width: 12, height: 1, backgroundColor: "transparent" }} // 12dp spacer
+                style={{ width: 8, height: 1, backgroundColor: "transparent" }} // 12dp spacer
               />
               <RoundedButtonComponent
                 clickHandler={() => navigation.navigate("SettingsScreen")}
                 iconName={"cog"}
                 size={48}
-                iconSize={28}
+                iconSize={26}
                 isTransparent={true}
                 colorIsTextColor={true}
               />
