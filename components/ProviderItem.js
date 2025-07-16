@@ -1,31 +1,38 @@
-//React
-import React from "react";
-
-//Styled Components
+import React, { useEffect, useState } from "react";
+import { Platform, Pressable } from "react-native";
 import {
-    StyledSwitch,
-    ProviderItemContainer, ParagraphListItem
+  StyledSwitch,
+  ProviderItemContainer,
+  ParagraphListItem,
 } from "../redux-store/StyledComponents.js";
-import {Platform} from "react-native";
 
-export default ProviderItem = ({
+const ProviderItem = ({
   providerLabel,
   providerValue,
   providerID,
   toggleSwitch,
 }) => {
+  const [localValue, setLocalValue] = useState(providerValue);
+  const isAndroid = Platform.OS === "android";
 
-    const PlatformIsAndroid = Platform.OS === "android";
+  const handleToggle = () => {
+    const newValue = !localValue;
+    setLocalValue(newValue); // Immediate feedback
+    toggleSwitch(providerID, newValue); // Update Redux
+  };
 
-    return (
-    <ProviderItemContainer platformIsAndroid={PlatformIsAndroid}>
-      <ParagraphListItem small>{providerLabel}</ParagraphListItem>
-
-      <StyledSwitch
-        passValue={providerValue}
-        onValueChange={() => toggleSwitch(providerID, providerValue)}
-        value={providerValue}
-      />
-    </ProviderItemContainer>
+  return (
+    <Pressable>
+      <ProviderItemContainer>
+        <ParagraphListItem small>{providerLabel}</ParagraphListItem>
+        <StyledSwitch
+          passValue={localValue}
+          value={localValue}
+          onValueChange={handleToggle}
+        />
+      </ProviderItemContainer>
+    </Pressable>
   );
 };
+
+export default ProviderItem;

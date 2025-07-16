@@ -24,8 +24,13 @@ export default ProviderSettingsScreen = ({ navigation }) => {
   //Function is called if specific Switch is toggled
   //Depending on state of switch, providerID is deleted oder added to async storage
   const toggleSwitch = (providerID, providerValue) => {
+    // console.log("providerID");
+    // console.log(providerID);
+    // console.log("providerValue");
+    // console.log(providerValue);
+
     let type;
-    if (!providerValue) {
+    if (providerValue) {
       type = "ADD_PROVIDER_TO_PROVIDERLIST";
     } else {
       type = "DELETE_PROVIDER_FROM_PROVIDERLIST";
@@ -65,6 +70,7 @@ export default ProviderSettingsScreen = ({ navigation }) => {
               providerID={item.id}
             />
           )}
+          ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
           keyExtractor={(item) => item.id}
         />
       </HalfWidthView>

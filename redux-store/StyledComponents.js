@@ -105,7 +105,7 @@ export const ProviderItemContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: ${(props) => (props.platformIsAndroid ? "8" : "16")}px;
+  height: 48px;
 `;
 
 export const RowContainer = styled.View`
@@ -230,13 +230,17 @@ export const StyledIonicon = styled(Entypo)`
 
 export const StyledSwitch = styled(Switch).attrs((props) => ({
   trackColor: {
-    true: props.theme.appearance.TEXT_COLOR,
-    false: props.theme.appearance.TEXT_COLOR,
+    true: props.theme.appearance.ACCENT_COLOR,
+    false: props.theme.appearance.COMPLEMENT,
   },
-  thumbColor: props.passValue
-    ? props.theme.appearance.ACCENT_COLOR
-    : props.theme.appearance.COMPLEMENT,
-  ios_backgroundColor: props.theme.appearance.TEXT_COLOR,
+  ios_backgroundColor: "#D56363",
+  thumbColor: "white",
+  // thumbColor: props.passValue
+  //   ? props.theme.appearance.ACCENT_COLOR
+  //   : props.theme.appearance.COMPLEMENT,
+
+  height: 48,
+  width: 48,
 }))``;
 
 import Ionicons from "@expo/vector-icons/Ionicons";
