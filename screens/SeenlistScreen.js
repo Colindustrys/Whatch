@@ -1,6 +1,6 @@
 //React
 import React, { useEffect, useState } from "react";
-import {View, FlatList, useWindowDimensions, Dimensions} from "react-native";
+import { View, FlatList, useWindowDimensions, Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 
 //API
@@ -32,19 +32,21 @@ export default SeenlistScreen = ({ navigation }) => {
 
   useEffect(() => {
     calculateDimensions();
-    Dimensions.addEventListener('change', () => {
+    Dimensions.addEventListener("change", () => {
       calculateDimensions();
     });
   }, []);
 
-
   //Calculate Dimensions for FlatList
   const calculateDimensions = () => {
     //TODO dont use the margin hardcoded, get it from Theme
-    const listWidth = Dimensions.get('screen').width - 2* (storedAppearance.isTablet ? 56 : 24);
+    const listWidth =
+      Dimensions.get("screen").width -
+      2 * (storedAppearance.isTablet ? 56 : 24);
     const newNumberOfColumns = Math.floor(listWidth / itemFixedWidth);
-    const newFlatListColumnGap = (listWidth - (newNumberOfColumns * itemFixedWidth)) / newNumberOfColumns + 1;
-
+    const newFlatListColumnGap =
+      (listWidth - newNumberOfColumns * itemFixedWidth) / newNumberOfColumns +
+      1;
 
     // Update state only if values change
     if (newNumberOfColumns !== numberOfColumns) {
@@ -71,14 +73,13 @@ export default SeenlistScreen = ({ navigation }) => {
         contentContainerStyle={{
           gap: 8,
         }}
-        columnWrapperStyle={{gap: flatListColumnGap}}
-
+        columnWrapperStyle={{ gap: flatListColumnGap }}
         data={storedSeenList.movies}
         renderItem={({ item, index }) => (
           <MoviePosterItem
             moviePosterPath={item._poster_path}
             withoutMargin={true}
-
+            movieTitle={item._title}
             clickHandler={() => clickHandler(index)}
           />
         )}

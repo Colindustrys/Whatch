@@ -9,7 +9,8 @@ import {
   MainContainer,
   Paragraph,
   StyledActivityIndicator,
-  HalfWidthView, PosterImage,
+  HalfWidthView,
+  PosterImage,
 } from "../redux-store/StyledComponents.js";
 
 //Components
@@ -17,7 +18,6 @@ import MoviePosterItem from "../components/MoviePosterItem.js";
 import * as ScreenOrientation from "expo-screen-orientation";
 
 export default WatchlistScreen = ({ navigation }) => {
-
   //Get States from Async Storage
   const storedWatchList = useSelector((state) => state.watchList);
   const storedAppearance = useSelector((state) => state.appearance);
@@ -31,18 +31,21 @@ export default WatchlistScreen = ({ navigation }) => {
 
   useEffect(() => {
     calculateDimensions();
-    Dimensions.addEventListener('change', () => {
+    Dimensions.addEventListener("change", () => {
       calculateDimensions();
     });
   }, []);
 
-
   //Calculate Dimensions for FlatList
   const calculateDimensions = () => {
     //TODO dont use the margin hardcoded, get it from Theme
-    const listWidth = Dimensions.get('screen').width - 2* (storedAppearance.isTablet ? 56 : 24);
+    const listWidth =
+      Dimensions.get("screen").width -
+      2 * (storedAppearance.isTablet ? 56 : 24);
     const newNumberOfColumns = Math.floor(listWidth / itemFixedWidth);
-    const newFlatListColumnGap = (listWidth - (newNumberOfColumns * itemFixedWidth)) / newNumberOfColumns + 1;
+    const newFlatListColumnGap =
+      (listWidth - newNumberOfColumns * itemFixedWidth) / newNumberOfColumns +
+      1;
 
     //console.log((listWidth - (newNumberOfColumns * itemFixedWidth)), newNumberOfColumns + 1)
     // Update state only if values change
@@ -53,8 +56,6 @@ export default WatchlistScreen = ({ navigation }) => {
       setFlatListColumnGap(newFlatListColumnGap);
     }
   };
-
-
 
   const clickHandler = (movieIndex) => {
     navigation.navigate("MovieDetailsListScreen", {
@@ -71,11 +72,12 @@ export default WatchlistScreen = ({ navigation }) => {
         contentContainerStyle={{
           gap: 8,
         }}
-        columnWrapperStyle={{gap: flatListColumnGap}}
+        columnWrapperStyle={{ gap: flatListColumnGap }}
         data={storedWatchList.movies}
         renderItem={({ item, index }) => (
           <MoviePosterItem
             moviePosterPath={item._poster_path}
+            movieTitle={item._title}
             withoutMargin={true}
             clickHandler={() => clickHandler(index)}
           />

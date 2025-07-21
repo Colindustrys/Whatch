@@ -9,6 +9,7 @@ export default MoviePosterItem = ({
   clickHandler,
   moviePosterPath,
   withoutMargin,
+  movieTitle,
 }) => {
   const shouldComponentUpdate = () => {
     return false;
@@ -19,6 +20,10 @@ export default MoviePosterItem = ({
       {({ pressed }) => (
         <PressableView pressed={pressed}>
           <PosterImage
+            accessible={true}
+            importantForAccessibility="yes"
+            accessibilityRole="imagebutton"
+            accessibilityLabel={`Movie: ${movieTitle}`}
             withoutMargin={withoutMargin}
             source={{
               uri: "https://image.tmdb.org/t/p/w342" + moviePosterPath,

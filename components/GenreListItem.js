@@ -89,6 +89,7 @@ export default genreListItem = ({
           <MoviePosterItem
             moviePosterPath={item.poster_path}
             clickHandler={() => clickHandler(index)}
+            movieTitle={item.title}
           />
         )}
         horizontal

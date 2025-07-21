@@ -68,6 +68,7 @@ export default SearchResults = ({
       renderItem={({ item, index }) => (
         <MoviePosterItem
           moviePosterPath={item._poster_path}
+          movieTitle={item._title}
           withoutMargin={true}
           clickHandler={() => clickHandler(index)}
         />
