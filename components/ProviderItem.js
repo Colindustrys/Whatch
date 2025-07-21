@@ -22,16 +22,30 @@ const ProviderItem = ({
   };
 
   return (
-    <Pressable>
-      <ProviderItemContainer>
-        <ParagraphListItem small>{providerLabel}</ParagraphListItem>
-        <StyledSwitch
-          passValue={localValue}
-          value={localValue}
-          onValueChange={handleToggle}
-        />
-      </ProviderItemContainer>
-    </Pressable>
+    <ProviderItemContainer
+      accessible={true}
+      accessibilityLabel={`Toggle provider ${providerLabel}`}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: localValue }}
+      accessibilityActions={[{ name: "activate", label: "Toggle" }]}
+      onAccessibilityAction={() => {
+        handleToggle();
+      }}
+      onAccessibilityTap={() => {
+        handleToggle();
+      }}
+    >
+      <ParagraphListItem accessible={false} small>
+        {providerLabel}
+      </ParagraphListItem>
+      <StyledSwitch
+        accessible={false}
+        importantForAccessibility="no"
+        passValue={localValue}
+        value={localValue}
+        onValueChange={handleToggle}
+      />
+    </ProviderItemContainer>
   );
 };
 
