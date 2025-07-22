@@ -1,12 +1,14 @@
 //React
 import { useSelector, useDispatch } from "react-redux";
-import React from "react";
+import React, { useState } from "react";
 import {
   Appearance,
   Pressable,
   Text,
   TouchableOpacity,
   View,
+  Platform,
+  AccessibilityInfo,
 } from "react-native";
 
 //Styled Components
@@ -21,9 +23,6 @@ import {
   StyledRadioButtonDescription,
 } from "../redux-store/StyledComponents.js";
 
-//Third Partys Components
-import RadioForm, { RadioButton } from "react-native-simple-radio-button";
-
 //Theme
 import { darkTheme, lightTheme } from "../redux-store/Theme";
 
@@ -31,6 +30,9 @@ export default ThemeSettingsScreen = () => {
   //Get Selected Radiofield from Async Storage
   const storedthemeSettingSelect = useSelector(
     (state) => state.themeSettingSelect
+  );
+  const [selectedOption, setSelectedOption] = useState(
+    useSelector((state) => state.themeSettingSelect).id
   );
 
   const dispatch = useDispatch();
@@ -43,18 +45,11 @@ export default ThemeSettingsScreen = () => {
     { label: "Dark", value: darkTheme, id: 2 },
   ];
 
+  const isIOS = Platform.OS === "ios";
+
   //TODO: outsource dispatch in actionHandler
   const onPressHandler = (value, optionId) => {
-    // console.log("value");
-    // console.log(value);
-    // console.log("optionID");
-    // console.log(optionId);
-
-    //--theme settings reducer--
-    dispatch({
-      type: "SELECT_ID",
-      id: optionId,
-    });
+    setSelectedOption(optionId);
 
     //--apperance reducer--
     //overwrite the value variable theme to system theme
@@ -65,24 +60,39 @@ export default ThemeSettingsScreen = () => {
         value = darkTheme;
       }
     }
-    //dispatch theme
-    dispatch({
-      type: "SWITCH_THEME",
-      baseTheme: value,
-    });
+
+    setTimeout(() => {
+      //--theme settings reducer--
+      dispatch({
+        type: "SELECT_ID",
+        id: optionId,
+      });
+
+      //dispatch theme
+      dispatch({
+        type: "SWITCH_THEME",
+        baseTheme: value,
+      });
+    }, 0);
   };
 
   return (
-    <MainContainer>
-      <HalfWidthView>
-        <Paragraph>Choose your color scheme</Paragraph>
-        <Paragraph small>
+    <MainContainer accessible={false}>
+      <HalfWidthView accessible={false}>
+        <Paragraph accessible={true}>Choose your color scheme</Paragraph>
+        <Paragraph small accessible={true}>
           Tip: The dark-theme uses less power on certain screens.
         </Paragraph>
 
-        <View style={{ flexDirection: "column", gap: 8 }}>
+        <View style={{ flexDirection: "column", gap: 8 }} accessible={false}>
           {themeOptions.map((option, optionId, value) => (
             <TouchableOpacity
+              accessible={true}
+              accessibilityLabel={`${option.label} theme`}
+              accessibilityRole="radio"
+              accessibilityState={{
+                checked: optionId === selectedOption,
+              }}
               style={{
                 height: 48,
                 flexDirection: "row",
@@ -94,13 +104,13 @@ export default ThemeSettingsScreen = () => {
               }}
               key={optionId}
             >
-              <StyledRadioButton>
-                {optionId === storedthemeSettingSelect.id && (
-                  <StyledRadioButtonInner />
+              <StyledRadioButton accessible={false}>
+                {option.id === selectedOption && (
+                  <StyledRadioButtonInner accessible={false} />
                 )}
               </StyledRadioButton>
 
-              <StyledRadioButtonDescription>
+              <StyledRadioButtonDescription accessible={false}>
                 {option.label}
               </StyledRadioButtonDescription>
             </TouchableOpacity>

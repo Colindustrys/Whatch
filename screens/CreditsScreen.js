@@ -1,6 +1,6 @@
 //React
-import React from "react";
-import { Image } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { Image, AccessibilityInfo, findNodeHandle } from "react-native";
 
 //Styled Components
 import {
@@ -10,10 +10,23 @@ import {
 } from "../redux-store/StyledComponents.js";
 
 export default CreditsSettingsScreen = () => {
+  const focusRef = useRef(null);
+
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     const reactTag = findNodeHandle(focusRef.current);
+  //     if (reactTag) {
+  //       AccessibilityInfo.setAccessibilityFocus(reactTag);
+  //     }
+  //   }, 100); // delay ensures element is mounted
+
+  //   return () => clearTimeout(timeout);
+  // }, []);
+
   return (
-    <MainContainer>
-      <HalfWidthView>
-        <Paragraph>
+    <MainContainer accessible={false}>
+      <HalfWidthView accessible={false}>
+        <Paragraph accessible={true}>
           This product uses the TMDB API but is not endorsed or certified by
           TMDB.
         </Paragraph>
@@ -27,7 +40,9 @@ export default CreditsSettingsScreen = () => {
             marginBottom: 40,
           }}
         />
-        <Paragraph>Watchprovider data is provided by JustWatch.</Paragraph>
+        <Paragraph ref={focusRef} accessible={true}>
+          Watchprovider data is provided by JustWatch.
+        </Paragraph>
         <Image
           source={require("../assets/JustWatch.png")}
           style={{

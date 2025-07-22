@@ -171,10 +171,11 @@ export default RandomScreen = ({ navigation }) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer accessible={false}>
       {/* <Headline small>Explore Random Films</Headline> */}
-      <CenterContainer>
+      <CenterContainer accessible={false}>
         <RoundedButtonComponent
+          accessible={true}
           clickHandler={onRandomClick}
           iconName={"shuffle"}
           size={320}

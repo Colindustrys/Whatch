@@ -17,14 +17,17 @@ const ProviderItem = ({
     useState(providerValue);
   const isIOS = Platform.OS === "ios";
 
-  const handleToggle = () => {
+  const handleToggle = async () => {
     if (isIOS) {
       AccessibilityInfo.announceForAccessibility("Stop");
     }
     const newSwitchValue = !localSwitchState;
-    setLocalSwitchState(newSwitchValue); // update usestate for Immediate feedback
-    toggleSwitch(providerID, newSwitchValue); // Update Redux
     setAccessibilitySwitchState(newSwitchValue);
+    setLocalSwitchState(newSwitchValue); // update usestate for Immediate feedback
+
+    setTimeout(() => {
+      toggleSwitch(providerID, newSwitchValue); // Update Redux
+    }, 100);
 
     if (isIOS) {
       setTimeout(() => {
@@ -32,7 +35,6 @@ const ProviderItem = ({
           newSwitchValue ? "on" : "off"
         );
       }, 500);
-    } else {
     }
   };
 

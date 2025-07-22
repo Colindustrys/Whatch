@@ -12,29 +12,43 @@ import {
 
 export default SettingsScreen = ({ navigation }) => {
   return (
-    <MainContainer>
-      <HalfWidthView>
+    <MainContainer accessible={false}>
+      <HalfWidthView accessible={false}>
         <TouchableOpacity
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Open your streaming services setting"
           onPress={() => navigation.navigate("ProviderSettingsScreen")}
           style={{ marginTop: 15 }}
         >
-          <Paragraph>Your streaming services</Paragraph>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate("SeenlistScreen")}>
-          <Paragraph>Seen List</Paragraph>
+          <Paragraph accessible={false}>Your streaming services</Paragraph>
         </TouchableOpacity>
 
         <TouchableOpacity
+          accessibilityRole="button"
+          accessibilityLabel="Open seen list"
+          onPress={() => navigation.navigate("SeenlistScreen")}
+          accessible={true}
+        >
+          <Paragraph accessible={false}>Seen List</Paragraph>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          accessibilityRole="button"
+          accessibilityLabel="Open Theme settings"
           onPress={() => navigation.navigate("ThemeSettingsScreen")}
+          accessible={true}
         >
-          <Paragraph>Theme</Paragraph>
+          <Paragraph accessible={false}>Theme</Paragraph>
         </TouchableOpacity>
 
         <TouchableOpacity
+          accessibilityRole="button"
+          accessibilityLabel="Open credits for this app"
           onPress={() => navigation.navigate("CreditsSettingsScreen")}
+          accessible={true}
         >
-          <Paragraph>Credits</Paragraph>
+          <Paragraph accessible={false}>Credits</Paragraph>
         </TouchableOpacity>
       </HalfWidthView>
     </MainContainer>
