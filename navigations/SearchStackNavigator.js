@@ -23,6 +23,8 @@ export default SearchStackNavigator = ({ navigation }) => {
           headerRight: () => (
             <Fragment>
               <RoundedButtonComponent
+                accessible={false}
+                accessibilityLabel={"Go to watchlist"}
                 clickHandler={() => navigation.navigate("WatchlistScreen")}
                 iconName={"heart"}
                 size={48}
@@ -34,6 +36,8 @@ export default SearchStackNavigator = ({ navigation }) => {
                 style={{ width: 8, height: 1, backgroundColor: "transparent" }} // 12dp spacer
               />
               <RoundedButtonComponent
+                accessible={false}
+                accessibilityLabel={"Go to settings"}
                 clickHandler={() => navigation.navigate("SettingsScreen")}
                 iconName={"cog"}
                 size={48}

@@ -13,12 +13,15 @@ const Stack = createNativeStackNavigator();
 
 export default BrowseStackNavigator = ({ navigation }) => {
   return (
-    <StyledStackNavigator>
+    <StyledStackNavigator accessible={false}>
       <Stack.Group
+        accessible={false}
         screenOptions={{
           headerRight: () => (
             <Fragment>
               <RoundedButtonComponent
+                accessible={false}
+                accessibilityLabel={"Go to watchlist"}
                 clickHandler={() => navigation.navigate("WatchlistScreen")}
                 iconName={"heart"}
                 size={48}
@@ -31,6 +34,8 @@ export default BrowseStackNavigator = ({ navigation }) => {
                 style={{ width: 8, height: 1, backgroundColor: "transparent" }} // 12dp spacer
               />
               <RoundedButtonComponent
+                accessible={false}
+                accessibilityLabel={"Go to settings"}
                 clickHandler={() => navigation.navigate("SettingsScreen")}
                 iconName={"cog"}
                 size={48}

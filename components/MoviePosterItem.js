@@ -16,11 +16,11 @@ export default MoviePosterItem = ({
   };
 
   return (
-    <Pressable onPress={clickHandler}>
+    <Pressable onPress={clickHandler} accessible={false}>
       {({ pressed }) => (
-        <PressableView pressed={pressed}>
+        <PressableView pressed={pressed} accessible={true}>
           <PosterImage
-            accessible={true}
+            accessible={false}
             importantForAccessibility="yes"
             accessibilityRole="imagebutton"
             accessibilityLabel={`Movie: ${movieTitle}`}

@@ -1,6 +1,6 @@
 //React
 import React, { useState } from "react";
-import { FlatList, useWindowDimensions } from "react-native";
+import { FlatList, useWindowDimensions, View, Text } from "react-native";
 
 //API
 import MovieDetailsScreen from "./MovieDetailsScreen.js";
@@ -47,9 +47,11 @@ export default MovieDetailListScreen = ({ route, navigation }) => {
   };
 
   //pass movieIDs to MovieDetailsScreen and render every ID as own movieScreen
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }, beAccessable) => {
     const movie = new Movie(item);
-    return <MovieDetailsScreen passedMovie={movie} />;
+    return (
+      <MovieDetailsScreen passedMovie={movie} beAccessable={beAccessable} />
+    );
   };
 
   return (
@@ -57,7 +59,17 @@ export default MovieDetailListScreen = ({ route, navigation }) => {
       <FlatList
         data={movieList}
         keyExtractor={(item, index) => index}
-        renderItem={renderItem}
+        renderItem={({ item, index }) => (
+          <View
+            accessibilityElementsHidden={index !== initialScrollIndex}
+            importantForAccessibility={
+              index !== initialScrollIndex ? "no-hide-descendants" : "yes"
+            }
+            accessible={false}
+          >
+            {renderItem({ item }, index == initialScrollIndex)}
+          </View>
+        )}
         horizontal
         pagingEnabled
         initialScrollIndex={initialScrollIndex}

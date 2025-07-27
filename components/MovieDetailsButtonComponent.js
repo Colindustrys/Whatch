@@ -9,9 +9,14 @@ import {
   PressableView,
 } from "../redux-store/StyledComponents.js";
 
-export default ({ clickHandler, iconName, children }) => {
+export default ({ clickHandler, iconName, children, aria_label }) => {
   return (
-    <Pressable onPress={clickHandler}>
+    <Pressable
+      onPress={clickHandler}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel={aria_label}
+    >
       {({ pressed }) => (
         <PressableView pressed={pressed} size={80}>
           <StyledIonicon name={iconName} size={32} colorIsTextColor={true} />

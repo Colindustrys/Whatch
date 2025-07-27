@@ -71,6 +71,9 @@ export default class Movie {
   set genres(value) {
     this._genres = value;
   }
+  get genresArray() {
+    return this._genres;
+  }
 
   _genreIDs;
   get genreIDs() {
@@ -96,7 +99,7 @@ export default class Movie {
   }
   //get date as string in format 14.03.1972
   get release_date_string() {
-    //check if date is set and return false if not, this is because some movies do not have a date 
+    //check if date is set and return false if not, this is because some movies do not have a date
     if (this._serialized_release_date) {
       const release_date = new Date(this._serialized_release_date);
 

@@ -65,8 +65,9 @@ export default WatchlistScreen = ({ navigation }) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer accessible={false}>
       <FlatList
+        accessible={false}
         key={numberOfColumns}
         numColumns={numberOfColumns}
         contentContainerStyle={{
