@@ -1,6 +1,6 @@
 //React
-import React, { useEffect, useState } from "react";
-import { FlatList, useWindowDimensions, Dimensions } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import { FlatList, useWindowDimensions, Dimensions, AccessibilityInfo, findNodeHandle } from "react-native";
 import { useSelector } from "react-redux";
 
 //Styled Components
@@ -22,6 +22,8 @@ export default WatchlistScreen = ({ navigation }) => {
   const storedWatchList = useSelector((state) => state.watchList);
   const storedAppearance = useSelector((state) => state.appearance);
 
+  const firstItemRef = useRef(null); //create ref for the first item to setAccessibilityFocus() to that when opening the page
+
   //usestates
   const [numberOfColumns, setNumberOfColumns] = useState(8);
   const [flatListColumnGap, setFlatListColumnGap] = useState(20);
@@ -35,6 +37,20 @@ export default WatchlistScreen = ({ navigation }) => {
       calculateDimensions();
     });
   }, []);
+
+  useEffect(() => {
+    // Focus after delay so layout has time to finish
+    const timeout = setTimeout(() => {
+      if (firstItemRef.current) {
+        const node = findNodeHandle(firstItemRef.current);
+        if (node) {
+          AccessibilityInfo.setAccessibilityFocus(node);
+        }
+      }
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, [storedWatchList]);
 
   //Calculate Dimensions for FlatList
   const calculateDimensions = () => {
@@ -77,6 +93,7 @@ export default WatchlistScreen = ({ navigation }) => {
         data={storedWatchList.movies}
         renderItem={({ item, index }) => (
           <MoviePosterItem
+            ref={index === 0 ? firstItemRef : null}
             moviePosterPath={item._poster_path}
             movieTitle={item._title}
             withoutMargin={true}

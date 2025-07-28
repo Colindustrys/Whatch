@@ -1,6 +1,13 @@
 //React
-import React, { useEffect, useState } from "react";
-import { View, FlatList, useWindowDimensions, Dimensions } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  View,
+  FlatList,
+  useWindowDimensions,
+  Dimensions,
+  AccessibilityInfo,
+  findNodeHandle,
+} from "react-native";
 import { useSelector } from "react-redux";
 
 //API
@@ -23,6 +30,8 @@ export default SeenlistScreen = ({ navigation }) => {
   const storedSeenList = useSelector((state) => state.seenList);
   const storedAppearance = useSelector((state) => state.appearance);
 
+  const firstItemRef = useRef(null); //create ref for the first item to setAccessibilityFocus() to that when opening the page
+
   //usestates
   const [numberOfColumns, setNumberOfColumns] = useState(8);
   const [flatListColumnGap, setFlatListColumnGap] = useState(20);
@@ -36,6 +45,22 @@ export default SeenlistScreen = ({ navigation }) => {
       calculateDimensions();
     });
   }, []);
+
+  useEffect(() => {
+    console.log("useeffect")
+    // Focus after delay so layout has time to finish
+    const timeout = setTimeout(() => {
+      if (firstItemRef.current) {
+        const node = findNodeHandle(firstItemRef.current);
+        if (node) {
+          console.log("setAccessibilityFocus()")
+          AccessibilityInfo.setAccessibilityFocus(node);
+        }
+      }
+    }, 10);
+
+    return () => clearTimeout(timeout);
+  }, [storedSeenList]);
 
   //Calculate Dimensions for FlatList
   const calculateDimensions = () => {
@@ -77,6 +102,7 @@ export default SeenlistScreen = ({ navigation }) => {
         data={storedSeenList.movies}
         renderItem={({ item, index }) => (
           <MoviePosterItem
+            ref={index === 0 ? firstItemRef : null}
             moviePosterPath={item._poster_path}
             withoutMargin={true}
             movieTitle={item._title}

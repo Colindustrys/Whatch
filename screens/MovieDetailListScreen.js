@@ -67,7 +67,7 @@ export default MovieDetailListScreen = ({ route, navigation }) => {
             }
             accessible={false}
           >
-            {renderItem({ item }, index == initialScrollIndex)}
+            {renderItem({ item }, index === initialScrollIndex)}
           </View>
         )}
         horizontal
