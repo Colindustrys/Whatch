@@ -1,6 +1,6 @@
 //React
-import React, { forwardRef } from "react";
-import { Pressable } from "react-native";
+import React, { forwardRef, useEffect } from "react";
+import { Pressable, findNodeHandle, AccessibilityInfo } from "react-native";
 
 //Styled Components
 import { PosterImage, PressableView } from "../redux-store/StyledComponents.js";
@@ -11,13 +11,25 @@ export default MoviePosterItem = forwardRef(
       return false;
     };
 
+    useEffect(() => {
+      // set screenreader focus to first new movie
+      setTimeout(() => {
+        if (ref && ref.current) {
+          const nodeHandle = findNodeHandle(ref.current);
+          if (nodeHandle) {
+            AccessibilityInfo.setAccessibilityFocus(nodeHandle);
+          }
+        }
+      }, 500); // adjust timing if needed
+    }, []);
+
     return (
-      <Pressable onPress={clickHandler} accessible={false}>
+      <Pressable onPress={clickHandler} accessible={true} ref={ref}>
         {({ pressed }) => (
           <PressableView
             pressed={pressed}
-            accessible={true}
-            ref={ref}
+            accessible={false}
+            // ref={ref}
           >
             <PosterImage
               accessible={false}

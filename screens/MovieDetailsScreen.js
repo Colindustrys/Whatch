@@ -41,7 +41,7 @@ import MovieDetailsButtonComponent from "../components/MovieDetailsButtonCompone
 import Movie from "../models/Movie.js";
 import * as ScreenOrientation from "expo-screen-orientation";
 
-export default MovieDetailsScreen = ({ passedMovie, beAccessable }) => {
+export default MovieDetailsScreen = ({ passedMovie, beAccessible }) => {
   //Get States from Async Storage
   const storedWatchList = useSelector((state) => state.watchList);
   const storedSeenList = useSelector((state) => state.seenList);
@@ -194,7 +194,7 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessable }) => {
     );
 
     // focus screen reader on title
-    if (beAccessable) {
+    if (beAccessible) {
       const nodeHandle = findNodeHandle(contentRef.current);
       if (nodeHandle) {
         AccessibilityInfo.setAccessibilityFocus(nodeHandle);
@@ -207,12 +207,12 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessable }) => {
     //TODO: use MainContainer?!
     <MovieDetailContainer
       windowWidth={useWindowDimensions().width}
-      accessibilityElementsHidden={beAccessable ? false : true}
-      importantForAccessibility={beAccessable ? "yes" : "no-hide-descendants"}
+      accessibilityElementsHidden={beAccessible ? false : true}
+      importantForAccessibility={beAccessible ? "yes" : "no-hide-descendants"}
     >
       {loading ? (
         <StyledActivityIndicator
-          accessible={beAccessable ? true : false}
+          accessible={beAccessible ? true : false}
           accessibilityLabel={"Loading"}
           ref={loadingRef}
         />

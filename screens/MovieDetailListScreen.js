@@ -47,10 +47,10 @@ export default MovieDetailListScreen = ({ route, navigation }) => {
   };
 
   //pass movieIDs to MovieDetailsScreen and render every ID as own movieScreen
-  const renderItem = ({ item }, beAccessable) => {
+  const renderItem = ({ item }, beAccessible) => {
     const movie = new Movie(item);
     return (
-      <MovieDetailsScreen passedMovie={movie} beAccessable={beAccessable} />
+      <MovieDetailsScreen passedMovie={movie} beAccessible={beAccessible} />
     );
   };
 

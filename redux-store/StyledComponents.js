@@ -268,7 +268,7 @@ export const StyledSearchbar = styled(SearchBar).attrs((props) => ({
   searchIcon: {
     name: "search",
     color: props.theme.appearance.name == "dark" ? "#595959" : "#A1A1A1",
-    accessable: false,
+    accessible: false,
     importantForAccessibility: "no-hide-descendants",
     accessibilityElementsHidden: true
 

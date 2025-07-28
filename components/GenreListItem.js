@@ -1,8 +1,14 @@
 //React
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import MoviePosterItem from "./MoviePosterItem";
-import { FlatList, View, ActivityIndicator } from "react-native";
+import {
+  FlatList,
+  View,
+  ActivityIndicator,
+  AccessibilityInfo,
+  findNodeHandle
+} from "react-native";
 import { Paragraph, EmptyContainer } from "../redux-store/StyledComponents";
 import { getMovieDiscover } from "../api/endpoints";
 import { loaded } from "expo-font/build/memory";
@@ -20,6 +26,25 @@ export default genreListItem = ({
   let flatlistRef;
 
   const itemWidth = 108;
+
+  // only enable on end reached when screnereader is off
+  const [isScreenReaderEnabled, setIsScreenReaderEnabled] = useState(false);
+  useEffect(() => {
+    // Check initial status
+    AccessibilityInfo.isScreenReaderEnabled().then(setIsScreenReaderEnabled);
+
+    // Subscribe to changes
+    const subscription = AccessibilityInfo.addEventListener(
+      "screenReaderChanged",
+      setIsScreenReaderEnabled
+    );
+
+    return () => subscription.remove();
+  }, []);
+
+  // set focus to first new movie when new movies were loaded
+  const firstNewMovieRef = useRef(null);
+  const [newMovieDataLength, setNewMovieDataLength] = useState(0);
 
   useEffect(() => {
     //update movielist if passed list changed
@@ -44,6 +69,7 @@ export default genreListItem = ({
   //is called then the end of the flatlist is reched to add more movies, uses isFunctionRunning to only run a single instance
   const [isFunctionRunning, setIsFunctionRunning] = useState(false);
   const loadMoreData = async () => {
+    console.log("loadmoredata");
     if (isFunctionRunning) {
       //console.log("Function is already running. Please wait.");
       return;
@@ -65,21 +91,69 @@ export default genreListItem = ({
     }
   };
 
+  const [isButtonFunctionRunning, setIsButtonFunctionRunning] = useState(false);
+  const loadMoreDataButton = async () => {
+    if (isButtonFunctionRunning) {
+      //console.log("Function is already running. Please wait.");
+      return;
+    }
+    setIsButtonFunctionRunning(true);
+
+    try {
+      requestParams.page = pageNR + 1;
+      let newData = await getMovieDiscover(requestParams);
+      setNewMovieDataLength(newData.length);
+      setMovieList((prevData) => [...prevData, ...newData]);
+      setPageNR(pageNR + 1);
+      if (newData.length < 20) {
+        setEndReached(true);
+      }
+    } catch (error) {
+      //throw error;
+    } finally {
+      setIsButtonFunctionRunning(false);
+    }
+
+    // // set screenreader focus to first new movie
+    // setTimeout(() => {
+    //   if (firstNewMovieRef.current) {
+    //     const nodeHandle = findNodeHandle(firstNewMovieRef.current);
+    //     if (nodeHandle) {
+    //       AccessibilityInfo.setAccessibilityFocus(nodeHandle);
+    //     }
+    //   }
+    // }, 500); // adjust timing if needed
+  };
+
   //render loading indacator if there is still more data to load
   const [endReached, setEndReached] = useState(false);
   const renderFooter = () => {
     if (endReached) return null;
 
     return (
-      <View style={{ paddingVertical: 20, paddingRight: 40, paddingLeft: 25 }}>
-        <ActivityIndicator animating size="large" />
+      <View
+        style={{ paddingVertical: 20, paddingRight: 40, paddingLeft: 25 }}
+        accessible={true}
+        accessibilityLabel={`Load more movies`}
+        accessibilityRole="button"
+        accessibilityActions={[{ name: "activate", label: "load movies" }]}
+        onAccessibilityAction={() => {
+          loadMoreDataButton();
+        }}
+        onAccessibilityTap={() => {
+          loadMoreDataButton();
+        }}
+      >
+        <ActivityIndicator accessible={false} animating size="large" />
       </View>
     );
   };
 
   return (
     <View>
-      <Paragraph browse>{title}</Paragraph>
+      <Paragraph accessibilityLabel={`Genre ${title}`} browse>
+        {title}
+      </Paragraph>
       <FlatList
         ref={(list) => (flatlistRef = list)}
         ListHeaderComponent={<EmptyContainer></EmptyContainer>}
@@ -87,13 +161,18 @@ export default genreListItem = ({
         keyExtractor={(item, index) => index}
         renderItem={({ item, index }) => (
           <MoviePosterItem
+            ref={
+              index === movieList.length - newMovieDataLength
+                ? firstNewMovieRef
+                : null
+            }
             moviePosterPath={item.poster_path}
             clickHandler={() => clickHandler(index)}
             movieTitle={item.title}
           />
         )}
         horizontal
-        onEndReached={loadMoreData}
+        onEndReached={!isScreenReaderEnabled ? loadMoreData : null}
         getItemLayout={(data, index) => ({
           length: itemWidth,
           offset: itemWidth * index,
@@ -103,6 +182,7 @@ export default genreListItem = ({
         maxToRenderPerBatch={3}
         ListFooterComponent={renderFooter}
         contentContainerStyle={{ flexGrow: 1 }}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );
