@@ -250,9 +250,6 @@ export const StyledSearchbar = styled(SearchBar).attrs((props) => ({
   platform: props.platformIsAndroid ? "android" : "ios",
   containerStyle: {
     backgroundColor: props.theme.appearance.BACKGROUND_COLOR,
-  },
-  containerStyle: {
-    backgroundColor: props.theme.appearance.BACKGROUND_CONTRAST,
     height: 52,
     borderRadius: 10,
     justifyContent: "center",
@@ -271,13 +268,19 @@ export const StyledSearchbar = styled(SearchBar).attrs((props) => ({
   searchIcon: {
     name: "search",
     color: props.theme.appearance.name == "dark" ? "#595959" : "#A1A1A1",
+    accessable: false,
+    importantForAccessibility: "no-hide-descendants",
+    accessibilityElementsHidden: true
+
   },
   clearIcon: {
     name: "close",
     color: props.theme.appearance.name == "dark" ? "#595959" : "#A1A1A1",
+    accessibilityLabel: "Clear searchbar",
   },
   cancelIcon: {
     color: props.theme.appearance.name == "dark" ? "#595959" : "#A1A1A1",
+    accessibilityLabel: "cancel typing",
   },
   placeholderTextColor:
     props.theme.appearance.name == "dark" ? "#595959" : "#A1A1A1",

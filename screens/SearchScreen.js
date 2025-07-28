@@ -28,7 +28,7 @@ export default SearchScreen = ({ navigation }) => {
 
   //takes search string and sets the movielist when received
   const updateSearch = async (searchString) => {
-    setSearchString(searchString);
+    // setSearchString(searchString);
     if (searchString) {
       //todo in try catch
       try {
@@ -44,6 +44,7 @@ export default SearchScreen = ({ navigation }) => {
 
   //clickhandler für ein Poster
   const clickHandler = (movieIndex) => {
+    console.log("index: " + movieIndex)
     navigation.navigate("MovieDetailsListScreen", {
       movies: movieList,
       initialScrollIndex: movieIndex,
@@ -56,7 +57,7 @@ export default SearchScreen = ({ navigation }) => {
       <HalfWidthView>
         <SearchBarComponent
           searchState={searchString}
-          updateSearch={(query) => setSearchString(query)}
+          updateSearch={setSearchString}
         />
       </HalfWidthView>
 

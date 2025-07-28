@@ -58,7 +58,7 @@ export default SearchResults = ({
 
   return movieList.length > 0 ? (
     <FlatList
-      key={numberOfColumns}
+      // key={numberOfColumns}
       numColumns={numberOfColumns}
       contentContainerStyle={{
         gap: 8,
