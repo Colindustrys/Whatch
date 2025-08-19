@@ -32,7 +32,7 @@ const ProviderItem = ({
     if (isIOS) {
       setTimeout(() => {
         AccessibilityInfo.announceForAccessibility(
-          newSwitchValue ? "on" : "off"
+          newSwitchValue ? "an" : "aus"
         );
       }, 500);
     }
@@ -41,10 +41,10 @@ const ProviderItem = ({
   return (
     <ProviderItemContainer
       accessible={true}
-      accessibilityLabel={`Toggle provider ${providerLabel}`}
+      accessibilityLabel={`Schalter Anbieter ${providerLabel}`}
       accessibilityRole="switch"
       accessibilityState={{ checked: accessibilitySwitchState }}
-      accessibilityActions={[{ name: "activate", label: "Toggle" }]}
+      accessibilityActions={[{ name: "activate", label: "Umschalten" }]}
       onAccessibilityAction={() => {
         handleToggle();
       }}

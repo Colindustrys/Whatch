@@ -36,7 +36,7 @@ export default MainStackNavigator = ({ isLightMode }) => {
           name="SettingsScreen"
           component={SettingsScreen}
           options={{
-            title: "Settings",
+            title: "Einstellungen",
           }}
         />
         <Stack.Screen
@@ -50,7 +50,7 @@ export default MainStackNavigator = ({ isLightMode }) => {
           name="ProviderSettingsScreen"
           component={ProviderSettingsScreen}
           options={{
-            title: "Streaming Services",
+            title: "Streaming Dienste",
           }}
           screenOptions={{
             //hide the very thin line under the header
@@ -61,7 +61,7 @@ export default MainStackNavigator = ({ isLightMode }) => {
           name="ThemeSettingsScreen"
           component={ThemeSettingsScreen}
           options={{
-            title: "Theme Settings",
+            title: "Theme Einstellungen",
           }}
         />
         <Stack.Screen
@@ -75,14 +75,14 @@ export default MainStackNavigator = ({ isLightMode }) => {
           name="SeenlistScreen"
           component={SeenlistScreen}
           options={{
-            title: "Seen List",
+            title: "Gesehen Liste",
           }}
         />
         <Stack.Screen
           name="MovieDetailsListScreen"
           component={MovieDetailListScreen}
           options={{
-            title: "Movie",
+            title: "Film",
           }}
         />
       </StyledStackNavigator>

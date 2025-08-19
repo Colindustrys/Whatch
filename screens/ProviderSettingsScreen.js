@@ -52,10 +52,10 @@ export default ProviderSettingsScreen = ({ navigation }) => {
         <FlatList
           ListHeaderComponent={
             <View>
-              <Paragraph>Choose your streaming services</Paragraph>
+              <Paragraph>Wähle deine Streaming dienste aus</Paragraph>
               <Paragraph small>
-                You will only be shown movies that are available from your
-                flatrate providers.
+                Dir werden nur Filme angezeigt, die bei deinen
+                Streaming-Diensten verfügbar sind.
               </Paragraph>
             </View>
           }

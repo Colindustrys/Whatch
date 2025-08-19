@@ -6,6 +6,7 @@ export const SearchMovie = async (string, page) => {
   const requestParams = {
     query: string,
     page: page,
+    language: "de-DE"
   };
 
   //console.log(requestParams);

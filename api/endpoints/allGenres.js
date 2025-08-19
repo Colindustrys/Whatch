@@ -6,7 +6,7 @@ export const getAllGenresObjects = async (id) => {
   try {
     // console.log("getAllGenresObjects");
     //get json from tmdb
-    const res = await moviedb.genreMovieList({ language: "en" });
+    const res = await moviedb.genreMovieList({ language: "de" });
     //console.log("got all genres");
 
     //parse watchprovider obejcts from json

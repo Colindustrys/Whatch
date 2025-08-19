@@ -31,7 +31,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
           name="random"
           component={RandomStackNavigator}
           options={{
-            tabBarLabel: "Random",
+            tabBarLabel: "Zufallsauswahl",
             tabBarIcon: ({ color }) => (
               <Entypo name="shuffle" size={24} color={color} />
             ),
@@ -41,7 +41,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
           name="browse"
           component={BrowseStackNavigator}
           options={{
-            tabBarLabel: "Browse",
+            tabBarLabel: "Entdecken",
             tabBarIcon: ({ color }) => (
               <Entypo name="list" size={24} color={color} />
             ),
@@ -51,7 +51,7 @@ export default HomeBottomTabNavigator = ({ navigation }) => {
           name="search"
           component={SearchStackNavigator}
           options={{
-            tabBarLabel: "Search",
+            tabBarLabel: "Suchen",
             tabBarIcon: ({ color }) => (
               <Entypo name="magnifying-glass" size={24} color={color} />
             ),

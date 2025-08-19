@@ -114,17 +114,23 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessible }) => {
 
   const onAddToWatchlist = () => {
     if (isIOS) {
-      AccessibilityInfo.announceForAccessibility("Stop");
+      AccessibilityInfo.announceForAccessibility("                  ");
     }
 
     if (isIOS) {
       setTimeout(() => {
         AccessibilityInfo.announceForAccessibility(
           elementExistInWatchList
-            ? "removed from watchlist"
-            : "added to watchlist"
+            ? "entfernt"
+            : "hinzugefügt"
         );
       }, 500);
+    } else {
+      AccessibilityInfo.announceForAccessibility(
+        elementExistInWatchList
+          ? "entfernt"
+          : "hinzugefügt"
+      );
     }
 
     let type;
@@ -139,15 +145,23 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessible }) => {
 
   const onAddToSeenlist = () => {
     if (isIOS) {
-      AccessibilityInfo.announceForAccessibility("Stop");
+      AccessibilityInfo.announceForAccessibility("                  ");
     }
 
     if (isIOS) {
       setTimeout(() => {
         AccessibilityInfo.announceForAccessibility(
-          elementExistInSeenList ? "removed from seenlist" : "added to seenlist"
+          elementExistInSeenList
+            ? "entfernt"
+            : "hinzugefügt"
         );
       }, 500);
+    } else {
+      AccessibilityInfo.announceForAccessibility(
+        elementExistInSeenList
+          ? "entfernt"
+          : "hinzugefügt"
+      );
     }
 
     let type;
@@ -213,7 +227,7 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessible }) => {
       {loading ? (
         <StyledActivityIndicator
           accessible={beAccessible ? true : false}
-          accessibilityLabel={"Loading"}
+          accessibilityLabel={"laden"}
           ref={loadingRef}
         />
       ) : error ? (
@@ -257,7 +271,7 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessible }) => {
                   textCenter
                   textIsTransparent
                   accessible={true}
-                  accessibilityLabel={`${movie.runtime} minutes long, released ${movie.release_date_string}, rating: ${movie.vote_average} positive`}
+                  accessibilityLabel={`${movie.runtime} minuten lang, veröffentlicht ${movie.release_date_string}, bewertung: ${movie.vote_average} positiv`}
                 >
                   {movie.runtime} Min
                   {/*TODO: use pseudo class before in styled components */}
@@ -307,7 +321,7 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessible }) => {
             {/* Provider */}
             <View
               accessible={true}
-              accessibilityLabel={`Included in the flatrate on: ${movie?.watchprovider
+              accessibilityLabel={`Im Abo enthalten bei: ${movie?.watchprovider
                 ?.map((provider) => provider.label)
                 .join(", ")}`}
             >
@@ -342,7 +356,7 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessible }) => {
                 <MovieDetailsButtonComponent
                   iconName={"share"}
                   clickHandler={() => onShareClick()}
-                  aria_label={"share"}
+                  aria_label={"Teilen"}
                 >
                   Share
                 </MovieDetailsButtonComponent>
@@ -351,8 +365,8 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessible }) => {
                   clickHandler={() => onAddToWatchlist()}
                   aria_label={
                     elementExistInWatchList
-                      ? "remove from watchlist"
-                      : "add to watchlist"
+                      ? "von watchliste entfernen"
+                      : "zur watchliste hinzufügen"
                   }
                 >
                   Watchlist
@@ -362,8 +376,8 @@ export default MovieDetailsScreen = ({ passedMovie, beAccessible }) => {
                   clickHandler={() => onAddToSeenlist()}
                   aria_label={
                     elementExistInSeenList
-                      ? "remove from seenlist"
-                      : "add to seenlist"
+                      ? "von gesehen liste entfernen"
+                      : "zu gesehen liste hinzufügen"
                   }
                 >
                   Seenlist

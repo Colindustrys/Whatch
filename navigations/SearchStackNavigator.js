@@ -24,7 +24,7 @@ export default SearchStackNavigator = ({ navigation }) => {
             <Fragment>
               <RoundedButtonComponent
                 accessible={false}
-                accessibilityLabel={"Go to watchlist"}
+                accessibilityLabel={"Watchliste öffnen"}
                 clickHandler={() => navigation.navigate("WatchlistScreen")}
                 iconName={"heart"}
                 size={48}
@@ -37,7 +37,7 @@ export default SearchStackNavigator = ({ navigation }) => {
               />
               <RoundedButtonComponent
                 accessible={false}
-                accessibilityLabel={"Go to settings"}
+                accessibilityLabel={"Einstellungen öffnen"}
                 clickHandler={() => navigation.navigate("SettingsScreen")}
                 iconName={"cog"}
                 size={48}
@@ -53,14 +53,14 @@ export default SearchStackNavigator = ({ navigation }) => {
           name="SearchScreen"
           component={SearchScreen}
           options={{
-            title: "Search",
+            title: "Suchen",
           }}
         />
         <Stack.Screen
           name="MovieDetailsListScreen"
           component={MovieDetailListScreen}
           options={{
-            title: "Movie",
+            title: "Film",
           }}
         />
       </Stack.Group>

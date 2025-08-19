@@ -13,10 +13,10 @@ export default SearchBarComponent = ({ searchState, updateSearch }) => {
         <View>
       <StyledSearchbar
         platformIsAndroid={PlatformIsAndroid}
-        placeholder="Type Here..."
+        placeholder="Hier tippen…"
         onChangeText={updateSearch}
         // value={localSearch} // removed on android because it would always read the ceplaced value with talkback, but value is needed on ios
-        accessibilityLabel="Searchbar"
+        accessibilityLabel="Suchleiste"
         // aria-label="Searchbar"
       />
     </View>
@@ -24,10 +24,10 @@ export default SearchBarComponent = ({ searchState, updateSearch }) => {
         <View>
           <StyledSearchbar
             platformIsAndroid={PlatformIsAndroid}
-            placeholder="Type Here..."
+            placeholder="Hier tippen…"
             onChangeText={updateSearch}
             value={searchState}
-            accessibilityLabel="Searchbar"
+            accessibilityLabel="Suchleiste"
             // aria-label="Searchbar"
           />
         </View>

@@ -63,6 +63,7 @@ export const getMovieDiscoverList = async ({
     "with_runtime.lte": runtimeMax,
     "primary_release_date.gte": releaseDateMin,
     "primary_release_date.lte": releaseDateMax,
+    "language": "de-DE",
   };
 
   try {

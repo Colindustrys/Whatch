@@ -134,9 +134,9 @@ export default genreListItem = ({
       <View
         style={{ paddingVertical: 20, paddingRight: 40, paddingLeft: 25 }}
         accessible={true}
-        accessibilityLabel={`Load more movies`}
+        accessibilityLabel={`lade mehr filme`}
         accessibilityRole="button"
-        accessibilityActions={[{ name: "activate", label: "load movies" }]}
+        accessibilityActions={[{ name: "activate", label: "filme laden" }]}
         onAccessibilityAction={() => {
           loadMoreDataButton();
         }}
@@ -172,7 +172,9 @@ export default genreListItem = ({
           />
         )}
         horizontal
-        onEndReached={!isScreenReaderEnabled ? loadMoreData : null}
+        // onEndReached={!isScreenReaderEnabled ? loadMoreData : null}
+        onEndReached={loadMoreData}
+        onEndReachedThreshold={2}
         getItemLayout={(data, index) => ({
           length: itemWidth,
           offset: itemWidth * index,

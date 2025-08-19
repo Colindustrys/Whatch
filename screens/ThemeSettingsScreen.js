@@ -40,9 +40,9 @@ export default ThemeSettingsScreen = () => {
   //TODO: make own dataClass?!
   var themeOptions = [
     //TODO: get systemstandard
-    { label: "System-Setting", value: "lightTheme", id: 0 },
-    { label: "Light", value: lightTheme, id: 1 },
-    { label: "Dark", value: darkTheme, id: 2 },
+    { label: "System-Einstellung", value: "lightTheme", id: 0 },
+    { label: "Hell", value: lightTheme, id: 1 },
+    { label: "Dunkel", value: darkTheme, id: 2 },
   ];
 
   const isIOS = Platform.OS === "ios";
@@ -79,16 +79,17 @@ export default ThemeSettingsScreen = () => {
   return (
     <MainContainer accessible={false}>
       <HalfWidthView accessible={false}>
-        <Paragraph accessible={true}>Choose your color scheme</Paragraph>
+        <Paragraph accessible={true}>Wähle dein Farbschema aus</Paragraph>
         <Paragraph small accessible={true}>
-          Tip: The dark-theme uses less power on certain screens.
+          Tipp: Das dunkle Design verbraucht auf bestimmten Bildschirmen weniger
+          Energie.
         </Paragraph>
 
         <View style={{ flexDirection: "column", gap: 8 }} accessible={false}>
           {themeOptions.map((option, optionId, value) => (
             <TouchableOpacity
               accessible={true}
-              accessibilityLabel={`${option.label} theme`}
+              accessibilityLabel={`${option.label} Schema`}
               accessibilityRole="radio"
               accessibilityState={{
                 checked: optionId === selectedOption,

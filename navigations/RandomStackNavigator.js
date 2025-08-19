@@ -19,7 +19,7 @@ export default RandomStackNavigator = ({ navigation, isLightMode }) => {
             <Fragment>
               <RoundedButtonComponent
                 accessible={false}
-                accessibilityLabel={"Go to watchlist"}
+                accessibilityLabel={"Watchliste öffnen"}
                 clickHandler={() => navigation.navigate("WatchlistScreen")}
                 iconName={"heart"}
                 size={48}
@@ -32,7 +32,7 @@ export default RandomStackNavigator = ({ navigation, isLightMode }) => {
               />
               <RoundedButtonComponent
                 accessible={false}
-                accessibilityLabel={"Go to settings"}
+                accessibilityLabel={"Einstellungen öffnen"}
                 clickHandler={() => navigation.navigate("SettingsScreen")}
                 iconName={"cog"}
                 size={48}
@@ -48,14 +48,14 @@ export default RandomStackNavigator = ({ navigation, isLightMode }) => {
           name="RandomScreen"
           component={RandomScreen}
           options={{
-            title: "Random",
+            title: "Zufallsauswahl",
           }}
         />
         <Stack.Screen
           name="MovieDetailsListScreen"
           component={MovieDetailListScreen}
           options={{
-            title: "Movie",
+            title: "Film",
           }}
         />
       </Stack.Group>

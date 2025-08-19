@@ -6,13 +6,13 @@ import { getMovieWatchProvider } from "./movieWatchProvider";
 export const getMovieDetailsObject = async (id) => {
   try {
     //get json from tmdb
-    const res = await moviedb.movieInfo(id);
+    const res = await moviedb.movieInfo({ id: id, language: 'de-DE' });
 
     //parse json to movie object
     let movieObject = parseMovie(res);
 
     //set flatrate provider for the movie, if there are none the list is empty
-    movieObject.watchprovider = await getMovieWatchProvider(id);
+    movieObject.watchprovider = await getMovieWatchProvider({ id: id, language: 'de-DE' });
 
     return movieObject;
   } catch (error) {

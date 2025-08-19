@@ -21,7 +21,7 @@ export default BrowseStackNavigator = ({ navigation }) => {
             <Fragment>
               <RoundedButtonComponent
                 accessible={false}
-                accessibilityLabel={"Go to watchlist"}
+                accessibilityLabel={"Einstellungen öffnen"}
                 clickHandler={() => navigation.navigate("WatchlistScreen")}
                 iconName={"heart"}
                 size={48}
@@ -35,7 +35,7 @@ export default BrowseStackNavigator = ({ navigation }) => {
               />
               <RoundedButtonComponent
                 accessible={false}
-                accessibilityLabel={"Go to settings"}
+                accessibilityLabel={"Einstellungen öffnen"}
                 clickHandler={() => navigation.navigate("SettingsScreen")}
                 iconName={"cog"}
                 size={48}
@@ -51,14 +51,14 @@ export default BrowseStackNavigator = ({ navigation }) => {
           name="BrowseScreen"
           component={BrowseScreen}
           options={{
-            title: "Browse",
+            title: "Entdecken",
           }}
         />
         <Stack.Screen
           name="MovieDetailsListScreen"
           component={MovieDetailListScreen}
           options={{
-            title: "Movie",
+            title: "Film",
           }}
         />
       </Stack.Group>

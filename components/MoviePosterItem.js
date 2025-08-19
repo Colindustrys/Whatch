@@ -35,7 +35,7 @@ export default MoviePosterItem = forwardRef(
               accessible={false}
               importantForAccessibility="yes"
               accessibilityRole="imagebutton"
-              accessibilityLabel={`Movie: ${movieTitle}`}
+              accessibilityLabel={`Film: ${movieTitle}`}
               withoutMargin={withoutMargin}
               source={{
                 uri: "https://image.tmdb.org/t/p/w342" + moviePosterPath,

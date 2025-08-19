@@ -27,8 +27,8 @@ export default CreditsSettingsScreen = () => {
     <MainContainer accessible={false}>
       <HalfWidthView accessible={false}>
         <Paragraph accessible={true}>
-          This product uses the TMDB API but is not endorsed or certified by
-          TMDB.
+          Dieses Produkt verwendet die TMDB-API, wird jedoch nicht von TMDB
+          unterstützt oder zertifiziert.
         </Paragraph>
         {/* Just Watch Logo */}
         <Image
@@ -41,7 +41,8 @@ export default CreditsSettingsScreen = () => {
           }}
         />
         <Paragraph ref={focusRef} accessible={true}>
-          Watchprovider data is provided by JustWatch.
+          Die Streaminganbierter Daten werden von JustWatch zu verfügung
+          gestellt.
         </Paragraph>
         <Image
           source={require("../assets/JustWatch.png")}

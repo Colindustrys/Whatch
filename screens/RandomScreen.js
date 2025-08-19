@@ -176,7 +176,7 @@ export default RandomScreen = ({ navigation }) => {
       <CenterContainer accessible={false}>
         <RoundedButtonComponent
           accessible={false}
-          accessibilityLabel={"Click to get random movies"}
+          accessibilityLabel={"Klicke, um zufällige Filme zu erhalten"}
           clickHandler={onRandomClick}
           iconName={"shuffle"}
           size={320}

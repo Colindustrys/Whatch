@@ -17,25 +17,25 @@ export default SettingsScreen = ({ navigation }) => {
         <TouchableOpacity
           accessible={true}
           accessibilityRole="button"
-          accessibilityLabel="Open your streaming services setting"
+          accessibilityLabel="Streaming-dienst einstellungen öffnen"
           onPress={() => navigation.navigate("ProviderSettingsScreen")}
           style={{ marginTop: 15 }}
         >
-          <Paragraph accessible={false}>Your streaming services</Paragraph>
+          <Paragraph accessible={false}>Deine Streaming Deinste</Paragraph>
         </TouchableOpacity>
 
         <TouchableOpacity
           accessibilityRole="button"
-          accessibilityLabel="Open seen list"
+          accessibilityLabel="Gesehen liste öffnen"
           onPress={() => navigation.navigate("SeenlistScreen")}
           accessible={true}
         >
-          <Paragraph accessible={false}>Seen List</Paragraph>
+          <Paragraph accessible={false}>Gesehen Liste</Paragraph>
         </TouchableOpacity>
 
         <TouchableOpacity
           accessibilityRole="button"
-          accessibilityLabel="Open Theme settings"
+          accessibilityLabel="Theme einstellungen öffnen"
           onPress={() => navigation.navigate("ThemeSettingsScreen")}
           accessible={true}
         >
@@ -44,7 +44,7 @@ export default SettingsScreen = ({ navigation }) => {
 
         <TouchableOpacity
           accessibilityRole="button"
-          accessibilityLabel="Open credits for this app"
+          accessibilityLabel="Credits öffnen"
           onPress={() => navigation.navigate("CreditsSettingsScreen")}
           accessible={true}
         >
